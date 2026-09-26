@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Request a Technical Quote (RFQ) | AR Group & Steelcore</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        background: '#F5F6F8',
+                        navy: { DEFAULT: '#0B1220', 900: '#0B1220', 800: '#111C30' },
+                        rust: { DEFAULT: '#C05621', hover: '#B5541F', light: '#E26E33' },
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        mono: ['JetBrains Mono', 'monospace'],
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-[#F5F6F8] text-slate-700 antialiased min-h-screen flex flex-col">
+    <!-- Sticky Header -->
+    <header class="sticky top-0 z-50 bg-white border-b border-gray-200 shadow-sm" id="main-header">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+            <a href="industrial-site.html" class="flex items-center gap-3">
+                <img src="logo.jpg" alt="AR Group" class="h-12 w-auto object-contain hover:opacity-90 transition-opacity">
+                <div class="hidden sm:block">
+                    <span class="font-extrabold text-navy-900 tracking-tight text-lg block leading-none">AR GROUP</span>
+                    <span class="font-mono text-[10px] text-gray-400 tracking-widest uppercase">STEEL & ALUMINIUM MFG</span>
+                </div>
+            </a>
+            
+            <nav class="hidden md:flex gap-8">
+                <a href="industrial-site.html" class="text-sm font-semibold text-gray-600 hover:text-navy-900 transition-colors">Home</a>
+                <a href="products.html" class="text-sm font-semibold text-gray-600 hover:text-navy-900 transition-colors">Products</a>
+                <a href="capabilities.html" class="text-sm font-semibold text-gray-600 hover:text-navy-900 transition-colors">Capabilities</a>
+                <a href="contact.html" class="text-sm font-semibold text-rust border-b-2 border-rust pb-1">Get Quote</a>
+                <a href="login.html" class="text-sm font-semibold text-gray-600 hover:text-rust transition-colors">Login</a>
+            </nav>
+            
+            <div class="flex items-center gap-4">
+            
+                <!-- Mobile Menu Button -->
+                <button id="mobile-menu-btn" class="md:hidden ml-4 p-2 text-gray-600 hover:text-navy-900 focus:outline-none" onclick="document.getElementById('mobile-menu').classList.toggle('hidden'); document.getElementById('mobile-menu').classList.toggle('flex');">
+                    <i data-lucide="menu" class="w-6 h-6"></i>
+                </button>
+</div>
+        </div>
+    </header>
+    <!-- Mobile Nav Dropdown -->
+    <div id="mobile-menu" class="hidden absolute top-20 left-0 w-full bg-white border-b border-gray-200 shadow-xl flex-col py-4 px-6 gap-3 z-40 transition-all">
+        <a href="industrial-site.html" class="text-base font-semibold text-gray-800 border-b border-gray-100 pb-3 pt-1">Home</a>
+        <a href="products.html" class="text-base font-semibold text-gray-800 border-b border-gray-100 pb-3">Products</a>
+        <a href="capabilities.html" class="text-base font-semibold text-gray-800 border-b border-gray-100 pb-3">Capabilities</a>
+        <a href="login.html" class="text-base font-semibold text-gray-800 border-b border-gray-100 pb-3">Client Portal</a>
+        <a href="admin-login.html" class="text-base font-mono font-semibold text-rust border-b border-gray-100 pb-3">Admin Console</a>
+        <a href="contact.html" class="mt-2 bg-navy-900 hover:bg-navy-800 text-white text-center py-3 rounded-lg font-bold text-base shadow-md">Request a Quote</a>
+    </div>
+
+    
+
+
+    <!-- Page Banner -->
+    <div class="bg-navy-900 py-12 text-white border-b border-navy-800">
+        <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <div class="inline-flex items-center gap-2 bg-white/10 px-3 py-1 rounded font-mono text-xs font-bold text-rust-light mb-3">
+                <span class="w-1.5 h-1.5 rounded-full bg-rust"></span> TECHNICAL RFQ SYSTEM
+            </div>
+            <h1 class="text-3xl sm:text-4xl font-extrabold tracking-tight">Request an Industrial Technical Quotation</h1>
+            <p class="text-gray-300 text-sm sm:text-base mt-2 max-w-2xl mx-auto">Upload CAD drawings (.dwg/.step/.pdf), bill of materials, or custom steel & aluminium specifications for rapid engineering review and itemized pricing.</p>
+        </div>
+    </div>
+
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-12 flex-1">
+        <div class="flex flex-col md:flex-row gap-8">
+            <!-- Form Section -->
+            <div class="flex-1 bg-white border border-gray-200 rounded-xl p-6 sm:p-8 shadow-sm" id="form-container">
+                <form id="rfq-form" class="space-y-6">
+                    <!-- Client Details -->
+                    <div>
+                        <h3 class="font-mono text-xs font-bold text-navy-900 tracking-widest uppercase mb-4 flex items-center gap-2 pb-2 border-b border-gray-100">
+                            <span class="w-2 h-2 bg-rust rounded-full"></span> 1. Company & Contact Details
+                        </h3>
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                            <div>
+                                <label class="block text-xs font-mono font-bold text-gray-700 mb-1.5">FULL NAME <span class="text-red-500">*</span></label>
+                                <div class="relative">
+                                    <i data-lucide="user" class="absolute left-3 top-2.5 w-4 h-4 text-gray-400"></i>
+                                    <input type="text" id="req-name" required placeholder="e.g. Rahul Sharma" class="w-full border border-gray-300 rounded pl-9 pr-3 py-2 text-sm outline-none focus:border-rust transition-colors">
+                                </div>
+                            </div>
+                            <div>
+                                <label class="block text-xs font-mono font-bold text-gray-700 mb-1.5">COMPANY NAME <span class="text-red-500">*</span></label>
+                                <div class="relative">
+                                    <i data-lucide="building" class="absolute left-3 top-2.5 w-4 h-4 text-gray-400"></i>
+                                    <input type="text" id="req-company" required placeholder="e.g. ABC Infrastructure Pvt Ltd" class="w-full border border-gray-300 rounded pl-9 pr-3 py-2 text-sm outline-none focus:border-rust transition-colors">
+                                </div>
+                            </div>
+                            <div>
+                                <label class="block text-xs font-mono font-bold text-gray-700 mb-1.5">OFFICIAL EMAIL <span class="text-red-500">*</span></label>
+                                <div class="relative">
+                                    <i data-lucide="mail" class="absolute left-3 top-2.5 w-4 h-4 text-gray-400"></i>
+                                    <input type="email" id="req-email" required placeholder="e.g. rahul@abc.com" class="w-full border border-gray-300 rounded pl-9 pr-3 py-2 text-sm outline-none focus:border-rust transition-colors">
+                                </div>
+                            </div>
+                            <div>
+                                <label class="block text-xs font-mono font-bold text-gray-700 mb-1.5">PHONE NUMBER <span class="text-red-500">*</span></label>
+                                <div class="relative">
+                                    <i data-lucide="phone" class="absolute left-3 top-2.5 w-4 h-4 text-gray-400"></i>
+                                    <input type="tel" id="req-phone" required placeholder="e.g. +91 98112 34567" class="w-full border border-gray-300 rounded pl-9 pr-3 py-2 text-sm outline-none focus:border-rust transition-colors">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Material & Technical Requirements -->
+                    <div class="pt-4 border-t border-gray-100">
+                        <h3 class="font-mono text-xs font-bold text-navy-900 tracking-widest uppercase mb-4 flex items-center gap-2 pb-2 border-b border-gray-100">
+                            <span class="w-2 h-2 bg-rust rounded-full"></span> 2. Material & Technical Specifications
+                        </h3>
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4">
+                            <div>
+                                <label class="block text-xs font-mono font-bold text-gray-700 mb-1.5">PRODUCT CATEGORY / ITEM <span class="text-red-500">*</span></label>
+                                <select id="req-product" required class="w-full border border-gray-300 rounded px-3 py-2 text-sm outline-none focus:border-rust bg-white">
+                                    <option value="">Select a product...</option>
+                                    <option value="Heavy Structural Steel Beams (ISMB 450 E350)">Heavy Structural Steel Beams (ISMB / UC / UB)</option>
+                                    <option value="Aluminium Modular T-Slot Profiles 45x90 Heavy">Aluminium Modular T-Slot Profiles</option>
+                                    <option value="Custom Welded Box Girders (50T Crane Duty)">Custom Welded Box Girders & Built-up Columns</option>
+                                    <option value="Solar Aluminium Mounting Rails & Clamps">Solar Aluminium Mounting Rails & Clamps</option>
+                                    <option value="Rectangular Hollow Sections (RHS 300x200x12)">Structural Hollow Sections (RHS / SHS / CHS)</option>
+                                    <option value="High-Strength Steel Plates (IS 2062 E350 50mm)">Heavy CNC Machined Steel Plates & Flanges</option>
+                                    <option value="Custom PEB Structural Fabrication">Custom PEB Structural Fabrication</option>
+                                    <option value="Other / Custom Engineering Component">Other / Custom Engineering Component</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label class="block text-xs font-mono font-bold text-gray-700 mb-1.5">MATERIAL GRADE</label>
+                                <select id="req-grade" class="w-full border border-gray-300 rounded px-3 py-2 text-sm outline-none focus:border-rust bg-white">
+                                    <option value="IS 2062 Grade E250 / E350">IS 2062 Grade E250 / E350 (Carbon Steel)</option>
+                                    <option value="EN 10025 S355JR / S355J2">EN 10025 S355JR / S355J2 (High Tensile)</option>
+                                    <option value="AA 6063-T6 / AA 6061-T6">AA 6063-T6 / 6061-T6 (Aluminium Alloy)</option>
+                                    <option value="AA 6005-T5 Solar Grade">AA 6005-T5 Solar Grade</option>
+                                    <option value="IS 4923 YSt 355 Hollow Section">IS 4923 YSt 355 (Tubular Steel)</option>
+                                    <option value="Stainless Steel SS304 / SS316L">Stainless Steel SS304 / SS316L</option>
+                                    <option value="As per uploaded drawing/BOM">As per uploaded drawing / BOM</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4">
+                            <div>
+                                <label class="block text-xs font-mono font-bold text-gray-700 mb-1.5">ESTIMATED QUANTITY & UNIT <span class="text-red-500">*</span></label>
+                                <input type="text" id="req-quantity" required placeholder="e.g. 120 Tons or 4,200 Meters" class="w-full border border-gray-300 rounded px-3 py-2 text-sm outline-none focus:border-rust">
+                            </div>
+                            <div>
+                                <label class="block text-xs font-mono font-bold text-gray-700 mb-1.5">PROJECT / DELIVERY LOCATION <span class="text-red-500">*</span></label>
+                                <div class="relative">
+                                    <i data-lucide="map-pin" class="absolute left-3 top-2.5 w-4 h-4 text-gray-400"></i>
+                                    <input type="text" id="req-location" required placeholder="e.g. Mumbai Coastal Road Project, Site C" class="w-full border border-gray-300 rounded pl-9 pr-3 py-2 text-sm outline-none focus:border-rust">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4">
+                            <div>
+                                <label class="block text-xs font-mono font-bold text-gray-700 mb-1.5">REQUIRED DELIVERY DATE</label>
+                                <input type="date" id="req-delivery-date" class="w-full border border-gray-300 rounded px-3 py-2 text-sm outline-none focus:border-rust">
+                            </div>
+                            <div>
+                                <label class="block text-xs font-mono font-bold text-gray-700 mb-1.5">PRIORITY LEVEL</label>
+                                <select id="req-priority" class="w-full border border-gray-300 rounded px-3 py-2 text-sm outline-none focus:border-rust bg-white">
+                                    <option value="NORMAL">Standard Processing (24h Quote)</option>
+                                    <option value="HIGH">High Priority (Urgent Project)</option>
+                                    <option value="URGENT">Urgent / Fast-Track (Tender Deadline)</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="mb-4">
+                            <label class="block text-xs font-mono font-bold text-gray-700 mb-1.5">FABRICATION NOTES & QUALITY REQUIREMENTS</label>
+                            <textarea id="req-specs" rows="3" placeholder="e.g. Requires 100% UT testing, SA 2.5 shot blast, zinc primer 75µm, Charpy test at -20°C, and Mill Test Certificates (MTC 3.1)." class="w-full border border-gray-300 rounded px-3 py-2 text-sm outline-none focus:border-rust"></textarea>
+                        </div>
+                    </div>
+
+                    <!-- CAD Drawing & File Attachments -->
+                    <div class="pt-4 border-t border-gray-100">
+                        <h3 class="font-mono text-xs font-bold text-navy-900 tracking-widest uppercase mb-4 flex items-center gap-2 pb-2 border-b border-gray-100">
+                            <span class="w-2 h-2 bg-rust rounded-full"></span> 3. CAD Drawings & Technical Attachments
+                        </h3>
+                        
+                        <div class="border-2 border-dashed border-gray-300 hover:border-rust rounded-xl p-6 text-center transition-colors bg-gray-50/50">
+                            <i data-lucide="upload-cloud" class="w-8 h-8 text-rust mx-auto mb-2"></i>
+                            <p class="text-sm font-bold text-navy-900 mb-1">Upload Engineering Drawings & Specs</p>
+                            <p class="text-xs text-gray-500 mb-3">Accepted: .pdf, .dwg, .dxf, .step, .stp, .xlsx, .zip (Max 50MB)</p>
+                            <label class="inline-block bg-navy-900 hover:bg-navy-800 text-white text-xs font-semibold px-4 py-2 rounded cursor-pointer transition-colors shadow-sm">
+                                <span>Browse Files</span>
+                                <input type="file" id="req-file-input" multiple class="hidden" accept=".pdf,.dwg,.dxf,.step,.stp,.xlsx,.zip">
+                            </label>
+                        </div>
+
+                        <!-- Uploaded Files List -->
+                        <div id="file-list-container" class="mt-3 flex flex-wrap gap-2"></div>
+                    </div>
+
+                    <!-- Submit Button -->
+                    <div class="pt-4">
+                        <button type="submit" id="submit-rfq-btn" class="w-full bg-rust hover:bg-rust-hover text-white font-bold py-3.5 rounded-lg flex items-center justify-center gap-2 transition-all shadow-lg shadow-rust/20 text-base">
+                            <i data-lucide="send" class="w-4 h-4"></i> Submit RFQ for Engineering Review
+                        </button>
+                    </div>
+                </form>
+            </div>
+
+            <!-- Side Info Card -->
+            <div class="w-full md:w-80 shrink-0 flex flex-col gap-4">
+                <div class="bg-navy-900 text-white border border-navy-800 rounded-xl p-5 shadow-sm">
+                    <div class="flex items-center gap-3 mb-3">
+                        <div class="w-9 h-9 rounded bg-rust/20 flex items-center justify-center text-rust">
+                            <i data-lucide="clock" class="w-5 h-5"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-sm">2-Hour Quote Triage</h4>
+                            <span class="text-xs text-gray-400">Rapid Estimation Turnaround</span>
+                        </div>
+                    </div>
+                    <p class="text-xs text-gray-300 leading-relaxed">Our in-house structural engineers and estimators review all CAD files and prepare itemized B2B commercial quotes including 18% GST and freight options.</p>
+                </div>
+
+                <div class="bg-white border border-gray-200 rounded-xl p-5 shadow-sm space-y-4">
+                    <h4 class="font-mono text-xs font-bold text-navy-900 tracking-wider uppercase border-b border-gray-100 pb-2">Direct Inquiries</h4>
+                    <div class="text-xs space-y-2 text-gray-600">
+                        <p class="flex items-center gap-2"><i data-lucide="phone" class="w-4 h-4 text-rust"></i> +91 98230 12345</p>
+                        <p class="flex items-center gap-2"><i data-lucide="mail" class="w-4 h-4 text-rust"></i> rfq@arlaminators.com</p>
+                        <p class="flex items-center gap-2"><i data-lucide="map-pin" class="w-4 h-4 text-rust"></i> MIDC Chakan, Pune, Maharashtra</p>
+                    </div>
+                </div>
+
+                <div class="bg-white border border-gray-200 rounded-xl p-5 shadow-sm">
+                    <h4 class="font-mono text-xs font-bold text-navy-900 tracking-wider uppercase border-b border-gray-100 pb-2 mb-3">Quality Assurance</h4>
+                    <ul class="text-xs space-y-2 text-gray-600">
+                        <li class="flex items-start gap-1.5"><span class="text-rust font-bold">✓</span> EN 10204 3.1 Traceable MTC</li>
+                        <li class="flex items-start gap-1.5"><span class="text-rust font-bold">✓</span> 100% UT & NDT Testing Available</li>
+                        <li class="flex items-start gap-1.5"><span class="text-rust font-bold">✓</span> Third-Party Inspection (TPI) Ready</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Success Confirmation Modal -->
+    <div id="success-modal" class="fixed inset-0 z-50 bg-navy-900/80 backdrop-blur-sm hidden items-center justify-center p-4">
+        <div class="bg-white rounded-2xl max-w-lg w-full p-8 shadow-2xl border border-gray-200 text-center">
+            <div class="w-16 h-16 bg-green-100 text-green-600 rounded-full flex items-center justify-center mx-auto mb-4">
+                <i data-lucide="check-circle" class="w-8 h-8"></i>
+            </div>
+            
+            <h3 class="text-2xl font-extrabold text-navy-900 mb-2">RFQ Successfully Logged!</h3>
+            <p class="text-sm text-gray-600 mb-4">Your Request for Quotation has been registered in our engineering pipeline with Reference ID:</p>
+            
+            <div class="bg-navy-900 text-white font-mono text-xl font-bold py-3 px-6 rounded-lg inline-block tracking-wider mb-6" id="success-rfq-id">
+                RFQ-2026-XXXXX
+            </div>
+
+            <p class="text-xs text-gray-500 mb-6">Our structural estimation team is reviewing your drawings. You can live-track the 10-stage manufacturing pipeline and approve commercial quotations online.</p>
+
+            <div class="flex flex-col sm:flex-row gap-3">
+                <a id="success-track-btn" href="industrial-site.html" class="flex-1 bg-navy-900 hover:bg-navy-800 text-white font-bold py-3 rounded-lg text-sm transition-colors flex items-center justify-center gap-2">
+                    <i data-lucide="home" class="w-4 h-4"></i> Back to Home
+                </a>
+                <button id="success-wa-btn" class="flex-1 bg-[#25D366] hover:bg-[#128C7E] text-white font-bold py-3 rounded-lg text-sm transition-colors flex items-center justify-center gap-2">
+                    <i data-lucide="message-square" class="w-4 h-4"></i> Share on WhatsApp
+                </button>
+            </div>
+            
+            <button id="success-close-btn" class="mt-4 text-xs font-semibold text-gray-400 hover:text-navy-900">Close Window</button>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-navy-900 text-white py-10 border-t border-navy-800 mt-auto">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-4">
+            <p class="text-xs text-gray-400">© 2026 A. R. Laminators. All rights reserved. GST: 24ADLPD9216D1ZV</p>
+            <div class="flex gap-6 text-xs text-gray-400">
+                <a href="industrial-site.html" class="hover:text-white">Home</a>
+                <a href="products.html" class="hover:text-white">Products</a>
+                <a href="capabilities.html" class="hover:text-white">Capabilities</a>
+                <a href="login.html" class="hover:text-white">Staff Login</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="js/api.js"></script>
+    <script>
+        lucide.createIcons();
+
+        // Redirect to login if not logged in
+        if (!api.getToken() || localStorage.getItem('ar_role') !== 'user') {
+            alert('Please login or register to submit an enquiry.');
+            window.location.href = 'login.html';
+        }
+
+        // Check if product is passed in query string
+        const urlParams = new URLSearchParams(window.location.search);
+        const prefilledProduct = urlParams.get('product');
+        if (prefilledProduct) {
+            const prodSelect = document.getElementById('req-product');
+            // Try to find matching option or set value
+            let matched = false;
+            for (let opt of prodSelect.options) {
+                if (opt.value.toLowerCase().includes(prefilledProduct.toLowerCase()) || prefilledProduct.toLowerCase().includes(opt.value.toLowerCase())) {
+                    prodSelect.value = opt.value;
+                    matched = true;
+                    break;
+                }
+            }
+            if (!matched) {
+                // Add temporary custom option
+                const newOpt = new Option(prefilledProduct, prefilledProduct, true, true);
+                prodSelect.add(newOpt);
+            }
+        }
+
+        // Handle File Uploads
+        let attachedFiles = [];
+        const fileInput = document.getElementById('req-file-input');
+        const fileListContainer = document.getElementById('file-list-container');
+
+        fileInput.addEventListener('change', (e) => {
+            const files = Array.from(e.target.files);
+            files.forEach(f => {
+                if (!attachedFiles.some(af => af.name === f.name)) {
+                    attachedFiles.push({ name: f.name, size: (f.size / 1024 / 1024).toFixed(2) + ' MB' });
+                }
+            });
+            renderFiles();
+        });
+
+        function renderFiles() {
+            if (attachedFiles.length === 0) {
+                fileListContainer.innerHTML = '';
+                return;
+            }
+            fileListContainer.innerHTML = attachedFiles.map((f, idx) => `
+                <div class="bg-gray-100 border border-gray-200 text-xs px-2.5 py-1 rounded-full flex items-center gap-1.5 text-gray-700">
+                    <i data-lucide="file" class="w-3.5 h-3.5 text-rust"></i>
+                    <span class="font-mono">${f.name}</span>
+                    <button type="button" onclick="removeFile(${idx})" class="text-gray-400 hover:text-red-500 font-bold ml-1">✕</button>
+                </div>
+            `).join('');
+            lucide.createIcons();
+        }
+
+        window.removeFile = function(idx) {
+            attachedFiles.splice(idx, 1);
+            renderFiles();
+        };
+
+        // Form submission
+        const form = document.getElementById('rfq-form');
+        const successModal = document.getElementById('success-modal');
+
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault();
+
+            const product = document.getElementById('req-product').value;
+            const grade = document.getElementById('req-grade').value;
+            const quantity = document.getElementById('req-quantity').value.trim();
+            const location = document.getElementById('req-location').value.trim();
+            const specs = document.getElementById('req-specs').value.trim();
+            const submitBtn = document.getElementById('submit-rfq-btn');
+            
+            const originalBtnText = submitBtn.innerHTML;
+            submitBtn.innerHTML = '<i data-lucide="loader" class="w-4 h-4 animate-spin"></i> Submitting...';
+            
+            try {
+                // We use phone and whatsapp from user session or input if available
+                const phone = document.getElementById('req-phone').value.trim();
+                
+                const enquiryData = {
+                    product_name: product,
+                    product_type: grade,
+                    quantity: quantity,
+                    message: `Location: ${location}\nSpecs: ${specs}`,
+                    phone: phone,
+                    whatsapp_number: phone 
+                };
+
+                const res = await api.post('/enquiries', enquiryData);
+                
+                // Update Success Modal
+                document.getElementById('success-rfq-id').innerText = res.id;
+                document.getElementById('success-track-btn').href = 'user-dashboard.html';
+
+                // WhatsApp Share link
+                let text = `*New RFQ Logged - AR Group & Steelcore*%0A`;
+                text += `*RFQ ID:* ${res.id}%0A`;
+                text += `*Product:* ${product}%0A`;
+                text += `*Grade:* ${grade}%0A`;
+                text += `*Quantity:* ${quantity}%0A`;
+                text += `*Location:* ${location}%0A`;
+
+                const waBtn = document.getElementById('success-wa-btn');
+                waBtn.onclick = () => {
+                    window.open(`https://wa.me/919823012345?text=${text}`, '_blank');
+                };
+
+                successModal.classList.remove('hidden');
+                successModal.classList.add('flex');
+                form.reset();
+            } catch (err) {
+                console.error(err);
+                alert(err.message || 'Error submitting enquiry. Please try again.');
+            } finally {
+                submitBtn.innerHTML = originalBtnText;
+                lucide.createIcons();
+            }
+        });
+
+        document.getElementById('success-close-btn').addEventListener('click', () => {
+            successModal.classList.add('hidden');
+            successModal.classList.remove('flex');
+        });
+    </script>
+    <script src="chatbot.js"></script>
+</body>
+</html>

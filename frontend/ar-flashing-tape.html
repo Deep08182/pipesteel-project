@@ -1,0 +1,683 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AR Flashing Bitumen Tape for Roofing | AR Industries Manufacturer</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        background: '#F8FAFC',
+                        navy: { DEFAULT: '#0B1220', 900: '#0B1220', 800: '#111C30', 700: '#1A2A44' },
+                        rust: { DEFAULT: '#C05621', hover: '#B5541F', light: '#E26E33' },
+                        steel: { DEFAULT: '#1A2A44', light: '#2C3E5D' }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        mono: ['JetBrains Mono', 'monospace'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .zoom-container {
+            overflow: hidden;
+            position: relative;
+            cursor: zoom-in;
+        }
+        .zoom-image {
+            transition: transform 0.3s ease-out;
+            transform-origin: center center;
+        }
+        .zoom-container:hover .zoom-image {
+            transform: scale(1.5);
+        }
+    </style>
+</head>
+<body class="bg-[#F8FAFC] text-slate-700 antialiased min-h-screen flex flex-col pb-16 md:pb-0">
+
+    <!-- Sticky Header -->
+    <header class="sticky top-0 z-50 bg-white border-b border-gray-200 shadow-sm" id="main-header">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+            <a href="industrial-site.html" class="flex items-center gap-3">
+                <img src="logo.jpg" alt="AR Group" class="h-12 w-auto object-contain hover:opacity-90 transition-opacity">
+                <div class="hidden sm:block">
+                    <span class="font-extrabold text-navy-900 tracking-tight text-lg block leading-none">AR INDUSTRIES</span>
+                    <span class="font-mono text-[10px] text-gray-400 tracking-widest uppercase">WATERPROOFING & FLASHING TAPES</span>
+                </div>
+            </a>
+            
+            <nav class="hidden md:flex gap-8">
+                <a href="industrial-site.html" class="text-sm font-semibold text-gray-600 hover:text-navy-900 transition-colors">Home</a>
+                <a href="products.html" class="text-sm font-semibold text-rust border-b-2 border-rust pb-1">Products</a>
+                <a href="capabilities.html" class="text-sm font-semibold text-gray-600 hover:text-navy-900 transition-colors">Capabilities</a>
+                <a href="contact.html" class="text-sm font-semibold text-gray-600 hover:text-navy-900 transition-colors">Get Quote</a>
+                <a href="login.html" class="text-sm font-semibold text-gray-600 hover:text-rust transition-colors">Client Portal</a>
+            </nav>
+            
+            <div class="flex items-center gap-3">
+                <button onclick="openQuoteModal('General Inquiry')" class="bg-rust hover:bg-rust-hover text-white px-5 py-2.5 rounded-lg text-sm font-bold flex items-center gap-2 transition-all shadow-md">
+                    <i data-lucide="file-text" class="w-4 h-4"></i> Get Best Quote
+                </button>
+            </div>
+        </div>
+    </header>
+    <!-- Mobile Nav Dropdown -->
+    <div id="mobile-menu" class="hidden absolute top-20 left-0 w-full bg-white border-b border-gray-200 shadow-xl flex-col py-4 px-6 gap-3 z-40 transition-all">
+        <a href="industrial-site.html" class="text-base font-semibold text-gray-800 border-b border-gray-100 pb-3 pt-1">Home</a>
+        <a href="products.html" class="text-base font-semibold text-gray-800 border-b border-gray-100 pb-3">Products</a>
+        <a href="capabilities.html" class="text-base font-semibold text-gray-800 border-b border-gray-100 pb-3">Capabilities</a>
+        <a href="login.html" class="text-base font-semibold text-gray-800 border-b border-gray-100 pb-3">Client Portal</a>
+        <a href="admin-login.html" class="text-base font-mono font-semibold text-rust border-b border-gray-100 pb-3">Admin Console</a>
+        <a href="contact.html" class="mt-2 bg-navy-900 hover:bg-navy-800 text-white text-center py-3 rounded-lg font-bold text-base shadow-md">Request a Quote</a>
+    </div>
+
+    
+
+
+    <!-- Breadcrumb Navigation -->
+    <div class="bg-white border-b border-gray-200 py-3 text-xs font-medium text-gray-500">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center gap-2">
+            <a href="industrial-site.html" class="hover:text-navy-900">Home</a>
+            <span>/</span>
+            <a href="products.html" class="hover:text-navy-900">Products</a>
+            <span>/</span>
+            <span class="text-gray-400">Self-Adhesive Bitumen Waterproofing</span>
+            <span>/</span>
+            <span class="text-navy-900 font-bold">AR Flashing Bitumen Tape</span>
+        </div>
+    </div>
+
+    <!-- MAIN PRODUCT HIGHLIGHT SECTION -->
+    <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
+        <div class="bg-white border border-gray-200 rounded-2xl p-6 md:p-8 shadow-sm grid grid-cols-1 lg:grid-cols-12 gap-10">
+            
+            <!-- LEFT COLUMN: Image Gallery & Zoom (5 Cols) -->
+            <div class="lg:col-span-5 flex flex-col gap-4">
+                <div class="bg-white border border-gray-200 rounded-xl p-4 flex items-center justify-center zoom-container min-h-[380px] shadow-sm relative group" id="main-image-box">
+                    <img id="main-product-img" src="images/tape_top.webp" class="max-h-[350px] w-auto object-contain zoom-image" alt="AR Flashing Bitumen Tape Top View">
+                    <span class="absolute top-3 left-3 bg-navy-900 text-white font-mono text-[10px] font-bold px-2.5 py-1 rounded tracking-widest uppercase shadow">
+                        BRAND: AR
+                    </span>
+                    <span class="absolute bottom-3 right-3 bg-white/90 border border-gray-200 text-gray-600 font-mono text-[11px] px-2 py-1 rounded shadow flex items-center gap-1">
+                        <i data-lucide="zoom-in" class="w-3.5 h-3.5 text-rust"></i> Hover to Zoom
+                    </span>
+                </div>
+
+                <!-- Thumbnail Gallery -->
+                <div class="grid grid-cols-3 gap-3">
+                    <button onclick="changeMainImage('images/tape_top.webp', this)" class="border-2 border-rust rounded-lg overflow-hidden p-1 bg-white hover:opacity-90 transition-all shadow-sm thumb-btn">
+                        <img src="images/tape_top.webp" class="h-20 w-full object-contain" alt="AR Bitumen Tape Top Packaging">
+                    </button>
+                    <button onclick="changeMainImage('images/tape_side.webp', this)" class="border-2 border-gray-200 rounded-lg overflow-hidden p-1 bg-white hover:border-rust transition-all thumb-btn">
+                        <img src="images/tape_side.webp" class="h-20 w-full object-contain" alt="AR Bitumen Tape Side Roll">
+                    </button>
+                    <button onclick="changeMainImage('images/tape_pack.webp', this)" class="border-2 border-gray-200 rounded-lg overflow-hidden p-1 bg-white hover:border-rust transition-all thumb-btn">
+                        <img src="images/tape_pack.webp" class="h-20 w-full object-contain" alt="AR Flash Strip Packaging Detail">
+                    </button>
+                </div>
+
+                <!-- Manufacturer Certificate Strip -->
+                <div class="p-3 bg-navy-900/5 rounded-xl border border-navy-900/10 flex items-center justify-between text-xs font-mono text-navy-900">
+                    <span class="flex items-center gap-1.5 font-bold"><i data-lucide="award" class="text-rust w-4 h-4"></i> ISO Certified Mfg</span>
+                    <span class="text-gray-500">100% Quality Inspected</span>
+                </div>
+            </div>
+
+            <!-- RIGHT COLUMN: Product Details & B2B Actions (7 Cols) -->
+            <div class="lg:col-span-7 flex flex-col justify-between space-y-6">
+                <div>
+                    <!-- Category & Status -->
+                    <div class="flex flex-wrap items-center justify-between gap-2 mb-2">
+                        <span class="font-mono text-xs font-bold text-rust uppercase tracking-wider">Self-Adhesive Bitumen Waterproofing / Flashing Membrane</span>
+                        <span class="bg-green-100 text-green-800 text-[11px] font-mono font-bold px-2.5 py-0.5 rounded-full border border-green-200">In Stock • Ready Dispatch</span>
+                    </div>
+
+                    <!-- Title -->
+                    <h1 class="text-2xl md:text-3xl font-extrabold text-navy-900 leading-tight">
+                        Ar Aluminium Top Self Adhesive Membrane 1.5 mm
+                    </h1>
+                    <p class="text-xs text-gray-500 font-mono mt-1">Brand: Ar Aluminium Top | Bituminous Waterproofing Membrane with Aluminium Top Finish</p>
+
+                    <!-- Price & MOQ Box -->
+                    <div class="my-5 p-4 bg-gray-50 rounded-xl border border-gray-200 flex flex-wrap items-center justify-between gap-4">
+                        <div>
+                            <span class="text-xs font-mono text-gray-400 uppercase block font-bold">Approx. Price</span>
+                            <div class="flex items-baseline gap-2">
+                                <span class="text-3xl font-black text-navy-900">Rs 200</span>
+                                <span class="text-sm font-semibold text-gray-500">/ Square Meter</span>
+                            </div>
+                        </div>
+                        <div class="text-right border-l border-gray-200 pl-4">
+                            <span class="text-xs font-mono text-gray-400 uppercase block font-bold">Roll Size & Coverage</span>
+                            <span class="text-base font-extrabold text-rust font-mono">1x10 m (10 sqm)</span>
+                        </div>
+                    </div>
+
+                    <!-- Key Highlights Bullet List -->
+                    <div class="space-y-2 mb-6">
+                        <h4 class="font-mono text-xs font-bold text-navy-900 uppercase tracking-wider">Product Specifications</h4>
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs text-gray-700 font-medium">
+                            <div class="flex items-center gap-2"><i data-lucide="check-circle-2" class="w-4 h-4 text-rust shrink-0"></i> <strong>Thickness:</strong> 1.5 mm</div>
+                            <div class="flex items-center gap-2"><i data-lucide="check-circle-2" class="w-4 h-4 text-rust shrink-0"></i> <strong>Membrane Type:</strong> Bituminous</div>
+                            <div class="flex items-center gap-2"><i data-lucide="check-circle-2" class="w-4 h-4 text-rust shrink-0"></i> <strong>Top Finish:</strong> Aluminium film</div>
+                            <div class="flex items-center gap-2"><i data-lucide="check-circle-2" class="w-4 h-4 text-rust shrink-0"></i> <strong>Adhesive Type:</strong> Bitumen based</div>
+                            <div class="flex items-center gap-2"><i data-lucide="check-circle-2" class="w-4 h-4 text-rust shrink-0"></i> <strong>Roll Size:</strong> 1x10 m (10 sqm)</div>
+                            <div class="flex items-center gap-2"><i data-lucide="check-circle-2" class="w-4 h-4 text-rust shrink-0"></i> <strong>Brand:</strong> Ar Aluminium Top</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- B2B Action Buttons -->
+                <div class="space-y-3 pt-4 border-t border-gray-100">
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                        <button onclick="openQuoteModal('Get Best Quote')" class="bg-rust hover:bg-rust-hover text-white font-bold py-3.5 px-4 rounded-xl flex items-center justify-center gap-2 transition-all shadow-lg shadow-rust/20 text-sm">
+                            <i data-lucide="file-check-2" class="w-4 h-4"></i> Get Best Quote
+                        </button>
+                        <button onclick="openQuoteModal('Yes! I am interested')" class="bg-navy-900 hover:bg-navy-800 text-white font-bold py-3.5 px-4 rounded-xl flex items-center justify-center gap-2 transition-all shadow-lg text-sm">
+                            <i data-lucide="check-circle" class="w-4 h-4"></i> Yes! I am interested
+                        </button>
+                    </div>
+
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                        <button onclick="openCallbackModal()" class="bg-white hover:bg-gray-50 border-2 border-navy-900 text-navy-900 font-bold py-3 px-4 rounded-xl flex items-center justify-center gap-2 transition-colors text-xs">
+                            <i data-lucide="phone-call" class="w-4 h-4 text-rust"></i> Request Callback
+                        </button>
+                        <a href="https://wa.me/919823012345?text=Hi,%20I%20am%20interested%20in%20Ar%20Aluminium%20Top%20Self%20Adhesive%20Membrane%201.5%20mm" target="_blank" class="bg-[#25D366] hover:bg-[#128C7E] text-white font-bold py-3 px-4 rounded-xl flex items-center justify-center gap-2 transition-colors text-xs shadow-sm">
+                            <i data-lucide="message-square" class="w-4 h-4"></i> Enquire via WhatsApp
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Supplier Quick Trust Badges -->
+                <div class="grid grid-cols-3 gap-2 pt-2 border-t border-gray-100 text-center text-[11px] font-mono text-gray-500">
+                    <div class="p-2 bg-gray-50 rounded">⚡ Fast Pan-India Shipping</div>
+                    <div class="p-2 bg-gray-50 rounded">🛡️ Genuine AR Product</div>
+                    <div class="p-2 bg-gray-50 rounded">📄 Tax Invoice Provided</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- DETAILED SECTIONS CONTENT -->
+    <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 space-y-10">
+
+        <!-- 1. Technical Specifications Table -->
+        <div class="bg-white border border-gray-200 rounded-2xl p-6 md:p-8 shadow-sm">
+            <h2 class="text-xl font-bold text-navy-900 mb-4 flex items-center gap-2">
+                <i data-lucide="sliders" class="w-5 h-5 text-rust"></i> Technical Specifications
+            </h2>
+            <div class="overflow-x-auto border border-gray-200 rounded-xl">
+                <table class="w-full text-xs text-left">
+                    <tbody class="divide-y divide-gray-200">
+                        <tr class="bg-gray-50">
+                            <td class="py-3 px-4 font-mono font-bold text-gray-600 w-1/3">Product Name</td>
+                            <td class="py-3 px-4 font-semibold text-navy-900">Ar Aluminium Top Self Adhesive Membrane 1.5 mm</td>
+                        </tr>
+                        <tr>
+                            <td class="py-3 px-4 font-mono font-bold text-gray-600">Brand</td>
+                            <td class="py-3 px-4 font-bold text-rust">Ar Aluminium Top</td>
+                        </tr>
+                        <tr class="bg-gray-50">
+                            <td class="py-3 px-4 font-mono font-bold text-gray-600">Approx. Price</td>
+                            <td class="py-3 px-4 font-bold text-navy-900">Rs 200 / Square Meter</td>
+                        </tr>
+                        <tr>
+                            <td class="py-3 px-4 font-mono font-bold text-gray-600">Thickness</td>
+                            <td class="py-3 px-4 font-mono text-navy-900">1.5 mm</td>
+                        </tr>
+                        <tr class="bg-gray-50">
+                            <td class="py-3 px-4 font-mono font-bold text-gray-600">Membrane Type</td>
+                            <td class="py-3 px-4 text-navy-900">Bituminous</td>
+                        </tr>
+                        <tr>
+                            <td class="py-3 px-4 font-mono font-bold text-gray-600">Top Finish</td>
+                            <td class="py-3 px-4 text-navy-900">Aluminium film</td>
+                        </tr>
+                        <tr class="bg-gray-50">
+                            <td class="py-3 px-4 font-mono font-bold text-gray-600">Roll Size</td>
+                            <td class="py-3 px-4 font-mono text-navy-900">1x10 m</td>
+                        </tr>
+                        <tr>
+                            <td class="py-3 px-4 font-mono font-bold text-gray-600">Application Area</td>
+                            <td class="py-3 px-4 text-navy-900">Roof / Rooftops, Joints & Shades</td>
+                        </tr>
+                        <tr class="bg-gray-50">
+                            <td class="py-3 px-4 font-mono font-bold text-gray-600">Adhesive Type</td>
+                            <td class="py-3 px-4 text-navy-900">Bitumen based</td>
+                        </tr>
+                        <tr>
+                            <td class="py-3 px-4 font-mono font-bold text-gray-600">Usage / Application</td>
+                            <td class="py-3 px-4 text-navy-900">Waterproofing</td>
+                        </tr>
+                        <tr class="bg-gray-50">
+                            <td class="py-3 px-4 font-mono font-bold text-gray-600">Packaging Size</td>
+                            <td class="py-3 px-4 font-mono text-navy-900">1X10 Mtr roll</td>
+                        </tr>
+                        <tr>
+                            <td class="py-3 px-4 font-mono font-bold text-gray-600">Coverage</td>
+                            <td class="py-3 px-4 font-mono text-navy-900">10 sqm</td>
+                        </tr>
+                        <tr class="bg-gray-50">
+                            <td class="py-3 px-4 font-mono font-bold text-gray-600">Type</td>
+                            <td class="py-3 px-4 text-navy-900">Membrane</td>
+                        </tr>
+                        <tr>
+                            <td class="py-3 px-4 font-mono font-bold text-gray-600">Color</td>
+                            <td class="py-3 px-4 text-navy-900">Silver & Black</td>
+                        </tr>
+                        <tr class="bg-gray-50">
+                            <td class="py-3 px-4 font-mono font-bold text-gray-600">Temperature Range</td>
+                            <td class="py-3 px-4 font-mono text-rust font-bold">-20°C to 100°C</td>
+                        </tr>
+                        <tr>
+                            <td class="py-3 px-4 font-mono font-bold text-gray-600">UV Resistance & Waterproof</td>
+                            <td class="py-3 px-4 font-bold text-green-600">Yes (100% Watertight)</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- 2. Product Overview & Description -->
+        <div class="bg-white border border-gray-200 rounded-2xl p-6 md:p-8 shadow-sm">
+            <h2 class="text-xl font-bold text-navy-900 mb-4 flex items-center gap-2">
+                <i data-lucide="file-text" class="w-5 h-5 text-rust"></i> Product Overview & Description
+            </h2>
+            <div class="prose prose-slate max-w-none text-sm leading-relaxed text-gray-600 space-y-4">
+                <p class="text-base text-navy-900 font-semibold bg-gray-50 p-4 rounded-xl border border-gray-200">
+                    "Ar Aluminium top self adhesive membrane is widely used & excellent product for waterproofing of rooftops & joints & shades."
+                </p>
+                <p>
+                    <strong>Ar Aluminium Top Self Adhesive Membrane 1.5 mm</strong> is a high-performance, multipurpose, all-weather self-adhesive bituminous waterproofing membrane. Protected with an <strong>aluminium film top finish</strong>, it offers exceptional UV resistance, thermal protection, and instant leak-proofing for rooftops, expansion joints, structural joints, and industrial shades.
+                </p>
+            </div>
+        </div>
+
+        <!-- 3. Key Features (10 Features) -->
+        <div class="bg-white border border-gray-200 rounded-2xl p-6 md:p-8 shadow-sm">
+            <h2 class="text-xl font-bold text-navy-900 mb-6 flex items-center gap-2">
+                <i data-lucide="check-square" class="w-5 h-5 text-rust"></i> Key Features
+            </h2>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4">
+                <div class="p-4 bg-gray-50 rounded-xl border border-gray-200 text-xs">
+                    <span class="w-6 h-6 rounded bg-rust/20 text-rust font-bold flex items-center justify-center mb-2">1</span>
+                    <strong class="text-navy-900 block mb-1">Self-adhesive</strong>
+                    <span class="text-gray-500">Instant peel-and-stick application without torching.</span>
+                </div>
+                <div class="p-4 bg-gray-50 rounded-xl border border-gray-200 text-xs">
+                    <span class="w-6 h-6 rounded bg-rust/20 text-rust font-bold flex items-center justify-center mb-2">2</span>
+                    <strong class="text-navy-900 block mb-1">Easy to apply</strong>
+                    <span class="text-gray-500">Requires no special heating tools or primers for smooth surfaces.</span>
+                </div>
+                <div class="p-4 bg-gray-50 rounded-xl border border-gray-200 text-xs">
+                    <span class="w-6 h-6 rounded bg-rust/20 text-rust font-bold flex items-center justify-center mb-2">3</span>
+                    <strong class="text-navy-900 block mb-1">Waterproof</strong>
+                    <span class="text-gray-500">100% impermeable barrier against rainwater & hydrostatic head.</span>
+                </div>
+                <div class="p-4 bg-gray-50 rounded-xl border border-gray-200 text-xs">
+                    <span class="w-6 h-6 rounded bg-rust/20 text-rust font-bold flex items-center justify-center mb-2">4</span>
+                    <strong class="text-navy-900 block mb-1">UV resistant</strong>
+                    <span class="text-gray-500">Aluminium top film shields bitumen compound from UV degradation.</span>
+                </div>
+                <div class="p-4 bg-gray-50 rounded-xl border border-gray-200 text-xs">
+                    <span class="w-6 h-6 rounded bg-rust/20 text-rust font-bold flex items-center justify-center mb-2">5</span>
+                    <strong class="text-navy-900 block mb-1">All-weather performance</strong>
+                    <span class="text-gray-500">Resists heavy rain, extreme heat, and severe frost conditions.</span>
+                </div>
+                <div class="p-4 bg-gray-50 rounded-xl border border-gray-200 text-xs">
+                    <span class="w-6 h-6 rounded bg-rust/20 text-rust font-bold flex items-center justify-center mb-2">6</span>
+                    <strong class="text-navy-900 block mb-1">Aluminium-film top</strong>
+                    <span class="text-gray-500">High-reflectivity silver surface reduces heat absorption.</span>
+                </div>
+                <div class="p-4 bg-gray-50 rounded-xl border border-gray-200 text-xs">
+                    <span class="w-6 h-6 rounded bg-rust/20 text-rust font-bold flex items-center justify-center mb-2">7</span>
+                    <strong class="text-navy-900 block mb-1">Polyester reinforced</strong>
+                    <span class="text-gray-500">High tensile matrix prevents tearing under structural movement.</span>
+                </div>
+                <div class="p-4 bg-gray-50 rounded-xl border border-gray-200 text-xs">
+                    <span class="w-6 h-6 rounded bg-rust/20 text-rust font-bold flex items-center justify-center mb-2">8</span>
+                    <strong class="text-navy-900 block mb-1">Pressure-sensitive</strong>
+                    <span class="text-gray-500">Bonds stronger as pressure is applied to substrate.</span>
+                </div>
+                <div class="p-4 bg-gray-50 rounded-xl border border-gray-200 text-xs">
+                    <span class="w-6 h-6 rounded bg-rust/20 text-rust font-bold flex items-center justify-center mb-2">9</span>
+                    <strong class="text-navy-900 block mb-1">Permanent sealing</strong>
+                    <span class="text-gray-500">Long-lasting watertight bond for decades of service.</span>
+                </div>
+                <div class="p-4 bg-gray-50 rounded-xl border border-gray-200 text-xs">
+                    <span class="w-6 h-6 rounded bg-rust/20 text-rust font-bold flex items-center justify-center mb-2">10</span>
+                    <strong class="text-navy-900 block mb-1">Temp (-20°C to 100°C)</strong>
+                    <span class="text-gray-500">Does not crack in extreme cold or melt under hot sun.</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- 4. Applications (9 Areas) -->
+        <div class="bg-white border border-gray-200 rounded-2xl p-6 md:p-8 shadow-sm">
+            <h2 class="text-xl font-bold text-navy-900 mb-6 flex items-center gap-2">
+                <i data-lucide="layers" class="w-5 h-5 text-rust"></i> Usage & Applications
+            </h2>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 text-xs">
+                <div class="p-4 border border-gray-200 rounded-xl flex items-start gap-3 bg-gray-50/50">
+                    <i data-lucide="home" class="w-5 h-5 text-rust shrink-0 mt-0.5"></i>
+                    <div>
+                        <strong class="text-navy-900 block text-sm mb-0.5">Roof Waterproofing</strong>
+                        <span class="text-gray-500">Sealing sheet overlaps, metal roof joints, asbestos & corrugated roof sheets.</span>
+                    </div>
+                </div>
+                <div class="p-4 border border-gray-200 rounded-xl flex items-start gap-3 bg-gray-50/50">
+                    <i data-lucide="sun" class="w-5 h-5 text-rust shrink-0 mt-0.5"></i>
+                    <div>
+                        <strong class="text-navy-900 block text-sm mb-0.5">Solar Panel Sealing</strong>
+                        <span class="text-gray-500">Weatherproofing around solar mounting legs, cable penetrations & frame joints.</span>
+                    </div>
+                </div>
+                <div class="p-4 border border-gray-200 rounded-xl flex items-start gap-3 bg-gray-50/50">
+                    <i data-lucide="building" class="w-5 h-5 text-rust shrink-0 mt-0.5"></i>
+                    <div>
+                        <strong class="text-navy-900 block text-sm mb-0.5">Wall Sealing</strong>
+                        <span class="text-gray-500">Sealing parapet wall junctions, window frame surrounds & exterior masonry gaps.</span>
+                    </div>
+                </div>
+                <div class="p-4 border border-gray-200 rounded-xl flex items-start gap-3 bg-gray-50/50">
+                    <i data-lucide="umbrella" class="w-5 h-5 text-rust shrink-0 mt-0.5"></i>
+                    <div>
+                        <strong class="text-navy-900 block text-sm mb-0.5">Terrace Waterproofing</strong>
+                        <span class="text-gray-500">Sealing roof drain outlets, terrace floor joints & expansion joints.</span>
+                    </div>
+                </div>
+                <div class="p-4 border border-gray-200 rounded-xl flex items-start gap-3 bg-gray-50/50">
+                    <i data-lucide="shield" class="w-5 h-5 text-rust shrink-0 mt-0.5"></i>
+                    <div>
+                        <strong class="text-navy-900 block text-sm mb-0.5">Basement Waterproofing</strong>
+                        <span class="text-gray-500">Sealing underground wall joints, retaining walls & foundation pipe sleeves.</span>
+                    </div>
+                </div>
+                <div class="p-4 border border-gray-200 rounded-xl flex items-start gap-3 bg-gray-50/50">
+                    <i data-lucide="wind" class="w-5 h-5 text-rust shrink-0 mt-0.5"></i>
+                    <div>
+                        <strong class="text-navy-900 block text-sm mb-0.5">Ducting & HVAC</strong>
+                        <span class="text-gray-500">Air-tight sealing of metal ventilation ducts & industrial exhaust piping.</span>
+                    </div>
+                </div>
+                <div class="p-4 border border-gray-200 rounded-xl flex items-start gap-3 bg-gray-50/50">
+                    <i data-lucide="hammer" class="w-5 h-5 text-rust shrink-0 mt-0.5"></i>
+                    <div>
+                        <strong class="text-navy-900 block text-sm mb-0.5">Construction Joints</strong>
+                        <span class="text-gray-500">Sealing precast concrete panel gaps, gutters & valley flashing.</span>
+                    </div>
+                </div>
+                <div class="p-4 border border-gray-200 rounded-xl flex items-start gap-3 bg-gray-50/50">
+                    <i data-lucide="split" class="w-5 h-5 text-rust shrink-0 mt-0.5"></i>
+                    <div>
+                        <strong class="text-navy-900 block text-sm mb-0.5">Crack Sealing</strong>
+                        <span class="text-gray-500">Emergency repair of active roof cracks, chimney collars & rainwater downpipes.</span>
+                    </div>
+                </div>
+                <div class="p-4 border border-gray-200 rounded-xl flex items-start gap-3 bg-gray-50/50">
+                    <i data-lucide="droplet" class="w-5 h-5 text-rust shrink-0 mt-0.5"></i>
+                    <div>
+                        <strong class="text-navy-900 block text-sm mb-0.5">General Waterproofing</strong>
+                        <span class="text-gray-500">All-purpose maintenance and waterproofing for industrial & domestic sites.</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 5. Available Sizes & Roll Matrix -->
+        <div class="bg-white border border-gray-200 rounded-2xl p-6 md:p-8 shadow-sm">
+            <h2 class="text-xl font-bold text-navy-900 mb-4 flex items-center gap-2">
+                <i data-lucide="ruler" class="w-5 h-5 text-rust"></i> Available Widths & Packaging Options
+            </h2>
+            <p class="text-xs text-gray-500 mb-4">Standard roll length is 10 meters (also available in 20m custom rolls upon request).</p>
+            
+            <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-3 text-center text-xs">
+                <div class="p-3 bg-gray-50 rounded-xl border border-gray-200">
+                    <span class="font-mono text-base font-extrabold text-navy-900 block">2 Inch</span>
+                    <span class="text-gray-500 font-mono">50 mm x 10 m</span>
+                </div>
+                <div class="p-3 bg-gray-50 rounded-xl border border-gray-200">
+                    <span class="font-mono text-base font-extrabold text-navy-900 block">3 Inch</span>
+                    <span class="text-gray-500 font-mono">75 mm x 10 m</span>
+                </div>
+                <div class="p-3 bg-rust/10 border border-rust/30 rounded-xl">
+                    <span class="font-mono text-base font-extrabold text-rust block">4 Inch</span>
+                    <span class="text-rust-light font-mono font-bold">100 mm x 10 m (Popular)</span>
+                </div>
+                <div class="p-3 bg-gray-50 rounded-xl border border-gray-200">
+                    <span class="font-mono text-base font-extrabold text-navy-900 block">6 Inch</span>
+                    <span class="text-gray-500 font-mono">150 mm x 10 m</span>
+                </div>
+                <div class="p-3 bg-gray-50 rounded-xl border border-gray-200">
+                    <span class="font-mono text-base font-extrabold text-navy-900 block">8 Inch</span>
+                    <span class="text-gray-500 font-mono">200 mm x 10 m</span>
+                </div>
+                <div class="p-3 bg-gray-50 rounded-xl border border-gray-200">
+                    <span class="font-mono text-base font-extrabold text-navy-900 block">10 Inch</span>
+                    <span class="text-gray-500 font-mono">250 mm x 10 m</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- 6. Why Choose AR Flashing Tape? -->
+        <div class="bg-navy-900 text-white rounded-2xl p-6 md:p-8 shadow-xl border border-navy-800">
+            <h2 class="text-xl font-bold mb-6 flex items-center gap-2">
+                <i data-lucide="shield-check" class="w-5 h-5 text-rust"></i> Why Choose AR Flashing Tape?
+            </h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 text-xs">
+                <div class="p-4 bg-white/5 rounded-xl border border-white/10 space-y-2">
+                    <strong class="text-rust-light text-sm block">Direct Manufacturer Pricing</strong>
+                    <p class="text-gray-300 leading-relaxed">Get genuine AR brand flashing tapes at competitive wholesale rates (approx. ₹200 / roll) with direct factory dispatch.</p>
+                </div>
+                <div class="p-4 bg-white/5 rounded-xl border border-white/10 space-y-2">
+                    <strong class="text-rust-light text-sm block">Instant Watertight Bond</strong>
+                    <p class="text-gray-300 leading-relaxed">No torch heating required. Pressure-sensitive bitumen compound forms an immediate seal against leaks.</p>
+                </div>
+                <div class="p-4 bg-white/5 rounded-xl border border-white/10 space-y-2">
+                    <strong class="text-rust-light text-sm block">Tested Temperature Range</strong>
+                    <p class="text-gray-300 leading-relaxed">Proven performance from -20°C freezing conditions up to 100°C blistering roof heat under direct sunlight.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- 7. Request a Quote / B2B Lead Form Section -->
+        <div class="bg-white border border-gray-200 rounded-2xl p-6 md:p-8 shadow-sm" id="inquiry-form-section">
+            <div class="max-w-2xl mx-auto">
+                <div class="text-center mb-6">
+                    <span class="font-mono text-xs font-bold text-rust uppercase tracking-wider">B2B INQUIRY & BULK QUOTATION</span>
+                    <h3 class="text-2xl font-extrabold text-navy-900 mt-1">Get Best Price for AR Flashing Bitumen Tape</h3>
+                    <p class="text-xs text-gray-500 mt-1">Fill out the form below to receive immediate wholesale pricing and delivery timelines.</p>
+                </div>
+
+                <form id="product-inquiry-form" class="space-y-4 text-xs">
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <div>
+                            <label class="block font-mono font-bold text-gray-700 mb-1 uppercase">YOUR NAME *</label>
+                            <input type="text" id="form-name" required placeholder="Full Name" class="w-full border border-gray-300 rounded-lg px-3 py-2 outline-none focus:border-rust">
+                        </div>
+                        <div>
+                            <label class="block font-mono font-bold text-gray-700 mb-1 uppercase">COMPANY / BUSINESS NAME *</label>
+                            <input type="text" id="form-company" required placeholder="Company Name" class="w-full border border-gray-300 rounded-lg px-3 py-2 outline-none focus:border-rust">
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <div>
+                            <label class="block font-mono font-bold text-gray-700 mb-1 uppercase">PHONE / WHATSAPP NUMBER *</label>
+                            <input type="tel" id="form-phone" required placeholder="+91 98000 00000" class="w-full border border-gray-300 rounded-lg px-3 py-2 outline-none focus:border-rust">
+                        </div>
+                        <div>
+                            <label class="block font-mono font-bold text-gray-700 mb-1 uppercase">EMAIL ADDRESS *</label>
+                            <input type="email" id="form-email" required placeholder="name@company.com" class="w-full border border-gray-300 rounded-lg px-3 py-2 outline-none focus:border-rust">
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <div>
+                            <label class="block font-mono font-bold text-gray-700 mb-1 uppercase">SELECT TAPE WIDTH</label>
+                            <select id="form-width" class="w-full border border-gray-300 rounded-lg px-3 py-2 outline-none focus:border-rust bg-white">
+                                <option value="4 inch / 100mm (Standard)">4 Inch (100 mm x 10 m)</option>
+                                <option value="2 inch / 50mm">2 Inch (50 mm x 10 m)</option>
+                                <option value="3 inch / 75mm">3 Inch (75 mm x 10 m)</option>
+                                <option value="6 inch / 150mm">6 Inch (150 mm x 10 m)</option>
+                                <option value="8 inch / 200mm">8 Inch (200 mm x 10 m)</option>
+                                <option value="10 inch / 250mm">10 Inch (250 mm x 10 m)</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block font-mono font-bold text-gray-700 mb-1 uppercase">ESTIMATED QUANTITY (ROLLS) *</label>
+                            <input type="text" id="form-qty" required placeholder="e.g. 50 Rolls" class="w-full border border-gray-300 rounded-lg px-3 py-2 outline-none focus:border-rust">
+                        </div>
+                    </div>
+
+                    <div>
+                        <label class="block font-mono font-bold text-gray-700 mb-1 uppercase">DELIVERY CITY / APPLICATION DETAILS</label>
+                        <textarea id="form-notes" rows="2" placeholder="e.g. For roof waterproofing in Pune. Required delivery by next week." class="w-full border border-gray-300 rounded-lg px-3 py-2 outline-none focus:border-rust"></textarea>
+                    </div>
+
+                    <button type="submit" class="w-full bg-rust hover:bg-rust-hover text-white font-bold py-3.5 rounded-xl transition-all shadow-lg shadow-rust/20 text-sm flex items-center justify-center gap-2">
+                        <i data-lucide="send" class="w-4 h-4"></i> Submit Inquiry & Get Wholesale Quote
+                    </button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- MOBILE STICKY BOTTOM B2B CTA BAR -->
+    <div class="fixed bottom-0 left-0 right-0 z-40 bg-white border-t border-gray-200 p-3 md:hidden flex gap-2 shadow-2xl">
+        <button onclick="openQuoteModal('Get Best Quote')" class="flex-1 bg-rust text-white text-xs font-bold py-3 rounded-lg flex items-center justify-center gap-1 shadow">
+            <i data-lucide="tag" class="w-3.5 h-3.5"></i> Get Best Quote
+        </button>
+        <a href="https://wa.me/919823012345?text=Hi,%20I%20want%20to%20enquire%20about%20AR%20Flashing%20Bitumen%20Tape%20for%20Roofing" target="_blank" class="flex-1 bg-[#25D366] text-white text-xs font-bold py-3 rounded-lg flex items-center justify-center gap-1 shadow">
+            <i data-lucide="message-square" class="w-3.5 h-3.5"></i> WhatsApp Inquiry
+        </a>
+    </div>
+
+    <!-- Callback Modal Popup -->
+    <div id="callback-modal" class="fixed inset-0 z-50 bg-navy-900/80 backdrop-blur-sm hidden items-center justify-center p-4">
+        <div class="bg-white rounded-2xl max-w-sm w-full p-6 shadow-2xl border border-gray-200 text-center relative">
+            <button onclick="closeCallbackModal()" class="absolute top-4 right-4 text-gray-400 hover:text-navy-900 text-sm font-bold">✕</button>
+            <div class="w-12 h-12 bg-rust/10 text-rust rounded-full flex items-center justify-center mx-auto mb-3">
+                <i data-lucide="phone-call" class="w-6 h-6"></i>
+            </div>
+            <h3 class="text-lg font-extrabold text-navy-900">Request Instant Callback</h3>
+            <p class="text-xs text-gray-500 mb-4">Enter your mobile number and our technical team will call you within 15 minutes.</p>
+
+            <form id="callback-form" class="space-y-3 text-xs">
+                <input type="tel" id="cb-phone" required placeholder="Enter Phone Number" class="w-full border border-gray-300 rounded-lg p-2.5 outline-none focus:border-rust font-mono text-center text-sm">
+                <button type="submit" class="w-full bg-navy-900 text-white font-bold py-2.5 rounded-lg hover:bg-navy-800 transition-colors">Call Me Back</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Quote Modal Popup -->
+    <div id="quote-modal" class="fixed inset-0 z-50 bg-navy-900/80 backdrop-blur-sm hidden items-center justify-center p-4">
+        <div class="bg-white rounded-2xl max-w-md w-full p-6 shadow-2xl border border-gray-200 relative">
+            <button onclick="closeQuoteModal()" class="absolute top-4 right-4 text-gray-400 hover:text-navy-900 text-sm font-bold">✕</button>
+            <h3 id="modal-quote-title" class="text-lg font-extrabold text-navy-900 mb-1">Get Quote for AR Flashing Tape</h3>
+            <p class="text-xs text-gray-500 mb-4">Manufacturer price: Approx. ₹200 / Roll • MOQ: 1 Roll</p>
+
+            <form id="popup-quote-form" class="space-y-3 text-xs">
+                <input type="text" id="pq-name" required placeholder="Your Full Name *" class="w-full border border-gray-300 rounded-lg p-2.5 outline-none focus:border-rust">
+                <input type="tel" id="pq-phone" required placeholder="Phone / WhatsApp Number *" class="w-full border border-gray-300 rounded-lg p-2.5 outline-none focus:border-rust">
+                <input type="text" id="pq-qty" required placeholder="Estimated Quantity (e.g. 20 Rolls) *" class="w-full border border-gray-300 rounded-lg p-2.5 outline-none focus:border-rust">
+                <button type="submit" class="w-full bg-rust hover:bg-rust-hover text-white font-bold py-3 rounded-lg transition-colors shadow">Submit Quote Request</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-navy-900 text-white py-10 border-t border-navy-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-4">
+            <p class="text-xs text-gray-400">© 2026 AR Industries & AR Group. Waterproofing Manufacturers.</p>
+            <div class="flex gap-6 text-xs text-gray-400">
+                <a href="industrial-site.html" class="hover:text-white">Home</a>
+                <a href="products.html" class="hover:text-white">Products</a>
+                <a href="capabilities.html" class="hover:text-white">Capabilities</a>
+            
+                <!-- Mobile Menu Button -->
+                <button id="mobile-menu-btn" class="md:hidden ml-4 p-2 text-gray-600 hover:text-navy-900 focus:outline-none" onclick="document.getElementById('mobile-menu').classList.toggle('hidden'); document.getElementById('mobile-menu').classList.toggle('flex');">
+                    <i data-lucide="menu" class="w-6 h-6"></i>
+                </button>
+</div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="company-config.js"></script>
+    <script>
+        lucide.createIcons();
+
+        function changeMainImage(src, btn) {
+            const mainImg = document.getElementById('main-product-img');
+            mainImg.src = src;
+            
+            document.querySelectorAll('.thumb-btn').forEach(b => {
+                b.classList.remove('border-rust');
+                b.classList.add('border-gray-200');
+            });
+            btn.classList.remove('border-gray-200');
+            btn.classList.add('border-rust');
+        }
+
+        function openCallbackModal() {
+            document.getElementById('callback-modal').classList.remove('hidden');
+            document.getElementById('callback-modal').classList.add('flex');
+        }
+
+        function closeCallbackModal() {
+            document.getElementById('callback-modal').classList.add('hidden');
+            document.getElementById('callback-modal').classList.remove('flex');
+        }
+
+        function openQuoteModal(title) {
+            document.getElementById('modal-quote-title').innerText = title || "Get Best Quote";
+            document.getElementById('quote-modal').classList.remove('hidden');
+            document.getElementById('quote-modal').classList.add('flex');
+        }
+
+        function closeQuoteModal() {
+            document.getElementById('quote-modal').classList.add('hidden');
+            document.getElementById('quote-modal').classList.remove('flex');
+        }
+
+        // Handle inline form
+        document.getElementById('product-inquiry-form').addEventListener('submit', (e) => {
+            e.preventDefault();
+            const name = document.getElementById('form-name').value;
+            const phone = document.getElementById('form-phone').value;
+            const qty = document.getElementById('form-qty').value;
+            const width = document.getElementById('form-width').value;
+
+            alert(`✅ Thank you ${name}!\nYour inquiry for AR Flashing Bitumen Tape (${width}, Quantity: ${qty}) has been received. Our sales engineer will call you back at ${phone}.`);
+            e.target.reset();
+        });
+
+        // Handle callback form
+        document.getElementById('callback-form').addEventListener('submit', (e) => {
+            e.preventDefault();
+            const phone = document.getElementById('cb-phone').value;
+            alert(`✅ Callback requested for ${phone}. Our technical expert will call you back within 15 minutes.`);
+            closeCallbackModal();
+        });
+
+        // Handle popup quote form
+        document.getElementById('popup-quote-form').addEventListener('submit', (e) => {
+            e.preventDefault();
+            const name = document.getElementById('pq-name').value;
+            const phone = document.getElementById('pq-phone').value;
+            const qty = document.getElementById('pq-qty').value;
+            alert(`✅ Thank you ${name}!\nQuote request for AR Flashing Bitumen Tape (${qty}) submitted. We will send the latest price quotation to ${phone}.`);
+            closeQuoteModal();
+        });
+    </script>
+    <script src="chatbot.js"></script>
+</body>
+</html>

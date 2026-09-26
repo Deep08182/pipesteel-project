@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Customer Login Portal | AR Group & Steelcore</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script src="js/api.js"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        background: '#F5F6F8',
+                        navy: { DEFAULT: '#0B1220', 900: '#0B1220', 800: '#111C30' },
+                        rust: { DEFAULT: '#C05621', hover: '#B5541F', light: '#E26E33' },
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        mono: ['JetBrains Mono', 'monospace'],
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-[#F5F6F8] text-slate-700 antialiased min-h-screen flex flex-col justify-between">
+    <!-- Header -->
+    <header class="bg-white border-b border-gray-200">
+        <div class="max-w-7xl mx-auto px-4 h-16 flex items-center justify-between">
+            <a href="industrial-site.html" class="flex items-center gap-3">
+                <img src="logo.jpg" alt="AR Group" class="h-10 w-auto object-contain hover:opacity-90 transition-opacity">
+                <span class="font-extrabold text-navy-900 text-sm hidden sm:block">AR GROUP & STEELCORE</span>
+            </a>
+            <div class="flex items-center gap-4">
+                <a href="admin-login.html" class="text-xs font-bold text-rust hover:text-rust-hover flex items-center gap-1 bg-rust/10 px-3 py-1.5 rounded">
+                    <i data-lucide="shield" class="w-3.5 h-3.5"></i> Admin Staff Login →
+                </a>
+                <a href="industrial-site.html" class="text-xs font-semibold text-gray-500 hover:text-navy-900">
+                    Back to Site
+                </a>
+            
+                <!-- Mobile Menu Button -->
+                <button id="mobile-menu-btn" class="md:hidden ml-4 p-2 text-gray-600 hover:text-navy-900 focus:outline-none" onclick="document.getElementById('mobile-menu').classList.toggle('hidden'); document.getElementById('mobile-menu').classList.toggle('flex');">
+                    <i data-lucide="menu" class="w-6 h-6"></i>
+                </button>
+</div>
+        </div>
+    </header>
+    <!-- Mobile Nav Dropdown -->
+    <div id="mobile-menu" class="hidden absolute top-20 left-0 w-full bg-white border-b border-gray-200 shadow-xl flex-col py-4 px-6 gap-3 z-40 transition-all">
+        <a href="industrial-site.html" class="text-base font-semibold text-gray-800 border-b border-gray-100 pb-3 pt-1">Home</a>
+        <a href="products.html" class="text-base font-semibold text-gray-800 border-b border-gray-100 pb-3">Products</a>
+        <a href="capabilities.html" class="text-base font-semibold text-gray-800 border-b border-gray-100 pb-3">Capabilities</a>
+        <a href="login.html" class="text-base font-semibold text-gray-800 border-b border-gray-100 pb-3">Client Portal</a>
+        <a href="admin-login.html" class="text-base font-mono font-semibold text-rust border-b border-gray-100 pb-3">Admin Console</a>
+        <a href="contact.html" class="mt-2 bg-navy-900 hover:bg-navy-800 text-white text-center py-3 rounded-lg font-bold text-base shadow-md">Request a Quote</a>
+    </div>
+
+    
+
+
+    <div class="flex-1 flex items-center justify-center p-4">
+        <div class="bg-white border border-gray-200 rounded-2xl shadow-xl w-full max-w-md overflow-hidden">
+            <!-- Header Banner -->
+            <div class="bg-navy-900 p-6 text-white text-center">
+                <div class="w-12 h-12 bg-rust/20 text-rust rounded-full flex items-center justify-center mx-auto mb-2">
+                    <i data-lucide="user-check" class="w-6 h-6"></i>
+                </div>
+                <h2 class="text-xl font-extrabold tracking-tight">Customer Tracking Portal</h2>
+                <p class="text-xs text-gray-300 mt-1">Sign in with your phone or email to track your WhatsApp & web RFQs.</p>
+            </div>
+
+            <!-- Login Modes: Phone/OTP vs Email/Password -->
+            <div class="p-6">
+                <div class="flex border-b border-gray-200 mb-6">
+                    <button id="mode-phone" class="flex-1 pb-3 text-xs font-mono font-bold uppercase border-b-2 border-rust text-navy-900">
+                        📱 Phone / WhatsApp OTP
+                    </button>
+                    <button id="mode-email" class="flex-1 pb-3 text-xs font-mono font-bold uppercase text-gray-400 border-b-2 border-transparent">
+                        ✉️ Email & Password
+                    </button>
+                </div>
+
+                <!-- 1-Click Fast Customer Demo Accounts -->
+                <div class="mb-6 p-3 bg-navy-900/5 rounded-xl border border-navy-900/10">
+                    <span class="text-[10px] font-mono font-bold text-gray-400 uppercase block mb-1.5">⚡ 1-Click Instant Customer Login</span>
+                    <div class="space-y-1.5">
+                        <button type="button" onclick="loginAsCustomer('+91 98112 34567', 'rahul@abc.com', 'Rahul Sharma')" class="w-full bg-white hover:bg-gray-50 border border-gray-300 text-navy-900 text-xs font-bold py-1.5 px-3 rounded-lg transition-colors flex items-center justify-between shadow-sm">
+                            <span>Rahul Sharma (ABC Infra)</span>
+                            <span class="text-[10px] font-mono text-rust">WhatsApp Linked</span>
+                        </button>
+                        <button type="button" onclick="loginAsCustomer('+91 98220 87654', 'amit.patel@lnt-heavy.com', 'Amit Patel')" class="w-full bg-white hover:bg-gray-50 border border-gray-300 text-navy-900 text-xs font-bold py-1.5 px-3 rounded-lg transition-colors flex items-center justify-between shadow-sm">
+                            <span>Amit Patel (L&T Heavy)</span>
+                            <span class="text-[10px] font-mono text-purple-600">WhatsApp Linked</span>
+                        </button>
+                    </div>
+                </div>
+
+                <form id="customer-login-form">
+                    <!-- Phone Input Block -->
+                    <div id="phone-block" class="space-y-4">
+                        <div>
+                            <label class="block text-[11px] font-mono font-bold tracking-wide text-gray-700 mb-1.5 uppercase">WHATSAPP / PHONE NUMBER</label>
+                            <div class="relative">
+                                <i data-lucide="phone" class="absolute left-3 top-2.5 w-4 h-4 text-gray-400"></i>
+                                <input type="text" id="req-phone-input" class="w-full border border-gray-300 rounded-lg pl-9 pr-3 py-2 text-sm outline-none focus:border-rust font-mono" value="+91 98112 34567">
+                            </div>
+                        </div>
+                        <div>
+                            <label class="block text-[11px] font-mono font-bold tracking-wide text-gray-700 mb-1.5 uppercase">VERIFICATION OTP</label>
+                            <div class="relative">
+                                <i data-lucide="message-square" class="absolute left-3 top-2.5 w-4 h-4 text-gray-400"></i>
+                                <input type="text" id="req-otp-input" class="w-full border border-gray-300 rounded-lg pl-9 pr-3 py-2 text-sm outline-none focus:border-rust font-mono" value="882190">
+                            </div>
+                            <span class="text-[10px] text-gray-400 mt-1 block">Auto-verified for registered WhatsApp customers</span>
+                        </div>
+                    </div>
+
+                    <!-- Email Input Block -->
+                    <div id="email-block" class="space-y-4 hidden">
+                        <div>
+                            <label class="block text-[11px] font-mono font-bold tracking-wide text-gray-700 mb-1.5 uppercase">OFFICIAL EMAIL</label>
+                            <div class="relative">
+                                <i data-lucide="mail" class="absolute left-3 top-2.5 w-4 h-4 text-gray-400"></i>
+                                <input type="email" id="req-email-input" class="w-full border border-gray-300 rounded-lg pl-9 pr-3 py-2 text-sm outline-none focus:border-rust" value="rahul@abc.com">
+                            </div>
+                        </div>
+                        <div>
+                            <label class="block text-[11px] font-mono font-bold tracking-wide text-gray-700 mb-1.5 uppercase">PASSWORD</label>
+                            <div class="relative">
+                                <i data-lucide="lock" class="absolute left-3 top-2.5 w-4 h-4 text-gray-400"></i>
+                                <input type="password" id="req-pass-input" class="w-full border border-gray-300 rounded-lg pl-9 pr-3 py-2 text-sm outline-none focus:border-rust" value="password123">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mt-4 text-center text-xs text-gray-500">
+                        Don't have an account? <a href="register.html" class="text-rust font-bold hover:underline">Register here</a>
+                    </div>
+
+                    <button type="submit" class="w-full bg-navy-900 hover:bg-navy-800 text-white font-bold py-3 rounded-lg transition-colors shadow-md text-sm flex items-center justify-center gap-2 mt-4">
+                        <i data-lucide="log-in" class="w-4 h-4"></i> Sign In to Portal &rarr;
+                    </button>
+                </form>
+            </div>
+
+            <!-- Footer link to admin -->
+            <div class="bg-gray-50 p-4 border-t border-gray-200 text-center text-xs">
+                Staff member? <a href="admin-login.html" class="text-rust font-bold hover:underline">Access Admin Console →</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="py-4 text-center text-xs text-gray-400">
+        © 2026 A. R. Laminators. All rights reserved. GST: 24ADLPD9216D1ZV
+    </footer>
+
+    <!-- Scripts -->
+    <script>
+        lucide.createIcons();
+
+        const btnPhone = document.getElementById('mode-phone');
+        const btnEmail = document.getElementById('mode-email');
+        const blockPhone = document.getElementById('phone-block');
+        const blockEmail = document.getElementById('email-block');
+        const form = document.getElementById('customer-login-form');
+
+        let activeAuthMode = 'phone';
+
+        btnPhone.addEventListener('click', () => {
+            activeAuthMode = 'phone';
+            btnPhone.classList.add('border-rust', 'text-navy-900');
+            btnPhone.classList.remove('border-transparent', 'text-gray-400');
+            btnEmail.classList.remove('border-rust', 'text-navy-900');
+            btnEmail.classList.add('border-transparent', 'text-gray-400');
+            blockPhone.classList.remove('hidden');
+            blockEmail.classList.add('hidden');
+        });
+
+        btnEmail.addEventListener('click', () => {
+            activeAuthMode = 'email';
+            btnEmail.classList.add('border-rust', 'text-navy-900');
+            btnEmail.classList.remove('border-transparent', 'text-gray-400');
+            btnPhone.classList.remove('border-rust', 'text-navy-900');
+            btnPhone.classList.add('border-transparent', 'text-gray-400');
+            blockEmail.classList.remove('hidden');
+            blockPhone.classList.add('hidden');
+        });
+
+        window.loginAsCustomer = function(phone, email, name) {
+            localStorage.setItem('ar_role', 'user');
+            localStorage.setItem('ar_user_phone', phone);
+            localStorage.setItem('ar_user_email', email);
+            localStorage.setItem('ar_user_name', name);
+            window.location.href = 'industrial-site.html';
+        };
+
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            const submitBtn = form.querySelector('button[type="submit"]');
+            submitBtn.innerHTML = '<i data-lucide="loader" class="w-4 h-4 animate-spin"></i> Authenticating...';
+            
+            try {
+                if (activeAuthMode === 'phone') {
+                    // For now, phone login is not supported in the backend implementation, 
+                    // redirect to email or show error.
+                    alert('Phone login is currently disabled. Please use Email/Password.');
+                    submitBtn.innerHTML = 'Sign In to Portal &rarr;';
+                    return;
+                }
+
+                const email = document.getElementById('req-email-input').value.trim();
+                const password = document.getElementById('req-pass-input').value.trim();
+
+                const response = await api.post('/auth/login', { email, password });
+                
+                api.setToken(response.token);
+                localStorage.setItem('ar_user_name', response.user.name);
+                localStorage.setItem('ar_user_email', response.user.email);
+                localStorage.setItem('ar_role', response.user.role);
+
+                if (response.user.role === 'admin') {
+                    window.location.href = 'admin.html';
+                } else {
+                    window.location.href = 'user-dashboard.html';
+                }
+            } catch (err) {
+                alert(err.message || 'Login failed. Please check your credentials.');
+            } finally {
+                submitBtn.innerHTML = 'Sign In to Portal &rarr;';
+            }
+        });
+    </script>
+</body>
+</html>

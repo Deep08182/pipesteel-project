@@ -1,0 +1,1048 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AR Group | Steel & Aluminium Manufacturing & Fabrication</title>
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    
+    <!-- Tailwind Config -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        background: '#F5F6F8',
+                        navy: {
+                            DEFAULT: '#0B1220',
+                            900: '#0B1220',
+                            800: '#111C30',
+                            700: '#1A2A44',
+                        },
+                        rust: {
+                            DEFAULT: '#C05621',
+                            hover: '#B5541F',
+                            light: '#E26E33'
+                        },
+                        slate: {
+                            DEFAULT: '#334155',
+                            text: '#475569'
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        mono: ['JetBrains Mono', 'monospace'],
+                    },
+                    animation: {
+                        'marquee': 'marquee 30s linear infinite',
+                        'draw': 'draw 1.5s ease-out forwards',
+                    },
+                    keyframes: {
+                        marquee: {
+                            '0%': { transform: 'translateX(0%)' },
+                            '100%': { transform: 'translateX(-50%)' },
+                        },
+                        draw: {
+                            '0%': { strokeDashoffset: '1000' },
+                            '100%': { strokeDashoffset: '0' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body {
+            background-color: theme('colors.background');
+            color: theme('colors.slate.text');
+        }
+        
+        h1, h2, h3, h4, h5, h6 {
+            color: theme('colors.navy.DEFAULT');
+        }
+
+        /* Scroll Reveal Utility Classes */
+        .reveal {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        /* Stagger delays */
+        .delay-100 { transition-delay: 100ms; }
+        .delay-200 { transition-delay: 200ms; }
+        .delay-300 { transition-delay: 300ms; }
+
+        /* Hide scrollbar for carousel but keep functionality */
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+    </style>
+</head>
+<body class="antialiased overflow-x-hidden">
+
+    <!-- Sticky Header -->
+    <header class="sticky top-0 z-50 bg-white border-b border-gray-200 shadow-sm transition-all duration-300" id="main-header">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+            <!-- Logo -->
+            <a href="industrial-site.html" class="flex items-center gap-3">
+                <img src="logo.jpg" alt="AR Group" class="h-12 w-auto object-contain hover:opacity-90 transition-opacity">
+                <div class="hidden sm:block">
+                    <span class="font-extrabold text-navy-900 tracking-tight text-lg block leading-none">AR GROUP</span>
+                    <span class="font-mono text-[10px] text-gray-400 tracking-widest uppercase">STEEL & ALUMINIUM MFG</span>
+                </div>
+            </a>
+            
+            <!-- Center Nav -->
+            <nav class="hidden md:flex gap-8">
+                <a href="industrial-site.html" class="text-sm font-semibold text-rust border-b-2 border-rust pb-1">Home</a>
+                <a href="products.html" class="text-sm font-semibold text-gray-600 hover:text-navy-900 transition-colors">Products</a>
+                <a href="capabilities.html" class="text-sm font-semibold text-gray-600 hover:text-navy-900 transition-colors">Capabilities</a>
+                <a href="contact.html" class="text-sm font-semibold text-gray-600 hover:text-navy-900 transition-colors">Get Quote</a>
+                <a href="login.html" class="text-sm font-semibold text-gray-600 hover:text-rust transition-colors">Client Portal</a>
+                <a href="admin-login.html" class="text-sm font-mono font-semibold text-rust hover:text-rust-hover transition-colors">Admin Console</a>
+            </nav>
+            
+            <!-- Right Actions -->
+            <div class="flex items-center gap-4">
+                <a href="login.html" class="text-sm font-mono font-semibold text-gray-600 hover:text-navy-900 hidden lg:flex items-center gap-1.5 uppercase tracking-wider text-xs bg-gray-100 hover:bg-gray-200 px-3 py-2 rounded">
+                    <i data-lucide="user" class="w-3.5 h-3.5"></i> Portal Login
+                </a>
+                <a href="contact.html" class="hidden md:flex bg-navy-900 hover:bg-navy-800 text-white px-5 py-2.5 rounded text-sm font-semibold flex items-center gap-2 transition-all shadow-md group">
+                    Request a Quote <i data-lucide="arrow-right" class="w-4 h-4 group-hover:translate-x-1 transition-transform"></i>
+                </a>
+            
+                <!-- Mobile Menu Button -->
+                <button id="mobile-menu-btn" class="md:hidden ml-4 p-2 text-gray-600 hover:text-navy-900 focus:outline-none" onclick="toggleMobileMenu()">
+                    <i data-lucide="menu" class="w-6 h-6"></i>
+                </button>
+</div>
+        </div>
+    </header>
+    <!-- Mobile Nav Drawer Overlay -->
+    <div id="mobile-menu-overlay" class="fixed inset-0 bg-navy-900/50 z-[55] hidden opacity-0 transition-opacity duration-300 backdrop-blur-sm" onclick="toggleMobileMenu()"></div>
+    
+    <!-- Mobile Nav Drawer -->
+    <div id="mobile-menu" class="fixed top-0 right-0 h-full w-1/2 min-w-[280px] bg-white shadow-2xl z-[60] flex flex-col py-6 px-6 gap-3 transition-transform duration-300 translate-x-full overflow-y-auto">
+        <div class="flex items-center justify-between border-b border-gray-100 pb-4 mb-2">
+            <span class="font-extrabold text-navy-900">MENU</span>
+            <button onclick="toggleMobileMenu()" class="text-gray-500 hover:text-navy-900 p-2 focus:outline-none">
+                <i data-lucide="x" class="w-6 h-6"></i>
+            </button>
+        </div>
+        <a href="industrial-site.html" class="text-base font-semibold text-gray-800 border-b border-gray-100 pb-3 pt-1">Home</a>
+        <a href="products.html" class="text-base font-semibold text-gray-800 border-b border-gray-100 pb-3">Products</a>
+        <a href="capabilities.html" class="text-base font-semibold text-gray-800 border-b border-gray-100 pb-3">Capabilities</a>
+        <a href="login.html" class="text-base font-semibold text-gray-800 border-b border-gray-100 pb-3">Client Portal</a>
+        <a href="admin-login.html" class="text-base font-mono font-semibold text-rust border-b border-gray-100 pb-3">Admin Console</a>
+        <a href="contact.html" class="mt-4 bg-navy-900 hover:bg-navy-800 text-white text-center py-3 rounded-lg font-bold text-base shadow-md">Request a Quote</a>
+    </div>
+
+    <script>
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobile-menu');
+            const overlay = document.getElementById('mobile-menu-overlay');
+            
+            if (menu.classList.contains('translate-x-full')) {
+                // Open menu
+                overlay.classList.remove('hidden');
+                // Small delay to allow display:block to apply before changing opacity
+                setTimeout(() => overlay.classList.remove('opacity-0'), 10);
+                menu.classList.remove('translate-x-full');
+            } else {
+                // Close menu
+                overlay.classList.add('opacity-0');
+                menu.classList.add('translate-x-full');
+                // Wait for transition to finish before hiding overlay
+                setTimeout(() => overlay.classList.add('hidden'), 300);
+            }
+        }
+    </script>
+
+    
+
+
+    <!-- Hero Section -->
+    <section class="relative h-[650px] md:h-[720px] flex items-center overflow-hidden bg-navy-900">
+        <!-- Background Image & Overlay -->
+        <div class="absolute inset-0 z-0">
+            <img src="https://images.unsplash.com/photo-1504917595217-d4dc5ebe6122?q=80&w=2000&auto=format&fit=crop" class="w-full h-full object-cover opacity-40 scale-100 transition-transform duration-[20s] ease-out hover:scale-105 origin-center" alt="Steel Manufacturing Plant">
+            <div class="absolute inset-0 bg-gradient-to-r from-navy-900 via-navy-900/90 to-transparent"></div>
+        </div>
+        
+        <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
+            <div class="max-w-3xl reveal active">
+                <div class="inline-flex items-center gap-2 bg-white/10 border border-white/20 rounded-full px-3.5 py-1 font-mono text-xs font-bold text-gray-200 tracking-widest mb-6 backdrop-blur-sm shadow-sm">
+                    <span class="w-2 h-2 rounded-full bg-rust animate-pulse"></span>
+                    WATERPROOFING &amp; ANTI-CORROSION SPECIALISTS • SINCE 2007
+                </div>
+                <h1 class="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold text-white leading-[1.1] mb-6 tracking-tight">
+                    Protect What’s Underground.<br><span class="text-rust-light">Waterproof What’s Above.</span>
+                </h1>
+                <p class="text-base sm:text-lg md:text-xl text-gray-300 mb-10 max-w-2xl font-medium reveal active delay-100 leading-relaxed">
+                    30+ years of trusted anti-corrosive pipe coating &amp; waterproofing membrane solutions for pipelines, bridges, roads &amp; structures across India. Manufactured in Vadodara, Gujarat.
+                </p>
+                <div class="flex flex-col sm:flex-row gap-4 reveal active delay-200">
+                    <a href="contact.html" class="bg-rust hover:bg-rust-hover text-white px-8 py-3.5 rounded text-base font-semibold flex items-center justify-center gap-2 transition-all shadow-lg shadow-rust/30 group">
+                        Submit RFQ & CAD Drawings <i data-lucide="arrow-right" class="w-4 h-4 group-hover:translate-x-1 transition-transform"></i>
+                    </a>
+                    <a href="products.html" class="bg-transparent hover:bg-white/10 border-2 border-white/30 text-white px-8 py-3.5 rounded text-base font-semibold flex items-center justify-center gap-2 transition-colors">
+                        Browse Our Products <i data-lucide="layers" class="w-4 h-4"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Trust Strip -->
+    <div class="bg-navy-900 border-t border-white/10 text-white py-8 md:py-10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-8 reveal">
+                <div class="flex items-center gap-4">
+                    <div class="w-12 h-12 rounded bg-white/5 border border-white/10 flex items-center justify-center flex-shrink-0">
+                        <i data-lucide="calendar" class="text-rust w-6 h-6"></i>
+                    </div>
+                    <div>
+                        <div class="font-bold text-sm md:text-base">Est. 1991</div>
+                        <div class="text-xs md:text-sm text-gray-400 font-mono mt-1">35+ Years Experience</div>
+                    </div>
+                </div>
+                <div class="flex items-center gap-4">
+                    <div class="w-12 h-12 rounded bg-white/5 border border-white/10 flex items-center justify-center flex-shrink-0">
+                        <i data-lucide="users" class="text-rust w-6 h-6"></i>
+                    </div>
+                    <div>
+                        <div class="font-bold text-sm md:text-base">30+ Employees</div>
+                        <div class="text-xs md:text-sm text-gray-400 font-mono mt-1">Skilled Workforce</div>
+                    </div>
+                </div>
+                <div class="flex items-center gap-4">
+                    <div class="w-12 h-12 rounded bg-white/5 border border-white/10 flex items-center justify-center flex-shrink-0">
+                        <i data-lucide="map-pin" class="text-rust w-6 h-6"></i>
+                    </div>
+                    <div>
+                        <div class="font-bold text-sm md:text-base">Nationwide</div>
+                        <div class="text-xs md:text-sm text-gray-400 font-mono mt-1">Pan-India Clients</div>
+                    </div>
+                </div>
+                <div class="flex items-center gap-4">
+                    <div class="w-12 h-12 rounded bg-white/5 border border-white/10 flex items-center justify-center flex-shrink-0">
+                        <i data-lucide="shield-check" class="text-rust w-6 h-6"></i>
+                    </div>
+                    <div>
+                        <div class="font-bold text-sm md:text-base">GST &amp; IEC</div>
+                        <div class="text-xs md:text-sm text-gray-400 font-mono mt-1">Registered Exporter</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Featured Product Carousel -->
+    <section class="py-20 md:py-28 bg-white overflow-hidden">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row md:items-end justify-between mb-12 reveal">
+                <div class="max-w-2xl">
+                    <div class="font-mono text-rust text-sm font-bold tracking-widest uppercase mb-3 flex items-center gap-2">
+                        <span class="w-1.5 h-1.5 bg-rust"></span> OUR PRODUCTS
+                    </div>
+                    <h2 class="text-3xl md:text-5xl font-bold tracking-tight text-navy-900">Waterproofing &amp; Anti-Corrosion Products</h2>
+                </div>
+                <div class="mt-6 md:mt-0 flex gap-3">
+                    <button id="prevBtn" class="w-12 h-12 rounded-full border border-gray-200 flex items-center justify-center hover:bg-gray-50 hover:border-rust transition-colors text-navy">
+                        <i data-lucide="arrow-left" class="w-5 h-5"></i>
+                    </button>
+                    <button id="nextBtn" class="w-12 h-12 rounded-full border border-gray-200 flex items-center justify-center hover:bg-gray-50 hover:border-rust transition-colors text-navy">
+                        <i data-lucide="arrow-right" class="w-5 h-5"></i>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Carousel Track -->
+            <div class="relative -mx-4 px-4 sm:mx-0 sm:px-0">
+                <div id="carouselTrack" class="flex gap-6 overflow-x-auto snap-x snap-mandatory no-scrollbar pb-8 pt-4">
+                    
+                    <!-- Card 1: Ar Aluminium Top Self Adhesive Membrane -->
+                    <div class="min-w-[300px] md:min-w-[360px] flex-shrink-0 snap-start group bg-white border border-gray-200 rounded-xl overflow-hidden hover:shadow-xl hover:-translate-y-1 transition-all duration-300 flex flex-col">
+                        <div class="relative h-56 bg-gray-100 overflow-hidden">
+                            <div class="absolute top-3 left-3 z-10 bg-navy-900 text-white text-[11px] font-mono px-2.5 py-1 rounded shadow-sm">WATERPROOFING MEMBRANE</div>
+                            <img src="images/tape_top.webp" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" alt="Ar Aluminium Top Self Adhesive Membrane">
+                        </div>
+                        <div class="p-6 flex flex-col flex-1">
+                            <div class="text-xs font-mono text-rust font-semibold mb-1">1.5 mm Thickness • Bituminous Membrane</div>
+                            <h3 class="text-xl font-bold mb-2 group-hover:text-rust transition-colors"><a href="ar-flashing-tape.html">Ar Aluminium Top Self Adhesive Membrane 1.5 mm</a></h3>
+                            <p class="text-sm text-gray-500 mb-4 line-clamp-2">Ar Aluminium top self adhesive membrane is widely used & excellent product for waterproofing of rooftops & joints & shades.</p>
+                            <div class="bg-gray-50 border border-gray-200 rounded p-2.5 text-xs mb-4">
+                                <div class="flex justify-between py-0.5"><span class="text-gray-500 font-mono">Price:</span> <span class="font-bold text-rust">Approx. ₹200 / Sq. Meter</span></div>
+                                <div class="flex justify-between py-0.5"><span class="text-gray-500 font-mono">Roll Size / Coverage:</span> <span class="font-semibold text-navy-900">1x10 m (10 sqm)</span></div>
+                                <div class="flex justify-between py-0.5"><span class="text-gray-500 font-mono">Brand:</span> <span class="font-semibold text-navy-900">Ar Aluminium Top</span></div>
+                            </div>
+                            <div class="mt-auto pt-4 border-t border-gray-100 flex items-center justify-between">
+                                <a href="ar-flashing-tape.html" class="inline-flex items-center gap-1.5 text-xs font-semibold text-navy hover:text-rust transition-colors">
+                                    Details & Specs <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                                </a>
+                                <a href="https://wa.me/919823012345?text=Hi,%20I%20am%20interested%20in%20Ar%20Aluminium%20Top%20Self%20Adhesive%20Membrane%201.5%20mm" target="_blank" class="bg-[#25D366] hover:bg-[#128C7E] text-white text-xs font-bold px-3.5 py-2 rounded flex items-center gap-1.5 shadow-sm transition-colors">
+                                    <i data-lucide="message-square" class="w-3.5 h-3.5"></i> WhatsApp
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Card 2: AR Oil/Solvent Based Bituminous Primer -->
+                    <div class="min-w-[300px] md:min-w-[360px] flex-shrink-0 snap-start group bg-white border border-gray-200 rounded-xl overflow-hidden hover:shadow-xl hover:-translate-y-1 transition-all duration-300 flex flex-col">
+                        <div class="relative h-56 bg-gray-100 overflow-hidden">
+                            <div class="absolute top-3 left-3 z-10 bg-navy-900 text-white text-[11px] font-mono px-2.5 py-1 rounded shadow-sm">BONDING PRIMER</div>
+                            <img src="images/bitumen_primer_can.webp" class="w-full h-full object-contain p-4 group-hover:scale-105 transition-transform duration-500" alt="AR Oil/Solvent Based Bituminous Primer">
+                        </div>
+                        <div class="p-6 flex flex-col flex-1">
+                            <div class="text-xs font-mono text-rust font-semibold mb-1">IS 3384-1986 • Item Code: ARL2</div>
+                            <h3 class="text-xl font-bold mb-2 group-hover:text-rust transition-colors"><a href="ar-bitumen-primer.html">AR Oil/Solvent Based Bituminous Primer</a></h3>
+                            <p class="text-sm text-gray-500 mb-4 line-clamp-2">Solvent based bituminous primer that seals concrete surface pores & improves membrane adhesion.</p>
+                            <div class="bg-gray-50 border border-gray-200 rounded p-2.5 text-xs mb-4">
+                                <div class="flex justify-between py-0.5"><span class="text-gray-500 font-mono">Price:</span> <span class="font-bold text-rust">Approx. ₹60 / Litre</span></div>
+                                <div class="flex justify-between py-0.5"><span class="text-gray-500 font-mono">Min Order Qty:</span> <span class="font-semibold text-navy-900">20 Litre</span></div>
+                                <div class="flex justify-between py-0.5"><span class="text-gray-500 font-mono">Application:</span> <span class="font-semibold text-navy-900">Cement / Concrete (Brush/Spray)</span></div>
+                            </div>
+                            <div class="mt-auto pt-4 border-t border-gray-100 flex items-center justify-between">
+                                <a href="ar-bitumen-primer.html" class="inline-flex items-center gap-1.5 text-xs font-semibold text-navy hover:text-rust transition-colors">
+                                    Details & Specs <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                                </a>
+                                <a href="https://wa.me/919823012345?text=Hi,%20I%20am%20interested%20in%20AR%20Oil/Solvent%20Based%20Bituminous%20Primer" target="_blank" class="bg-[#25D366] hover:bg-[#128C7E] text-white text-xs font-bold px-3.5 py-2 rounded flex items-center gap-1.5 shadow-sm transition-colors">
+                                    <i data-lucide="message-square" class="w-3.5 h-3.5"></i> WhatsApp
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Card 3: Ar Plastic Felt -->
+                    <div class="min-w-[300px] md:min-w-[360px] flex-shrink-0 snap-start group bg-white border border-gray-200 rounded-xl overflow-hidden hover:shadow-xl hover:-translate-y-1 transition-all duration-300 flex flex-col">
+                        <div class="relative h-56 bg-gray-100 overflow-hidden">
+                            <div class="absolute top-3 left-3 z-10 bg-navy-900 text-white text-[11px] font-mono px-2.5 py-1 rounded shadow-sm">APP MODIFIED FELT</div>
+                            <img src="images/ar_plastic_felt.png" class="w-full h-full object-contain p-4 group-hover:scale-105 transition-transform duration-500" alt="Ar Plastic Felt">
+                        </div>
+                        <div class="p-6 flex flex-col flex-1">
+                            <div class="text-xs font-mono text-rust font-semibold mb-1">Type 1 • Model: Ar Polyseal</div>
+                            <h3 class="text-xl font-bold mb-2 group-hover:text-rust transition-colors"><a href="ar-plastic-felt.html">Ar Plastic Felt (Polyseal Waterproofing)</a></h3>
+                            <p class="text-sm text-gray-500 mb-4 line-clamp-2">High performance APP polymer modified bitumen membrane with HMHDPE core for superior UV protection.</p>
+                            <div class="bg-gray-50 border border-gray-200 rounded p-2.5 text-xs mb-4">
+                                <div class="flex justify-between py-0.5"><span class="text-gray-500 font-mono">Price:</span> <span class="font-bold text-rust">Approx. ₹1,000 / Roll</span></div>
+                                <div class="flex justify-between py-0.5"><span class="text-gray-500 font-mono">Roll Size:</span> <span class="font-semibold text-navy-900">1x15 m (0.8/1/1.5mm)</span></div>
+                                <div class="flex justify-between py-0.5"><span class="text-gray-500 font-mono">Method:</span> <span class="font-semibold text-navy-900">Cold Adhesive</span></div>
+                            </div>
+                            <div class="mt-auto pt-4 border-t border-gray-100 flex items-center justify-between">
+                                <a href="ar-plastic-felt.html" class="inline-flex items-center gap-1.5 text-xs font-semibold text-navy hover:text-rust transition-colors">
+                                    Details & Specs <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                                </a>
+                                <a href="https://wa.me/919823012345?text=Hi,%20I%20am%20interested%20in%20Ar%20Plastic%20Felt" target="_blank" class="bg-[#25D366] hover:bg-[#128C7E] text-white text-xs font-bold px-3.5 py-2 rounded flex items-center gap-1.5 shadow-sm transition-colors">
+                                    <i data-lucide="message-square" class="w-3.5 h-3.5"></i> WhatsApp
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Card 4: SBS Water Proofing Membrane -->
+                    <div class="min-w-[300px] md:min-w-[360px] flex-shrink-0 snap-start group bg-white border border-gray-200 rounded-xl overflow-hidden hover:shadow-xl hover:-translate-y-1 transition-all duration-300 flex flex-col">
+                        <div class="relative h-56 bg-gray-100 overflow-hidden">
+                            <div class="absolute top-3 left-3 z-10 bg-navy-900 text-white text-[11px] font-mono px-2.5 py-1 rounded shadow-sm">SBS MEMBRANE</div>
+                            <img src="images/sbs_membrane.png" class="w-full h-full object-contain p-4 group-hover:scale-105 transition-transform duration-500" alt="SBS Water Proofing Membrane">
+                        </div>
+                        <div class="p-6 flex flex-col flex-1">
+                            <div class="text-xs font-mono text-rust font-semibold mb-1">3 mm • Polyester Mat Core</div>
+                            <h3 class="text-xl font-bold mb-2 group-hover:text-rust transition-colors"><a href="sbs-waterproofing-membrane.html">SBS Water Proofing Membrane</a></h3>
+                            <p class="text-sm text-gray-500 mb-4 line-clamp-2">Pre-fabricated elastomeric SBS modified bitumen membrane with spunbond polyester core.</p>
+                            <div class="bg-gray-50 border border-gray-200 rounded p-2.5 text-xs mb-4">
+                                <div class="flex justify-between py-0.5"><span class="text-gray-500 font-mono">Price:</span> <span class="font-bold text-rust">Approx. ₹1,250 / Roll</span></div>
+                                <div class="flex justify-between py-0.5"><span class="text-gray-500 font-mono">Roll Size:</span> <span class="font-semibold text-navy-900">1x10 m (3 mm)</span></div>
+                                <div class="flex justify-between py-0.5"><span class="text-gray-500 font-mono">Method:</span> <span class="font-semibold text-navy-900">Torch Applied</span></div>
+                            </div>
+                            <div class="mt-auto pt-4 border-t border-gray-100 flex items-center justify-between">
+                                <a href="sbs-waterproofing-membrane.html" class="inline-flex items-center gap-1.5 text-xs font-semibold text-navy hover:text-rust transition-colors">
+                                    Details & Specs <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                                </a>
+                                <a href="https://wa.me/919823012345?text=Hi,%20I%20am%20interested%20in%20SBS%20Water%20Proofing%20Membrane" target="_blank" class="bg-[#25D366] hover:bg-[#128C7E] text-white text-xs font-bold px-3.5 py-2 rounded flex items-center gap-1.5 shadow-sm transition-colors">
+                                    <i data-lucide="message-square" class="w-3.5 h-3.5"></i> WhatsApp
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Card 5: Bitumen Tar Felt Sheet -->
+                    <div class="min-w-[300px] md:min-w-[360px] flex-shrink-0 snap-start group bg-white border border-gray-200 rounded-xl overflow-hidden hover:shadow-xl hover:-translate-y-1 transition-all duration-300 flex flex-col">
+                        <div class="relative h-56 bg-gray-100 overflow-hidden">
+                            <div class="absolute top-3 left-3 z-10 bg-navy-900 text-white text-[11px] font-mono px-2.5 py-1 rounded shadow-sm">TAR FELT SHEET</div>
+                            <img src="images/bitumen_tar_felt.png" class="w-full h-full object-contain p-4 group-hover:scale-105 transition-transform duration-500" alt="Bitumen Tar Felt Sheet">
+                        </div>
+                        <div class="p-6 flex flex-col flex-1">
+                            <div class="text-xs font-mono text-rust font-semibold mb-1">Item Code: 1 • 1mm to 5mm</div>
+                            <h3 class="text-xl font-bold mb-2 group-hover:text-rust transition-colors"><a href="bitumen-tar-felt.html">Bitumen Tar Felt Sheet</a></h3>
+                            <p class="text-sm text-gray-500 mb-4 line-clamp-2">APP modified bitumen tar felt rolls for heavy-duty waterproofing of rooftops, terraces & foundations.</p>
+                            <div class="bg-gray-50 border border-gray-200 rounded p-2.5 text-xs mb-4">
+                                <div class="flex justify-between py-0.5"><span class="text-gray-500 font-mono">Price:</span> <span class="font-bold text-rust">Approx. ₹1,000 / Roll</span></div>
+                                <div class="flex justify-between py-0.5"><span class="text-gray-500 font-mono">Roll Length:</span> <span class="font-semibold text-navy-900">20 m (Width: 100 cm)</span></div>
+                                <div class="flex justify-between py-0.5"><span class="text-gray-500 font-mono">MOQ:</span> <span class="font-semibold text-navy-900">1 Roll</span></div>
+                            </div>
+                            <div class="mt-auto pt-4 border-t border-gray-100 flex items-center justify-between">
+                                <a href="bitumen-tar-felt.html" class="inline-flex items-center gap-1.5 text-xs font-semibold text-navy hover:text-rust transition-colors">
+                                    Details & Specs <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                                </a>
+                                <a href="https://wa.me/919823012345?text=Hi,%20I%20am%20interested%20in%20Bitumen%20Tar%20Felt%20Sheet" target="_blank" class="bg-[#25D366] hover:bg-[#128C7E] text-white text-xs font-bold px-3.5 py-2 rounded flex items-center gap-1.5 shadow-sm transition-colors">
+                                    <i data-lucide="message-square" class="w-3.5 h-3.5"></i> WhatsApp
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Card 6: AR Bituminous Aluminum Paint -->
+                    <div class="min-w-[300px] md:min-w-[360px] flex-shrink-0 snap-start group bg-white border border-gray-200 rounded-xl overflow-hidden hover:shadow-xl hover:-translate-y-1 transition-all duration-300 flex flex-col">
+                        <div class="relative h-56 bg-gray-100 overflow-hidden">
+                            <div class="absolute top-3 left-3 z-10 bg-navy-900 text-white text-[11px] font-mono px-2.5 py-1 rounded shadow-sm">HEAT REFLECTIVE PAINT</div>
+                            <img src="images/aluminum_paint.png" class="w-full h-full object-contain p-4 group-hover:scale-105 transition-transform duration-500" alt="AR Bituminous Aluminum Paint">
+                        </div>
+                        <div class="p-6 flex flex-col flex-1">
+                            <div class="text-xs font-mono text-rust font-semibold mb-1">Heat Resistant up to 150°C</div>
+                            <h3 class="text-xl font-bold mb-2 group-hover:text-rust transition-colors"><a href="ar-aluminum-paint.html">AR Bituminous Aluminum Paint</a></h3>
+                            <p class="text-sm text-gray-500 mb-4 line-clamp-2">Multi-purpose anti-corrosive & heat-reflective silver paint made of oxidized bitumen & aluminum compounds.</p>
+                            <div class="bg-gray-50 border border-gray-200 rounded p-2.5 text-xs mb-4">
+                                <div class="flex justify-between py-0.5"><span class="text-gray-500 font-mono">Price:</span> <span class="font-bold text-rust">Approx. ₹400 / Piece</span></div>
+                                <div class="flex justify-between py-0.5"><span class="text-gray-500 font-mono">Pack Size:</span> <span class="font-semibold text-navy-900">20 L Drum</span></div>
+                                <div class="flex justify-between py-0.5"><span class="text-gray-500 font-mono">Finish:</span> <span class="font-semibold text-navy-900">Glossy Silver</span></div>
+                            </div>
+                            <div class="mt-auto pt-4 border-t border-gray-100 flex items-center justify-between">
+                                <a href="ar-aluminum-paint.html" class="inline-flex items-center gap-1.5 text-xs font-semibold text-navy hover:text-rust transition-colors">
+                                    Details & Specs <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                                </a>
+                                <a href="https://wa.me/919823012345?text=Hi,%20I%20am%20interested%20in%20AR%20Bituminous%20Aluminum%20Paint" target="_blank" class="bg-[#25D366] hover:bg-[#128C7E] text-white text-xs font-bold px-3.5 py-2 rounded flex items-center gap-1.5 shadow-sm transition-colors">
+                                    <i data-lucide="message-square" class="w-3.5 h-3.5"></i> WhatsApp
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Card 7: APP Water Proofing Membrane -->
+                    <div class="min-w-[300px] md:min-w-[360px] flex-shrink-0 snap-start group bg-white border border-gray-200 rounded-xl overflow-hidden hover:shadow-xl hover:-translate-y-1 transition-all duration-300 flex flex-col">
+                        <div class="relative h-56 bg-gray-100 overflow-hidden">
+                            <div class="absolute top-3 left-3 z-10 bg-navy-900 text-white text-[11px] font-mono px-2.5 py-1 rounded shadow-sm">APP MEMBRANE</div>
+                            <img src="images/app_membrane_roll.webp" class="w-full h-full object-contain p-4 group-hover:scale-105 transition-transform duration-500" alt="APP Water Proofing Membrane">
+                        </div>
+                        <div class="p-6 flex flex-col flex-1">
+                            <div class="text-xs font-mono text-rust font-semibold mb-1">ASTM D 5147 • Item: ARBITUSEAL</div>
+                            <h3 class="text-xl font-bold mb-2 group-hover:text-rust transition-colors"><a href="app-waterproofing-membrane.html">APP Water Proofing Membrane</a></h3>
+                            <p class="text-sm text-gray-500 mb-4 line-clamp-2">Bituseal APP membrane mineral/sand based with thermo-fusible polyethylene film.</p>
+                            <div class="bg-gray-50 border border-gray-200 rounded p-2.5 text-xs mb-4">
+                                <div class="flex justify-between py-0.5"><span class="text-gray-500 font-mono">Price:</span> <span class="font-bold text-rust">Approx. ₹1,000 / Roll</span></div>
+                                <div class="flex justify-between py-0.5"><span class="text-gray-500 font-mono">Coverage:</span> <span class="font-semibold text-navy-900">8 to 9 sqm (1x10m)</span></div>
+                                <div class="flex justify-between py-0.5"><span class="text-gray-500 font-mono">Thickness:</span> <span class="font-semibold text-navy-900">2, 3, 4 mm</span></div>
+                            </div>
+                            <div class="mt-auto pt-4 border-t border-gray-100 flex items-center justify-between">
+                                <a href="app-waterproofing-membrane.html" class="inline-flex items-center gap-1.5 text-xs font-semibold text-navy hover:text-rust transition-colors">
+                                    Details & Specs <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                                </a>
+                                <a href="https://wa.me/919823012345?text=Hi,%20I%20am%20interested%20in%20APP%20Water%20Proofing%20Membrane" target="_blank" class="bg-[#25D366] hover:bg-[#128C7E] text-white text-xs font-bold px-3.5 py-2 rounded flex items-center gap-1.5 shadow-sm transition-colors">
+                                    <i data-lucide="message-square" class="w-3.5 h-3.5"></i> WhatsApp
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Card 8: Garden Water Proofing Membrane -->
+                    <div class="min-w-[300px] md:min-w-[360px] flex-shrink-0 snap-start group bg-white border border-gray-200 rounded-xl overflow-hidden hover:shadow-xl hover:-translate-y-1 transition-all duration-300 flex flex-col">
+                        <div class="relative h-56 bg-gray-100 overflow-hidden">
+                            <div class="absolute top-3 left-3 z-10 bg-navy-900 text-white text-[11px] font-mono px-2.5 py-1 rounded shadow-sm">ANTI-ROOT GARDEN MEMBRANE</div>
+                            <img src="images/garden_terrace_roof.webp" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" alt="Garden Water Proofing Membrane">
+                        </div>
+                        <div class="p-6 flex flex-col flex-1">
+                            <div class="text-xs font-mono text-rust font-semibold mb-1">Anti-Root • Terrace Gardens</div>
+                            <h3 class="text-xl font-bold mb-2 group-hover:text-rust transition-colors"><a href="garden-waterproofing-membrane.html">Garden Water Proofing Membrane</a></h3>
+                            <p class="text-sm text-gray-500 mb-4 line-clamp-2">Anti-root waterproofing membrane with spun-bonded polyester core. Diverts root growth without puncture.</p>
+                            <div class="bg-gray-50 border border-gray-200 rounded p-2.5 text-xs mb-4">
+                                <div class="flex justify-between py-0.5"><span class="text-gray-500 font-mono">Price:</span> <span class="font-bold text-rust">Approx. ₹250 / Sq. Meter</span></div>
+                                <div class="flex justify-between py-0.5"><span class="text-gray-500 font-mono">Roll Size:</span> <span class="font-semibold text-navy-900">1x10 m (3 mm)</span></div>
+                                <div class="flex justify-between py-0.5"><span class="text-gray-500 font-mono">Application:</span> <span class="font-semibold text-navy-900">Roof top & Terrace Garden</span></div>
+                            </div>
+                            <div class="mt-auto pt-4 border-t border-gray-100 flex items-center justify-between">
+                                <a href="garden-waterproofing-membrane.html" class="inline-flex items-center gap-1.5 text-xs font-semibold text-navy hover:text-rust transition-colors">
+                                    Details & Specs <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                                </a>
+                                <a href="https://wa.me/919823012345?text=Hi,%20I%20am%20interested%20in%20Garden%20Water%20Proofing%20Membrane" target="_blank" class="bg-[#25D366] hover:bg-[#128C7E] text-white text-xs font-bold px-3.5 py-2 rounded flex items-center gap-1.5 shadow-sm transition-colors">
+                                    <i data-lucide="message-square" class="w-3.5 h-3.5"></i> WhatsApp
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Card 9: Plastic Felt AR Polyseal HMHDPE Waterproofing Membrane -->
+                    <div class="min-w-[300px] md:min-w-[360px] flex-shrink-0 snap-start group bg-white border border-gray-200 rounded-xl overflow-hidden hover:shadow-xl hover:-translate-y-1 transition-all duration-300 flex flex-col">
+                        <div class="relative h-56 bg-gray-100 overflow-hidden">
+                            <div class="absolute top-3 left-3 z-10 bg-navy-900 text-white text-[11px] font-mono px-2.5 py-1 rounded shadow-sm">HMHDPE MEMBRANE</div>
+                            <img src="images/polyseal_roll.webp" class="w-full h-full object-contain p-4 group-hover:scale-105 transition-transform duration-500" alt="Plastic Felt AR Polyseal HMHDPE Waterproofing Membrane">
+                        </div>
+                        <div class="p-6 flex flex-col flex-1">
+                            <div class="text-xs font-mono text-rust font-semibold mb-1">HMHDPE Reinforced • 1 mm</div>
+                            <h3 class="text-xl font-bold mb-2 group-hover:text-rust transition-colors"><a href="ar-polyseal-hmhdpe.html">AR Polyseal HMHDPE Membrane</a></h3>
+                            <p class="text-sm text-gray-500 mb-4 line-clamp-2">High performance APP bitumen waterproofing membrane with HMHDPE core for roofs, basements & wet areas.</p>
+                            <div class="bg-gray-50 border border-gray-200 rounded p-2.5 text-xs mb-4">
+                                <div class="flex justify-between py-0.5"><span class="text-gray-500 font-mono">Price:</span> <span class="font-bold text-rust">Approx. ₹100 / Sq. Meter</span></div>
+                                <div class="flex justify-between py-0.5"><span class="text-gray-500 font-mono">Roll Size:</span> <span class="font-semibold text-navy-900">1x20 m (15-20 sqm)</span></div>
+                                <div class="flex justify-between py-0.5"><span class="text-gray-500 font-mono">Application:</span> <span class="font-semibold text-navy-900">Roofs, Basements, Tanks</span></div>
+                            </div>
+                            <div class="mt-auto pt-4 border-t border-gray-100 flex items-center justify-between">
+                                <a href="ar-polyseal-hmhdpe.html" class="inline-flex items-center gap-1.5 text-xs font-semibold text-navy hover:text-rust transition-colors">
+                                    Details & Specs <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                                </a>
+                                <a href="https://wa.me/919823012345?text=Hi,%20I%20am%20interested%20in%20AR%20Polyseal%20HMHDPE%20Membrane" target="_blank" class="bg-[#25D366] hover:bg-[#128C7E] text-white text-xs font-bold px-3.5 py-2 rounded flex items-center gap-1.5 shadow-sm transition-colors">
+                                    <i data-lucide="message-square" class="w-3.5 h-3.5"></i> WhatsApp
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══════ CAPABILITIES SECTION START ═══════ -->
+
+    <!-- Major Clients Trust Bar -->
+    <section class="py-12 bg-gray-50 border-y border-gray-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="font-mono text-center text-gray-400 text-xs tracking-widest mb-8">TRUSTED BY INDIA'S LEADING COMPANIES</div>
+            <div class="flex flex-wrap items-center justify-center gap-8 md:gap-16">
+                <div class="text-center">
+                    <div class="text-lg md:text-xl font-extrabold text-navy-900">Siemens</div>
+                </div>
+                <div class="text-center">
+                    <div class="text-lg md:text-xl font-extrabold text-navy-900">Jindal SAW Ltd.</div>
+                </div>
+                <div class="text-center">
+                    <div class="text-lg md:text-xl font-extrabold text-navy-900">Megha Engineering</div>
+                </div>
+                <div class="text-center">
+                    <div class="text-lg md:text-xl font-extrabold text-navy-900">Welspun Corp.</div>
+                </div>
+                <div class="text-center">
+                    <div class="text-lg md:text-xl font-extrabold text-navy-900">Adani Power</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About / Company Story -->
+    <section class="py-20 md:py-28 bg-navy-900 text-white relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="grid md:grid-cols-2 gap-16 items-start">
+                <!-- Left: Story -->
+                <div class="reveal">
+                    <div class="font-mono text-rust-light text-sm font-bold tracking-widest uppercase mb-4 flex items-center gap-2">
+                        <span class="w-1.5 h-1.5 bg-rust-light"></span> ABOUT US
+                    </div>
+                    <h2 class="text-3xl md:text-4xl font-bold tracking-tight text-white mb-6">
+                        Leaders in Pipe Protection &amp; Waterproofing Since 1991
+                    </h2>
+                    <p class="text-gray-300 leading-relaxed mb-5">
+                        <strong class="text-white">A.R. Laminators</strong>, established in <strong class="text-rust-light">1991</strong>, is one of the leading service providers in the pipe protection industry. Our pipe protection services enhance the strength of underground pipelines by coating and wrapping them with anti-corrosive material &mdash; including corrosion coatings, waterproof coating, and rust-proof primer.
+                    </p>
+                    <p class="text-gray-300 leading-relaxed mb-5">
+                        Our services are used to coat and wrap national <strong class="text-white">water lines, oil lines, gas lines, and sewage lines</strong> across India. Led by <strong class="text-white">Mr. Amit Desai</strong>, the company adopted high-end pipeline protection technology and works closely with clients to deliver customized taping &amp; wrapping solutions &mdash; including on-site application at the vendor&rsquo;s/client&rsquo;s location.
+                    </p>
+                    <p class="text-gray-300 leading-relaxed mb-8">
+                        Our sister concern, <strong class="text-white">A. R. Industries</strong> (est. 2007), extends our offering to waterproofing membranes, bituminous coatings, heat shrink sleeves, emulsion bitumen, and bridge &amp; deck waterproofing services.
+                    </p>
+
+                    <!-- Vision -->
+                    <div class="bg-white/5 border border-white/10 rounded-xl p-6 mb-6">
+                        <div class="flex items-center gap-3 mb-3">
+                            <i data-lucide="target" class="w-6 h-6 text-rust"></i>
+                            <h3 class="text-lg font-bold text-white">Our Vision</h3>
+                        </div>
+                        <p class="text-gray-300 italic">&ldquo;Deliver Best Services. Quality Services. Client&rsquo;s Satisfaction.&rdquo;</p>
+                        <p class="text-gray-400 text-sm mt-2">Long-term goal: To build a full-function plant offering a <strong class="text-white">&ldquo;Total Solution of Pipe Line Protection under one roof.&rdquo;</strong></p>
+                    </div>
+                </div>
+
+                <!-- Right: Quick Facts + Why Us -->
+                <div class="reveal delay-200">
+                    <!-- Quick Facts Table -->
+                    <div class="bg-white/5 border border-white/10 rounded-xl overflow-hidden mb-8">
+                        <div class="bg-white/5 px-6 py-4 border-b border-white/10">
+                            <h3 class="text-lg font-bold text-white flex items-center gap-2">
+                                <i data-lucide="building-2" class="w-5 h-5 text-rust"></i> Company Factsheet
+                            </h3>
+                        </div>
+                        <div class="divide-y divide-white/10 text-sm">
+                            <div class="flex justify-between px-6 py-3">
+                                <span class="text-gray-400">Founded</span>
+                                <span class="text-white font-bold">1991</span>
+                            </div>
+                            <div class="flex justify-between px-6 py-3">
+                                <span class="text-gray-400">CEO</span>
+                                <span class="text-white font-bold">Mr. Amit Desai</span>
+                            </div>
+                            <div class="flex justify-between px-6 py-3">
+                                <span class="text-gray-400">Nature of Business</span>
+                                <span class="text-white font-bold">Manufacturer</span>
+                            </div>
+                            <div class="flex justify-between px-6 py-3">
+                                <span class="text-gray-400">Legal Status</span>
+                                <span class="text-white font-bold">Proprietorship</span>
+                            </div>
+                            <div class="flex justify-between px-6 py-3">
+                                <span class="text-gray-400">Premises</span>
+                                <span class="text-white font-bold">11,000 sq. ft.</span>
+                            </div>
+                            <div class="flex justify-between px-6 py-3">
+                                <span class="text-gray-400">Employees</span>
+                                <span class="text-white font-bold">11&ndash;25 (Skilled &amp; Semi-skilled)</span>
+                            </div>
+                            <div class="flex justify-between px-6 py-3">
+                                <span class="text-gray-400">Annual Turnover</span>
+                                <span class="text-white font-bold">&#8377;5&ndash;25 Crore</span>
+                            </div>
+                            <div class="flex justify-between px-6 py-3">
+                                <span class="text-gray-400">GST No.</span>
+                                <span class="text-white font-mono font-bold text-xs">24ADLPD9216D1ZV</span>
+                            </div>
+                            <div class="flex justify-between px-6 py-3">
+                                <span class="text-gray-400">IEC (Export)</span>
+                                <span class="text-white font-mono font-bold text-xs">3406001394</span>
+                            </div>
+                            <div class="flex justify-between px-6 py-3">
+                                <span class="text-gray-400">Banker</span>
+                                <span class="text-white font-bold">Bank of Baroda</span>
+                            </div>
+                            <div class="flex justify-between px-6 py-3">
+                                <span class="text-gray-400">Shipment Mode</span>
+                                <span class="text-white font-bold">By Road</span>
+                            </div>
+                            <div class="flex justify-between px-6 py-3">
+                                <span class="text-gray-400">R&amp;D</span>
+                                <span class="text-white font-bold">Experienced R&amp;D Dept.</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Why Choose Us -->
+                    <div class="space-y-4">
+                        <h3 class="text-lg font-bold text-white flex items-center gap-2">
+                            <i data-lucide="thumbs-up" class="w-5 h-5 text-rust"></i> Why Choose Us
+                        </h3>
+                        <div class="grid grid-cols-1 gap-3">
+                            <div class="bg-white/5 border border-white/10 rounded-lg p-4 flex items-start gap-3">
+                                <i data-lucide="truck" class="w-5 h-5 text-rust flex-shrink-0 mt-0.5"></i>
+                                <div>
+                                    <div class="font-bold text-white text-sm">Robust Logistics</div>
+                                    <div class="text-gray-400 text-xs mt-1">Quick distribution across India with doorstep delivery for bulk orders.</div>
+                                </div>
+                            </div>
+                            <div class="bg-white/5 border border-white/10 rounded-lg p-4 flex items-start gap-3">
+                                <i data-lucide="layers" class="w-5 h-5 text-rust flex-shrink-0 mt-0.5"></i>
+                                <div>
+                                    <div class="font-bold text-white text-sm">Complete Product Range</div>
+                                    <div class="text-gray-400 text-xs mt-1">Waterproofing membranes, anti-corrosion tapes, bituminous coatings, epoxy primers &mdash; all under one roof.</div>
+                                </div>
+                            </div>
+                            <div class="bg-white/5 border border-white/10 rounded-lg p-4 flex items-start gap-3">
+                                <i data-lucide="shield-check" class="w-5 h-5 text-rust flex-shrink-0 mt-0.5"></i>
+                                <div>
+                                    <div class="font-bold text-white text-sm">Defect-Free Manufacturing</div>
+                                    <div class="text-gray-400 text-xs mt-1">Modern production with strict QC. Long-term relationships built on reliability.</div>
+                                </div>
+                            </div>
+                            <div class="bg-white/5 border border-white/10 rounded-lg p-4 flex items-start gap-3">
+                                <i data-lucide="hard-hat" class="w-5 h-5 text-rust flex-shrink-0 mt-0.5"></i>
+                                <div>
+                                    <div class="font-bold text-white text-sm">On-Site Services</div>
+                                    <div class="text-gray-400 text-xs mt-1">Taping &amp; wrapping performed at the client&rsquo;s/vendor&rsquo;s site with our skilled team.</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Application Areas -->
+    <section class="py-16 md:py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-14 reveal">
+                <div class="font-mono text-rust text-sm font-bold tracking-widest uppercase mb-3 flex items-center justify-center gap-2">
+                    <span class="w-1.5 h-1.5 bg-rust"></span> APPLICATION AREAS
+                </div>
+                <h2 class="text-3xl md:text-4xl font-bold tracking-tight mb-4">Industries &amp; Applications We Serve</h2>
+                <p class="text-gray-500">Our anti-corrosive coatings and waterproofing solutions protect infrastructure across diverse sectors nationwide.</p>
+            </div>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+                <div class="group bg-gray-50 border border-gray-100 rounded-xl p-6 hover:border-rust/30 hover:bg-rust/5 transition-all reveal">
+                    <i data-lucide="droplets" class="w-8 h-8 text-rust mb-4"></i>
+                    <h3 class="font-bold text-navy-900 mb-2">Water Lines</h3>
+                    <p class="text-sm text-gray-500">Cross-country and national water supply pipelines.</p>
+                </div>
+                <div class="group bg-gray-50 border border-gray-100 rounded-xl p-6 hover:border-rust/30 hover:bg-rust/5 transition-all reveal delay-100">
+                    <i data-lucide="flame" class="w-8 h-8 text-rust mb-4"></i>
+                    <h3 class="font-bold text-navy-900 mb-2">Oil Lines</h3>
+                    <p class="text-sm text-gray-500">Static &amp; anti-static oil transmission pipelines.</p>
+                </div>
+                <div class="group bg-gray-50 border border-gray-100 rounded-xl p-6 hover:border-rust/30 hover:bg-rust/5 transition-all reveal delay-200">
+                    <i data-lucide="fuel" class="w-8 h-8 text-rust mb-4"></i>
+                    <h3 class="font-bold text-navy-900 mb-2">Gas Lines (LPG/CNG)</h3>
+                    <p class="text-sm text-gray-500">Cross-country LPG &amp; CNG gas transmission pipelines.</p>
+                </div>
+                <div class="group bg-gray-50 border border-gray-100 rounded-xl p-6 hover:border-rust/30 hover:bg-rust/5 transition-all reveal">
+                    <i data-lucide="waves" class="w-8 h-8 text-rust mb-4"></i>
+                    <h3 class="font-bold text-navy-900 mb-2">Sewage Lines</h3>
+                    <p class="text-sm text-gray-500">Municipal sewage and drainage pipeline networks.</p>
+                </div>
+                <div class="group bg-gray-50 border border-gray-100 rounded-xl p-6 hover:border-rust/30 hover:bg-rust/5 transition-all reveal delay-100">
+                    <i data-lucide="siren" class="w-8 h-8 text-rust mb-4"></i>
+                    <h3 class="font-bold text-navy-900 mb-2">Fire Hydrant Lines</h3>
+                    <p class="text-sm text-gray-500">Anti-corrosive protection for fire safety pipeline systems.</p>
+                </div>
+                <div class="group bg-gray-50 border border-gray-100 rounded-xl p-6 hover:border-rust/30 hover:bg-rust/5 transition-all reveal delay-200">
+                    <i data-lucide="zap" class="w-8 h-8 text-rust mb-4"></i>
+                    <h3 class="font-bold text-navy-900 mb-2">Electric Supply Tubes</h3>
+                    <p class="text-sm text-gray-500">Intercity underground electric supply conduits.</p>
+                </div>
+                <div class="group bg-gray-50 border border-gray-100 rounded-xl p-6 hover:border-rust/30 hover:bg-rust/5 transition-all reveal">
+                    <i data-lucide="cable" class="w-8 h-8 text-rust mb-4"></i>
+                    <h3 class="font-bold text-navy-900 mb-2">Fiber Optic Tunnels</h3>
+                    <p class="text-sm text-gray-500">Underground &amp; on-ground fiber optic cable tunnels.</p>
+                </div>
+                <div class="group bg-gray-50 border border-gray-100 rounded-xl p-6 hover:border-rust/30 hover:bg-rust/5 transition-all reveal delay-100">
+                    <i data-lucide="building-2" class="w-8 h-8 text-rust mb-4"></i>
+                    <h3 class="font-bold text-navy-900 mb-2">Buildings &amp; Terraces</h3>
+                    <p class="text-sm text-gray-500">Waterproofing for terraces, basements, podiums &amp; gardens.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Our Clients -->
+    <section class="py-16 md:py-20 bg-background">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-14 reveal">
+                <div class="font-mono text-rust text-sm font-bold tracking-widest uppercase mb-3 flex items-center justify-center gap-2">
+                    <span class="w-1.5 h-1.5 bg-rust"></span> OUR CLIENTELE
+                </div>
+                <h2 class="text-3xl md:text-4xl font-bold tracking-tight mb-4">Clients We&rsquo;ve Served</h2>
+            </div>
+            <div class="flex flex-wrap justify-center gap-3 md:gap-4 reveal">
+                <span class="bg-white border border-gray-200 rounded-lg px-4 py-2.5 text-sm font-semibold text-navy-900 hover:border-rust/40 hover:bg-rust/5 transition-colors">O.N.G.C. Ltd.</span>
+                <span class="bg-white border border-gray-200 rounded-lg px-4 py-2.5 text-sm font-semibold text-navy-900 hover:border-rust/40 hover:bg-rust/5 transition-colors">Siemens</span>
+                <span class="bg-white border border-gray-200 rounded-lg px-4 py-2.5 text-sm font-semibold text-navy-900 hover:border-rust/40 hover:bg-rust/5 transition-colors">Jindal SAW Ltd.</span>
+                <span class="bg-white border border-gray-200 rounded-lg px-4 py-2.5 text-sm font-semibold text-navy-900 hover:border-rust/40 hover:bg-rust/5 transition-colors">Megha Engineering</span>
+                <span class="bg-white border border-gray-200 rounded-lg px-4 py-2.5 text-sm font-semibold text-navy-900 hover:border-rust/40 hover:bg-rust/5 transition-colors">Welspun Corp. Ltd.</span>
+                <span class="bg-white border border-gray-200 rounded-lg px-4 py-2.5 text-sm font-semibold text-navy-900 hover:border-rust/40 hover:bg-rust/5 transition-colors">Adani Power Rajasthan Ltd.</span>
+                <span class="bg-white border border-gray-200 rounded-lg px-4 py-2.5 text-sm font-semibold text-navy-900 hover:border-rust/40 hover:bg-rust/5 transition-colors">Reliance Industries Ltd.</span>
+                <span class="bg-white border border-gray-200 rounded-lg px-4 py-2.5 text-sm font-semibold text-navy-900 hover:border-rust/40 hover:bg-rust/5 transition-colors">Engineers India Ltd. (E.I.L.)</span>
+                <span class="bg-white border border-gray-200 rounded-lg px-4 py-2.5 text-sm font-semibold text-navy-900 hover:border-rust/40 hover:bg-rust/5 transition-colors">IVRCL Ltd.</span>
+                <span class="bg-white border border-gray-200 rounded-lg px-4 py-2.5 text-sm font-semibold text-navy-900 hover:border-rust/40 hover:bg-rust/5 transition-colors">P.S.L. Ltd.</span>
+                <span class="bg-white border border-gray-200 rounded-lg px-4 py-2.5 text-sm font-semibold text-navy-900 hover:border-rust/40 hover:bg-rust/5 transition-colors">Essar Construction Ltd.</span>
+                <span class="bg-white border border-gray-200 rounded-lg px-4 py-2.5 text-sm font-semibold text-navy-900 hover:border-rust/40 hover:bg-rust/5 transition-colors">E.C.C.</span>
+                <span class="bg-white border border-gray-200 rounded-lg px-4 py-2.5 text-sm font-semibold text-navy-900 hover:border-rust/40 hover:bg-rust/5 transition-colors">N.C.C.</span>
+                <span class="bg-white border border-gray-200 rounded-lg px-4 py-2.5 text-sm font-semibold text-navy-900 hover:border-rust/40 hover:bg-rust/5 transition-colors">L&amp;T (Larsen &amp; Toubro)</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Portfolio -->
+    <section class="py-16 md:py-20 bg-navy-900 text-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid md:grid-cols-2 gap-16 items-center">
+                <div class="reveal">
+                    <div class="font-mono text-rust-light text-sm font-bold tracking-widest uppercase mb-4 flex items-center gap-2">
+                        <span class="w-1.5 h-1.5 bg-rust-light"></span> OUR SERVICES
+                    </div>
+                    <h2 class="text-3xl md:text-4xl font-bold tracking-tight mb-6">Pipe Protection Services</h2>
+                    <p class="text-gray-300 leading-relaxed mb-6">
+                        We offer comprehensive pipe protection services using high-grade <strong class="text-white">Anti-Corrosive Pipe Coating Tape</strong> and <strong class="text-white">Coal Tar Impregnated Fiber Glass</strong> for effective taping and wrapping of underground pipelines.
+                    </p>
+                    <div class="space-y-3">
+                        <div class="flex items-center gap-3">
+                            <div class="w-6 h-6 rounded-full bg-rust/20 flex items-center justify-center flex-shrink-0">
+                                <i data-lucide="check" class="w-3.5 h-3.5 text-rust"></i>
+                            </div>
+                            <span class="text-gray-300 text-sm">Timely completion of all projects</span>
+                        </div>
+                        <div class="flex items-center gap-3">
+                            <div class="w-6 h-6 rounded-full bg-rust/20 flex items-center justify-center flex-shrink-0">
+                                <i data-lucide="check" class="w-3.5 h-3.5 text-rust"></i>
+                            </div>
+                            <span class="text-gray-300 text-sm">Effective corrosion resistance &amp; waterproofing</span>
+                        </div>
+                        <div class="flex items-center gap-3">
+                            <div class="w-6 h-6 rounded-full bg-rust/20 flex items-center justify-center flex-shrink-0">
+                                <i data-lucide="check" class="w-3.5 h-3.5 text-rust"></i>
+                            </div>
+                            <span class="text-gray-300 text-sm">Environmentally friendly materials</span>
+                        </div>
+                        <div class="flex items-center gap-3">
+                            <div class="w-6 h-6 rounded-full bg-rust/20 flex items-center justify-center flex-shrink-0">
+                                <i data-lucide="check" class="w-3.5 h-3.5 text-rust"></i>
+                            </div>
+                            <span class="text-gray-300 text-sm">Excellent bonding of material to pipe surface</span>
+                        </div>
+                        <div class="flex items-center gap-3">
+                            <div class="w-6 h-6 rounded-full bg-rust/20 flex items-center justify-center flex-shrink-0">
+                                <i data-lucide="check" class="w-3.5 h-3.5 text-rust"></i>
+                            </div>
+                            <span class="text-gray-300 text-sm">On-site application at client&rsquo;s/vendor&rsquo;s location</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Team & Domain Expertise -->
+                <div class="reveal delay-200">
+                    <div class="bg-white/5 border border-white/10 rounded-xl p-8 mb-6">
+                        <div class="flex items-center gap-3 mb-4">
+                            <i data-lucide="users" class="w-6 h-6 text-rust"></i>
+                            <h3 class="text-lg font-bold text-white">Our Team &amp; Expertise</h3>
+                        </div>
+                        <p class="text-gray-300 leading-relaxed mb-4">
+                            Our team has <strong class="text-white">9+ years of domain experience</strong>, works in close coordination with clients, and undergoes regular training to keep skills current. We perform taping/wrapping jobs directly at the client&rsquo;s/vendor&rsquo;s site, in addition to factory-based work.
+                        </p>
+                        <div class="grid grid-cols-2 gap-4 mt-6">
+                            <div class="bg-white/5 border border-white/10 rounded-lg p-4 text-center">
+                                <div class="text-2xl font-black text-rust">9+</div>
+                                <div class="text-xs text-gray-400 font-mono mt-1">Years Domain Expertise</div>
+                            </div>
+                            <div class="bg-white/5 border border-white/10 rounded-lg p-4 text-center">
+                                <div class="text-2xl font-black text-rust">11,000</div>
+                                <div class="text-xs text-gray-400 font-mono mt-1">Sq. Ft. Premises</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Contact Info -->
+                    <div class="bg-rust/10 border border-rust/30 rounded-xl p-6">
+                        <div class="flex items-center gap-3 mb-3">
+                            <i data-lucide="map-pin" class="w-5 h-5 text-rust"></i>
+                            <h3 class="text-base font-bold text-white">Factory &amp; Office</h3>
+                        </div>
+                        <p class="text-gray-300 text-sm leading-relaxed mb-3">
+                            No. 497/2, G.I.D.C., Makarpura, Near Tempo Chokdi, Beside Shivam Waybridge, Vadodara &ndash; 390010, Gujarat, India
+                        </p>
+                        <div class="flex items-center gap-4 text-sm">
+                            <a href="tel:08047638090" class="text-rust-light hover:text-white transition-colors flex items-center gap-1.5">
+                                <i data-lucide="phone" class="w-4 h-4"></i> 08047638090
+                            </a>
+                            <a href="https://maps.google.com?q=22.25755000,73.19549000" target="_blank" class="text-rust-light hover:text-white transition-colors flex items-center gap-1.5">
+                                <i data-lucide="external-link" class="w-4 h-4"></i> View on Map
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══════ CAPABILITIES SECTION END ═══════ -->
+
+    <!-- CTA Banner -->
+    <section class="bg-gradient-to-r from-rust to-rust-light py-16">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row items-center justify-between text-center md:text-left reveal">
+            <div class="mb-8 md:mb-0">
+                <h2 class="text-3xl md:text-4xl font-bold text-white mb-3">Ready to Protect Your Infrastructure?</h2>
+                <p class="text-rust-50 text-lg">Our engineering estimators provide comprehensive technical & commercial quotations within 2 business hours.</p>
+
+              <div class="mt-8 p-6 bg-white/5 border border-white/10 rounded-xl text-left max-w-lg mx-auto md:mx-0 mb-8 md:mb-0">
+                  <h4 class="text-white font-bold mb-3 flex items-center gap-2"><i data-lucide="user" class="w-4 h-4 text-rust"></i> Direct Inquiries</h4>
+                  <p class="text-gray-300 text-sm leading-relaxed mb-4">
+                      <strong>Amit Desai (CEO)</strong><br>
+                      📍 No. 497/2, G.I.D.C., Makarpura,<br>
+                      Near Tempo Chokdi, Beside Shivam Weighbridge,<br>
+                      Vadodara &ndash; 390010, Gujarat, India<br>
+                  </p>
+                  <a href="tel:08047638090" class="text-rust-light hover:text-white font-mono flex items-center gap-2 transition-colors">
+                      <i data-lucide="phone" class="w-4 h-4"></i> 080-4763-8090
+                  </a>
+              </div>
+            </div>
+            <a href="contact.html" class="hidden md:flex bg-navy-900 hover:bg-navy-800 text-white px-8 py-4 rounded text-lg font-bold flex items-center justify-center gap-2 transition-all shadow-xl whitespace-nowrap group shrink-0">
+                Get a Quote Now <i data-lucide="arrow-right" class="w-5 h-5 group-hover:translate-x-1 transition-transform"></i>
+            </a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-navy-900 pt-20 pb-10 border-t border-navy-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-12 md:gap-8 mb-16">
+                <!-- Brand -->
+                <div class="col-span-1 md:col-span-1">
+                    <a href="industrial-site.html" class="flex items-center gap-3 mb-6">
+                        <img src="logo.jpg" alt="AR Group" class="h-10 w-auto object-contain hover:opacity-90 transition-opacity">
+                        <span class="font-bold text-white tracking-wider">AR GROUP</span>
+                    </a>
+                    <p class="text-sm text-gray-400 mb-4">Waterproofing &amp; Anti-Corrosion Specialists. Delivering certified solutions across India.</p>
+                    <div class="text-xs text-gray-400 space-y-1">
+                        <p><span class="font-bold text-white">Amit Desai (CEO)</span></p>
+                        <p>📍 No. 497/2, G. I. D. C., Makarpura,<br>&nbsp;&nbsp;&nbsp;&nbsp;Near Tempo Chokdi, Beside Shivam Waybridge,<br>&nbsp;&nbsp;&nbsp;&nbsp;Vadodara - 390010, Gujarat, India</p>
+                        <p>📞 08047638090</p>
+                    </div>
+                </div>
+
+                <!-- Products -->
+                <div>
+                    <h4 class="font-mono text-xs font-bold text-gray-300 tracking-wider mb-6">OUR PRODUCTS</h4>
+                    <ul class="space-y-4">
+                        <li><a href="products.html" class="text-sm text-gray-400 hover:text-rust transition-colors">Waterproofing Membranes</a></li>
+                        <li><a href="products.html" class="text-sm text-gray-400 hover:text-rust transition-colors">Anti-Corrosive Pipe Tapes</a></li>
+                        <li><a href="products.html" class="text-sm text-gray-400 hover:text-rust transition-colors">Bituminous Primers & Coatings</a></li>
+                        <li><a href="products.html" class="text-sm text-gray-400 hover:text-rust transition-colors">Coal Tar Enamel</a></li>
+                        <li><a href="products.html" class="text-sm text-gray-400 hover:text-rust transition-colors">Heat Shrink Sleeves</a></li>
+                    </ul>
+                </div>
+
+                <!-- Corporate -->
+                <div>
+                    <h4 class="font-mono text-xs font-bold text-gray-300 tracking-wider mb-6">QUICK LINKS</h4>
+                    <ul class="space-y-4">
+                        <li><a href="products.html" class="text-sm text-gray-400 hover:text-rust transition-colors">Product Catalog</a></li>
+                        <li><a href="contact.html" class="text-sm text-gray-400 hover:text-rust transition-colors">Request a Quote</a></li>
+                        <li><a href="contact.html" class="text-sm text-gray-400 hover:text-rust transition-colors">WhatsApp Us</a></li>
+                        <li><a href="login.html" class="text-sm text-gray-400 hover:text-rust transition-colors">Customer Portal</a></li>
+                    </ul>
+                </div>
+
+                <!-- Plant Locations -->
+                <div>
+                    <h4 class="font-mono text-xs font-bold text-gray-300 tracking-wider mb-6">CONTACT DETAILS</h4>
+                    <div class="space-y-3 text-xs text-gray-400">
+                        <div class="p-3 bg-white/5 rounded border border-white/10">
+                            <span class="font-bold text-white block mb-1">A. R. Laminators</span>
+                            No. 497/2, G.I.D.C., Makarpura,<br>
+                            Near Tempo Chokdi, Beside Shivam Waybridge,<br>
+                            Vadodara - 390010, Gujarat, India
+                        </div>
+                        <div class="p-3 bg-white/5 rounded border border-white/10">
+                            <span class="font-bold text-white block mb-1">GST Number</span>
+                            24ADLPD9216D1ZV
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="border-t border-white/10 pt-8 flex flex-col md:flex-row items-center justify-between gap-4">
+                <p class="text-xs text-gray-500">© 2026 A. R. Laminators. All rights reserved. GST: 24ADLPD9216D1ZV</p>
+                <div class="flex items-center gap-4 text-xs text-gray-400">
+                    <a href="login.html" class="hover:text-white transition-colors">Client Portal</a>
+                    <span>•</span>
+                    <a href="admin-login.html" class="hover:text-white transition-colors">Admin Console</a>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Floating Quick Quote -->
+        <a href="contact.html" class="fixed bottom-6 right-6 bg-rust hover:bg-rust-hover text-white px-5 py-3 rounded-full shadow-2xl flex items-center gap-2 text-sm font-bold z-40 transition-transform hover:scale-105">
+            <i data-lucide="file-text" class="w-4 h-4"></i> Request Quote
+        </a>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="company-config.js"></script>
+    <script>
+        // Initialize Lucide Icons
+        lucide.createIcons();
+
+        // Header Scroll Effect
+        const header = document.getElementById('main-header');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 20) {
+                header.classList.add('shadow-md');
+                header.classList.remove('border-gray-200');
+            } else {
+                header.classList.remove('shadow-md');
+                header.classList.add('border-gray-200');
+            }
+        });
+
+        // Carousel Logic
+        const track = document.getElementById('carouselTrack');
+        const nextBtn = document.getElementById('nextBtn');
+        const prevBtn = document.getElementById('prevBtn');
+
+        nextBtn.addEventListener('click', () => {
+            track.scrollBy({ left: 360, behavior: 'smooth' });
+        });
+        prevBtn.addEventListener('click', () => {
+            track.scrollBy({ left: -360, behavior: 'smooth' });
+        });
+
+        // Scroll Reveal & Counters Observer
+        const observerOptions = {
+            root: null,
+            rootMargin: '0px',
+            threshold: 0.15
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+
+                    // Animate Timeline Line
+                    if(entry.target.id === 'timeline-line') {
+                        entry.target.style.width = '100%';
+                        const circles = document.querySelectorAll('.step-circle');
+                        circles.forEach((circle, i) => {
+                            setTimeout(() => {
+                                circle.classList.remove('border-gray-300', 'text-gray-400');
+                                circle.classList.add('border-rust', 'text-navy');
+                            }, (i + 1) * 500);
+                        });
+                    }
+
+                    // Animate Counters
+                    if (entry.target.classList.contains('counter') && !entry.target.classList.contains('counted')) {
+                        const target = +entry.target.getAttribute('data-target');
+                        const duration = 2000;
+                        const startTime = performance.now();
+
+                        const updateCounter = (currentTime) => {
+                            const elapsed = currentTime - startTime;
+                            const progress = Math.min(elapsed / duration, 1);
+                            const easeProgress = 1 - Math.pow(1 - progress, 4);
+                            const current = Math.floor(easeProgress * target);
+                            
+                            entry.target.innerText = current.toLocaleString('en-IN');
+
+                            if (progress < 1) {
+                                requestAnimationFrame(updateCounter);
+                            } else {
+                                entry.target.innerText = target.toLocaleString('en-IN');
+                                entry.target.classList.add('counted');
+                            }
+                        };
+                        requestAnimationFrame(updateCounter);
+                    }
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.reveal').forEach((el) => observer.observe(el));
+        document.querySelectorAll('.counter').forEach((el) => observer.observe(el));
+        const timelineLine = document.getElementById('timeline-line');
+        if(timelineLine) observer.observe(timelineLine);
+    </script>
+    <script src="chatbot.js"></script>
+</body>
+</html>

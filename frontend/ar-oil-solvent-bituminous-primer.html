@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AR Oil/Solvent Based Bituminous Primer | Industrial Waterproofing Primer</title>
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        background: '#F5F6F8',
+                        navy: { DEFAULT: '#0B1220', 900: '#0B1220', 800: '#111C30', 700: '#1A2A44' },
+                        rust: { DEFAULT: '#C05621', hover: '#B5541F', light: '#E26E33' },
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        mono: ['JetBrains Mono', 'monospace'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .zoom-container { overflow: hidden; position: relative; cursor: zoom-in; }
+        .zoom-image { transition: transform 0.3s ease-out; transform-origin: center center; }
+        .zoom-container:hover .zoom-image { transform: scale(1.5); }
+    
+        .reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.6s ease-out, transform 0.6s ease-out; }
+        .reveal.active { opacity: 1; transform: translateY(0); }
+
+    </style>
+</head>
+<body class="bg-[#F5F6F8] text-slate-700 antialiased min-h-screen flex flex-col pb-20 md:pb-0">
+
+    <!-- Header Navigation -->
+    <header class="sticky top-0 z-50 bg-white border-b border-gray-200 shadow-sm" id="main-header">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+            <a href="industrial-site.html" class="flex items-center gap-3">
+                <img src="logo.jpg" alt="AR Group" class="h-12 w-auto object-contain hover:opacity-90 transition-opacity">
+                <div class="hidden sm:block">
+                    <span class="font-extrabold text-navy-900 tracking-tight text-lg block leading-none">AR GROUP</span>
+                    <span class="font-mono text-[10px] text-gray-400 tracking-widest uppercase">STEEL & WATERPROOFING MFG</span>
+                </div>
+            </a>
+            
+            <nav class="hidden md:flex gap-8">
+                <a href="industrial-site.html" class="text-sm font-semibold text-gray-600 hover:text-navy-900 transition-colors">Home</a>
+                <a href="products.html" class="text-sm font-semibold text-rust border-b-2 border-rust pb-1">Products</a>
+                <a href="capabilities.html" class="text-sm font-semibold text-rust border-b-2 border-rust pb-1">Capabilities</a>
+                <a href="contact.html" class="text-sm font-semibold text-gray-600 hover:text-navy-900 transition-colors">Get Quote</a>
+                <a href="login.html" class="text-sm font-semibold text-gray-600 hover:text-rust transition-colors">Client Portal</a>
+            </nav>
+            
+            <div class="flex items-center gap-4">
+                <button onclick="openQuoteModal('Instant RFQ')" class="bg-navy-900 hover:bg-navy-800 text-white px-5 py-2.5 rounded text-sm font-semibold flex items-center gap-2 transition-all shadow-md group">
+                    <i data-lucide="file-text" class="w-4 h-4"></i> Request Quote
+                </button>
+            </div>
+        </div>
+    </header>
+    <!-- Mobile Nav Dropdown -->
+    <div id="mobile-menu" class="hidden absolute top-20 left-0 w-full bg-white border-b border-gray-200 shadow-xl flex-col py-4 px-6 gap-3 z-40 transition-all">
+        <a href="industrial-site.html" class="text-base font-semibold text-gray-800 border-b border-gray-100 pb-3 pt-1">Home</a>
+        <a href="products.html" class="text-base font-semibold text-gray-800 border-b border-gray-100 pb-3">Products</a>
+        <a href="capabilities.html" class="text-base font-semibold text-gray-800 border-b border-gray-100 pb-3">Capabilities</a>
+        <a href="login.html" class="text-base font-semibold text-gray-800 border-b border-gray-100 pb-3">Client Portal</a>
+        <a href="admin-login.html" class="text-base font-mono font-semibold text-rust border-b border-gray-100 pb-3">Admin Console</a>
+        <a href="contact.html" class="mt-2 bg-navy-900 hover:bg-navy-800 text-white text-center py-3 rounded-lg font-bold text-base shadow-md">Request a Quote</a>
+    </div>
+
+    
+
+
+        <!-- Page Hero -->
+    <section class="bg-navy-900 text-white py-16 md:py-20">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="font-mono text-rust-light text-xs font-bold tracking-widest uppercase mb-3 flex items-center gap-2">
+                <span class="w-1.5 h-1.5 bg-rust-light"></span>
+                <a href="industrial-site.html" class="hover:text-white transition-colors">Home</a>
+                <span class="text-white/30">/</span>
+                <span>Capabilities</span>
+            </div>
+            <h1 class="text-4xl md:text-5xl font-extrabold text-white mb-4">Capabilities &amp; Credentials</h1>
+            <p class="text-gray-300 text-lg max-w-2xl">Our approved vendor status, client portfolio, and certificate gallery — all in one place.</p>
+        </div>
+    </section>
+
+    <!-- Approved Vendors & Clientele -->
+    <section class="py-20 md:py-28 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid md:grid-cols-2 gap-16">
+                <!-- Approved Vendor For -->
+                <div class="reveal">
+                    <div class="font-mono text-rust text-sm font-bold tracking-widest uppercase mb-4 flex items-center gap-2">
+                        <span class="w-1.5 h-1.5 bg-rust"></span> APPROVED VENDOR FOR
+                    </div>
+                    <h2 class="text-2xl md:text-3xl font-bold tracking-tight text-navy-900 mb-8">Third-Party Approved &amp; Accredited By</h2>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="px-3 py-2 bg-navy-900 text-white text-xs font-semibold rounded-lg">L&amp;T (Larsen &amp; Toubro)</span>
+                        <span class="px-3 py-2 bg-navy-900 text-white text-xs font-semibold rounded-lg">Adani Infra</span>
+                        <span class="px-3 py-2 bg-navy-900 text-white text-xs font-semibold rounded-lg">Siemens</span>
+                        <span class="px-3 py-2 bg-navy-900 text-white text-xs font-semibold rounded-lg">Engineers India Limited (EIL)</span>
+                        <span class="px-3 py-2 bg-navy-900 text-white text-xs font-semibold rounded-lg">Toyo Engineering India Ltd.</span>
+                        <span class="px-3 py-2 bg-navy-900 text-white text-xs font-semibold rounded-lg">Bureau Veritas (BV)</span>
+                        <span class="px-3 py-2 bg-navy-900 text-white text-xs font-semibold rounded-lg">SGS</span>
+                        <span class="px-3 py-2 bg-navy-900 text-white text-xs font-semibold rounded-lg">RITES</span>
+                        <span class="px-3 py-2 bg-navy-900 text-white text-xs font-semibold rounded-lg">Tata Projects</span>
+                        <span class="px-3 py-2 bg-navy-900 text-white text-xs font-semibold rounded-lg">NTPC</span>
+                        <span class="px-3 py-2 bg-navy-900 text-white text-xs font-semibold rounded-lg">SEPCO</span>
+                        <span class="px-3 py-2 bg-navy-900 text-white text-xs font-semibold rounded-lg">Maharashtra Jeevan Pradhikaran</span>
+                        <span class="px-3 py-2 bg-navy-900 text-white text-xs font-semibold rounded-lg">Jacobs H&amp;G</span>
+                        <span class="px-3 py-2 bg-navy-900 text-white text-xs font-semibold rounded-lg">GWSSB / GWRDC – Gujarat</span>
+                        <span class="px-3 py-2 bg-navy-900 text-white text-xs font-semibold rounded-lg">Baroda Corporation</span>
+                        <span class="px-3 py-2 bg-navy-900 text-white text-xs font-semibold rounded-lg">Bombay Corporation</span>
+                        <span class="px-3 py-2 bg-navy-900 text-white text-xs font-semibold rounded-lg">Nagpur Corporation</span>
+                        <span class="px-3 py-2 bg-navy-900 text-white text-xs font-semibold rounded-lg">Indore Corporation</span>
+                        <span class="px-3 py-2 bg-navy-900 text-white text-xs font-semibold rounded-lg">Mahajan &amp; Co.</span>
+                        <span class="px-3 py-2 bg-navy-900 text-white text-xs font-semibold rounded-lg">Udhde India</span>
+                    </div>
+                </div>
+                <!-- Clients We've Served -->
+                <div class="reveal delay-200">
+                    <div class="font-mono text-rust text-sm font-bold tracking-widest uppercase mb-4 flex items-center gap-2">
+                        <span class="w-1.5 h-1.5 bg-rust"></span> OUR CLIENTELE
+                    </div>
+                    <h2 class="text-2xl md:text-3xl font-bold tracking-tight text-navy-900 mb-8">Clients We Have Served</h2>
+                    <div class="grid grid-cols-2 gap-3">
+                        <div class="flex items-center gap-3 p-3 rounded-lg border border-gray-100 bg-gray-50">
+                            <i data-lucide="check-circle-2" class="w-4 h-4 text-rust flex-shrink-0"></i>
+                            <span class="text-sm font-medium text-navy-900">O.N.G.C. Ltd.</span>
+                        </div>
+                        <div class="flex items-center gap-3 p-3 rounded-lg border border-gray-100 bg-gray-50">
+                            <i data-lucide="check-circle-2" class="w-4 h-4 text-rust flex-shrink-0"></i>
+                            <span class="text-sm font-medium text-navy-900">IVRCL Ltd.</span>
+                        </div>
+                        <div class="flex items-center gap-3 p-3 rounded-lg border border-gray-100 bg-gray-50">
+                            <i data-lucide="check-circle-2" class="w-4 h-4 text-rust flex-shrink-0"></i>
+                            <span class="text-sm font-medium text-navy-900">P.S.L. Ltd.</span>
+                        </div>
+                        <div class="flex items-center gap-3 p-3 rounded-lg border border-gray-100 bg-gray-50">
+                            <i data-lucide="check-circle-2" class="w-4 h-4 text-rust flex-shrink-0"></i>
+                            <span class="text-sm font-medium text-navy-900">Essar Construction Ltd.</span>
+                        </div>
+                        <div class="flex items-center gap-3 p-3 rounded-lg border border-gray-100 bg-gray-50">
+                            <i data-lucide="check-circle-2" class="w-4 h-4 text-rust flex-shrink-0"></i>
+                            <span class="text-sm font-medium text-navy-900">E.C.C.</span>
+                        </div>
+                        <div class="flex items-center gap-3 p-3 rounded-lg border border-gray-100 bg-gray-50">
+                            <i data-lucide="check-circle-2" class="w-4 h-4 text-rust flex-shrink-0"></i>
+                            <span class="text-sm font-medium text-navy-900">Engineers India Ltd. (EIL)</span>
+                        </div>
+                        <div class="flex items-center gap-3 p-3 rounded-lg border border-gray-100 bg-gray-50">
+                            <i data-lucide="check-circle-2" class="w-4 h-4 text-rust flex-shrink-0"></i>
+                            <span class="text-sm font-medium text-navy-900">Reliance Industries Ltd.</span>
+                        </div>
+                        <div class="flex items-center gap-3 p-3 rounded-lg border border-gray-100 bg-gray-50">
+                            <i data-lucide="check-circle-2" class="w-4 h-4 text-rust flex-shrink-0"></i>
+                            <span class="text-sm font-medium text-navy-900">N.C.C.</span>
+                        </div>
+                        <div class="flex items-center gap-3 p-3 rounded-lg border border-gray-100 bg-gray-50">
+                            <i data-lucide="check-circle-2" class="w-4 h-4 text-rust flex-shrink-0"></i>
+                            <span class="text-sm font-medium text-navy-900">Welspun Corp. Ltd.</span>
+                        </div>
+                        <div class="flex items-center gap-3 p-3 rounded-lg border border-gray-100 bg-gray-50">
+                            <i data-lucide="check-circle-2" class="w-4 h-4 text-rust flex-shrink-0"></i>
+                            <span class="text-sm font-medium text-navy-900">Jindal SAW Ltd.</span>
+                        </div>
+                        <div class="flex items-center gap-3 p-3 rounded-lg border border-gray-100 bg-gray-50">
+                            <i data-lucide="check-circle-2" class="w-4 h-4 text-rust flex-shrink-0"></i>
+                            <span class="text-sm font-medium text-navy-900">Siemens</span>
+                        </div>
+                        <div class="flex items-center gap-3 p-3 rounded-lg border border-gray-100 bg-gray-50">
+                            <i data-lucide="check-circle-2" class="w-4 h-4 text-rust flex-shrink-0"></i>
+                            <span class="text-sm font-medium text-navy-900">Adani Power Rajasthan</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Certifications -->
+    <section class="py-20 md:py-28 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-14 reveal">
+                <div class="font-mono text-rust text-sm font-bold tracking-widest uppercase mb-3 flex items-center justify-center gap-2">
+                    <span class="w-1.5 h-1.5 bg-rust"></span> CERTIFICATES &amp; APPROVALS
+                </div>
+                <h2 class="text-3xl md:text-4xl font-bold tracking-tight text-navy-900 mb-4">Approved &amp; Certified By Industry Leaders</h2>
+                <p class="text-gray-500">Our products and services have been approved and certified by major public sector, private sector, and government organisations across India.</p>
+            </div>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- ONGC Certificate -->
+                <div class="bg-white rounded-2xl border border-gray-200 overflow-hidden shadow-sm hover:shadow-md transition-shadow reveal group">
+                    <div class="relative overflow-hidden bg-gray-100 h-56 cursor-pointer" onclick="openCert('images/cert_ongc.jpg','ONGC — Pipe Kote Coal Tar Tape Approval')">
+                        <img src="images/cert_ongc.jpg" alt="ONGC Certificate" class="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-500">
+                        <div class="absolute inset-0 bg-navy-900/0 group-hover:bg-navy-900/30 transition-colors flex items-center justify-center">
+                            <span class="opacity-0 group-hover:opacity-100 transition-opacity bg-white text-navy-900 font-bold text-xs px-4 py-2 rounded-full flex items-center gap-2"><i data-lucide="zoom-in" class="w-4 h-4"></i> View</span>
+                        </div>
+                    </div>
+                    <div class="p-5">
+                        <div class="text-xs font-mono text-rust font-bold tracking-widest mb-1">OIL &amp; NATURAL GAS CORPORATION</div>
+                        <h3 class="font-bold text-navy-900 text-base mb-1">ONGC — Hazira Plant</h3>
+                        <p class="text-gray-500 text-sm">Approval for use of Pipe Kote Coal Tar Tape &amp; Synthetic Primer by A.R. Laminators, Vadodara</p>
+                    </div>
+                </div>
+                <!-- MSPGCL / MAHAGENCO Certificate -->
+                <div class="bg-white rounded-2xl border border-gray-200 overflow-hidden shadow-sm hover:shadow-md transition-shadow reveal delay-100 group">
+                    <div class="relative overflow-hidden bg-gray-100 h-56 cursor-pointer" onclick="openCert('images/cert_mspgcl.jpg','MSPGCL / MAHAGENCO — Sub-Vendor Approval')">
+                        <img src="images/cert_mspgcl.jpg" alt="MSPGCL Certificate" class="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-500">
+                        <div class="absolute inset-0 bg-navy-900/0 group-hover:bg-navy-900/30 transition-colors flex items-center justify-center">
+                            <span class="opacity-0 group-hover:opacity-100 transition-opacity bg-white text-navy-900 font-bold text-xs px-4 py-2 rounded-full flex items-center gap-2"><i data-lucide="zoom-in" class="w-4 h-4"></i> View</span>
+                        </div>
+                    </div>
+                    <div class="p-5">
+                        <div class="text-xs font-mono text-rust font-bold tracking-widest mb-1">MAHARASHTRA STATE POWER GENERATION CO.</div>
+                        <h3 class="font-bold text-navy-900 text-base mb-1">MSPGCL / MAHAGENCO</h3>
+                        <p class="text-gray-500 text-sm">Sub-vendor approval for supply of Pipe Coat Coal Tar Tape for 3x660 MW Koradi Project</p>
+                    </div>
+                </div>
+                <!-- Larsen & Toubro Certificate -->
+                <div class="bg-white rounded-2xl border border-gray-200 overflow-hidden shadow-sm hover:shadow-md transition-shadow reveal delay-200 group">
+                    <div class="relative overflow-hidden bg-gray-100 h-56 cursor-pointer" onclick="openCert('images/cert_lt.jpg','Larsen &amp; Toubro — E&amp;C Division Certificate')">
+                        <img src="images/cert_lt.jpg" alt="L&T Certificate" class="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-500">
+                        <div class="absolute inset-0 bg-navy-900/0 group-hover:bg-navy-900/30 transition-colors flex items-center justify-center">
+                            <span class="opacity-0 group-hover:opacity-100 transition-opacity bg-white text-navy-900 font-bold text-xs px-4 py-2 rounded-full flex items-center gap-2"><i data-lucide="zoom-in" class="w-4 h-4"></i> View</span>
+                        </div>
+                    </div>
+                    <div class="p-5">
+                        <div class="text-xs font-mono text-rust font-bold tracking-widest mb-1">LARSEN &amp; TOUBRO LIMITED</div>
+                        <h3 class="font-bold text-navy-900 text-base mb-1">L&amp;T — E&amp;C Division</h3>
+                        <p class="text-gray-500 text-sm">Recommended as approved sub-vendor for wrapping &amp; coating of LD Piping at Koradi 3x660 MW TPS project</p>
+                    </div>
+                </div>
+                <!-- GWRDC Certificate -->
+                <div class="bg-white rounded-2xl border border-gray-200 overflow-hidden shadow-sm hover:shadow-md transition-shadow reveal group">
+                    <div class="relative overflow-hidden bg-gray-100 h-56 cursor-pointer" onclick="openCert('images/cert_gwrdc.jpg','GWRDC — Ground Water Management Registration')">
+                        <img src="images/cert_gwrdc.jpg" alt="GWRDC Certificate" class="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-500">
+                        <div class="absolute inset-0 bg-navy-900/0 group-hover:bg-navy-900/30 transition-colors flex items-center justify-center">
+                            <span class="opacity-0 group-hover:opacity-100 transition-opacity bg-white text-navy-900 font-bold text-xs px-4 py-2 rounded-full flex items-center gap-2"><i data-lucide="zoom-in" class="w-4 h-4"></i> View</span>
+                        </div>
+                    </div>
+                    <div class="p-5">
+                        <div class="text-xs font-mono text-rust font-bold tracking-widest mb-1">GWRDC — GUJARAT</div>
+                        <h3 class="font-bold text-navy-900 text-base mb-1">Ground Water Resources Dev. Corp.</h3>
+                        <p class="text-gray-500 text-sm">Registered vendor / approved manufacturer — Ground Water Management, Ahmedabad</p>
+                    </div>
+                </div>
+                <!-- Adani Infra Certificate -->
+                <div class="bg-white rounded-2xl border border-gray-200 overflow-hidden shadow-sm hover:shadow-md transition-shadow reveal delay-100 group">
+                    <div class="relative overflow-hidden bg-gray-100 h-56 cursor-pointer" onclick="openCert('images/cert_adani.jpg','Adani Infra — Approved Sub-contractor')">
+                        <img src="images/cert_adani.jpg" alt="Adani Certificate" class="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-500">
+                        <div class="absolute inset-0 bg-navy-900/0 group-hover:bg-navy-900/30 transition-colors flex items-center justify-center">
+                            <span class="opacity-0 group-hover:opacity-100 transition-opacity bg-white text-navy-900 font-bold text-xs px-4 py-2 rounded-full flex items-center gap-2"><i data-lucide="zoom-in" class="w-4 h-4"></i> View</span>
+                        </div>
+                    </div>
+                    <div class="p-5">
+                        <div class="text-xs font-mono text-rust font-bold tracking-widest mb-1">ADANI INFRA (INDIA) LIMITED</div>
+                        <h3 class="font-bold text-navy-900 text-base mb-1">Adani Infra — Approved Sub-contractor</h3>
+                        <p class="text-gray-500 text-sm">Approved sub-contractor for supply of Pipe Kote Coal Tar Tape per AWWA-C-203 / IS-10221 specification</p>
+                    </div>
+                </div>
+                <!-- More on request -->
+                <div class="bg-white rounded-2xl border-2 border-dashed border-gray-200 flex flex-col items-center justify-center text-center p-8 reveal delay-200">
+                    <i data-lucide="file-badge" class="w-12 h-12 text-gray-300 mb-4"></i>
+                    <h3 class="font-bold text-navy-900 mb-2">More Certificates Available</h3>
+                    <p class="text-gray-400 text-sm mb-4">Additional registration certificates and vendor approvals available on request.</p>
+                    <a href="contact.html" class="text-rust font-semibold text-sm hover:underline flex items-center gap-1">Request Copies <i data-lucide="arrow-right" class="w-4 h-4"></i></a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Certificate Lightbox -->
+    <div id="certLightbox" class="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm flex items-center justify-center p-4 hidden" onclick="closeCert()">
+        <div class="relative max-w-3xl w-full bg-white rounded-2xl overflow-hidden shadow-2xl" onclick="event.stopPropagation()">
+            <div class="flex items-center justify-between px-5 py-4 border-b border-gray-100">
+                <h4 id="certTitle" class="font-bold text-navy-900 text-sm"></h4>
+                <button onclick="closeCert()" class="text-gray-400 hover:text-navy-900 transition-colors"><i data-lucide="x" class="w-5 h-5"></i></button>
+            </div>
+            <div class="p-4 overflow-auto max-h-[75vh]">
+                <img id="certImg" src="" alt="Certificate" class="w-full h-auto rounded-lg">
+            </div>
+        </div>
+    </div>
+
+    
+    <!-- CTA -->
+    <section class="bg-gradient-to-r from-rust to-rust-light py-16">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row items-center justify-between text-center md:text-left">
+            <div class="mb-8 md:mb-0">
+                <h2 class="text-3xl md:text-4xl font-bold text-white mb-3">Ready to Work With Us?</h2>
+                <p class="text-rust-50 text-lg">Get bulk pricing, product datasheets, and certificate copies on request.</p>
+            </div>
+            <a href="contact.html" class="hidden md:flex bg-navy-900 hover:bg-navy-800 text-white px-8 py-4 rounded text-lg font-bold flex items-center justify-center gap-2 transition-all shadow-xl whitespace-nowrap group shrink-0">
+                Get a Quote <i data-lucide="arrow-right" class="w-5 h-5 group-hover:translate-x-1 transition-transform"></i>
+            </a>
+        </div>
+    </section>
+
+    <footer class="bg-navy-900 text-white py-10 border-t border-navy-800 mt-auto">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-xs text-gray-400 flex flex-col sm:flex-row items-center justify-between gap-4">
+            <p>© 2026 A. R. Laminators. All rights reserved. GST: 24ADLPD9216D1ZV</p>
+            <div class="flex gap-4">
+                <a href="industrial-site.html" class="hover:text-white">Home</a>
+                <a href="products.html" class="hover:text-white">Products</a>
+                <a href="contact.html" class="hover:text-white">Contact</a>
+            
+                <!-- Mobile Menu Button -->
+                <button id="mobile-menu-btn" class="md:hidden ml-4 p-2 text-gray-600 hover:text-navy-900 focus:outline-none" onclick="document.getElementById('mobile-menu').classList.toggle('hidden'); document.getElementById('mobile-menu').classList.toggle('flex');">
+                    <i data-lucide="menu" class="w-6 h-6"></i>
+                </button>
+</div>
+        </div>
+    </footer>
+
+    <script src="company-config.js"></script>
+    <script>
+        
+        // Certificate Lightbox
+        function openCert(src, title) {
+            document.getElementById('certImg').src = src;
+            document.getElementById('certTitle').textContent = title;
+            document.getElementById('certLightbox').classList.remove('hidden');
+            document.body.style.overflow = 'hidden';
+            lucide.createIcons();
+
+        // Scroll Reveal
+        const revObs = new IntersectionObserver((entries) => {
+            entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('active'); });
+        }, { threshold: 0.1 });
+        document.querySelectorAll('.reveal').forEach(el => revObs.observe(el));
+
+        }
+        function closeCert() {
+            document.getElementById('certLightbox').classList.add('hidden');
+            document.body.style.overflow = '';
+        }
+        document.addEventListener('keydown', e => { if (e.key === 'Escape') closeCert(); });
+
+        lucide.createIcons();
+
+        function changeMainImage(src, btn) {
+            const mainImg = document.getElementById('main-product-img');
+            mainImg.src = src;
+            
+            document.querySelectorAll('.thumb-btn').forEach(b => {
+                b.classList.remove('border-rust');
+                b.classList.add('border-gray-200');
+            });
+            btn.classList.remove('border-gray-200');
+            btn.classList.add('border-rust');
+        }
+
+        function openQuoteModal(title) {
+            document.getElementById('modal-title-text').innerText = title + ' - AR Bitumen Primer (ARL2)';
+            document.getElementById('quoteModal').classList.remove('hidden');
+            document.getElementById('quoteModal').classList.add('flex');
+        }
+
+        function closeQuoteModal() {
+            document.getElementById('quoteModal').classList.add('hidden');
+            document.getElementById('quoteModal').classList.remove('flex');
+        }
+
+        function openCallbackModal() {
+            openQuoteModal('Request Callback');
+        }
+
+        function submitQuoteForm(e) {
+            e.preventDefault();
+            const name = document.getElementById('q-name').value;
+            const phone = document.getElementById('q-phone').value;
+            const company = document.getElementById('q-company').value;
+            const qty = document.getElementById('q-qty').value;
+
+            const list = getEnquiries();
+            const newRfq = {
+                id: "RFQ-2026-" + Math.floor(10000 + Math.random() * 90000),
+                name: name,
+                company: company,
+                phone: phone,
+                product: "AR Oil/Solvent Based Bituminous Primer (ARL2)",
+                category: "Bituminous Primers",
+                quantity: qty + " Litres",
+                specifications: "Item Code: ARL2, IS: 3384-1986, 20L drum packaging.",
+                date: getFormattedDisplayDate(0),
+                status: "Submitted",
+                whatsappSource: true,
+                history: [{ stage: "Submitted", time: getFormattedDisplayDate(0) + ", Now", user: name, note: "RFQ created for AR Bitumen Primer." }]
+            };
+            list.unshift(newRfq);
+            saveEnquiries(list);
+            alert(`Thank you ${name}! Your RFQ (${newRfq.id}) for ${qty} Litres of AR Bitumen Primer has been submitted. Tracking link generated!`);
+            closeQuoteModal();
+            window.location.href = 'industrial-site.html';
+        }
+    </script>
+</body>
+</html>

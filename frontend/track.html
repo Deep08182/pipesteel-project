@@ -1,0 +1,531 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Customer RFQ Portal | AR Group & Steelcore</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script src="company-config.js"></script>
+    <script>
+        // ROUTE-LEVEL SECURITY GUARD
+        // Unauthenticated visitors are redirected to /login
+        const currentUserRole = localStorage.getItem('ar_role');
+        if (!currentUserRole) {
+            window.location.href = 'login.html';
+        }
+
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        background: '#F5F6F8',
+                        navy: { DEFAULT: '#0B1220', 900: '#0B1220', 800: '#111C30' },
+                        rust: { DEFAULT: '#C05621', hover: '#B5541F', light: '#E26E33' },
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        mono: ['JetBrains Mono', 'monospace'],
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-[#F5F6F8] text-slate-700 antialiased min-h-screen flex flex-col">
+
+    <!-- Sticky Header -->
+    <header class="sticky top-0 z-50 bg-white border-b border-gray-200 shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+            <a href="industrial-site.html" class="flex items-center gap-3">
+                <img src="logo.jpg" alt="AR Group" class="h-12 w-auto object-contain hover:opacity-90 transition-opacity">
+                <div class="hidden sm:block">
+                    <span class="font-extrabold text-navy-900 tracking-tight text-lg block leading-none">AR GROUP</span>
+                    <span class="font-mono text-[10px] text-gray-400 tracking-widest uppercase">CUSTOMER PORTAL</span>
+                </div>
+            </a>
+            <nav class="hidden md:flex gap-8">
+                <a href="industrial-site.html" class="text-sm font-semibold text-gray-600 hover:text-navy-900 transition-colors">Home</a>
+                <a href="products.html" class="text-sm font-semibold text-gray-600 hover:text-navy-900 transition-colors">Products</a>
+                <a href="capabilities.html" class="text-sm font-semibold text-gray-600 hover:text-navy-900 transition-colors">Capabilities</a>
+                <a href="contact.html" class="text-sm font-semibold text-gray-600 hover:text-navy-900 transition-colors">Get Quote</a>
+                <a href="track.html" class="text-sm font-semibold text-rust border-b-2 border-rust pb-1">My RFQ Portal</a>
+            </nav>
+            <div class="flex items-center gap-3">
+                <a href="contact.html" class="bg-rust hover:bg-rust-hover text-white px-4 py-2 rounded-lg text-xs font-bold transition-all shadow-md">
+                    + New RFQ
+                </a>
+                <button id="logout-portal-btn" class="bg-gray-100 hover:bg-gray-200 text-gray-700 px-3 py-2 rounded-lg text-xs font-semibold flex items-center gap-1.5 transition-colors">
+                    <i data-lucide="log-out" class="w-3.5 h-3.5"></i> Logout
+                </button>
+            </div>
+        </div>
+    </header>
+    <!-- Mobile Nav Dropdown -->
+    <div id="mobile-menu" class="hidden absolute top-20 left-0 w-full bg-white border-b border-gray-200 shadow-xl flex-col py-4 px-6 gap-3 z-40 transition-all">
+        <a href="industrial-site.html" class="text-base font-semibold text-gray-800 border-b border-gray-100 pb-3 pt-1">Home</a>
+        <a href="products.html" class="text-base font-semibold text-gray-800 border-b border-gray-100 pb-3">Products</a>
+        <a href="capabilities.html" class="text-base font-semibold text-gray-800 border-b border-gray-100 pb-3">Capabilities</a>
+        <a href="login.html" class="text-base font-semibold text-gray-800 border-b border-gray-100 pb-3">Client Portal</a>
+        <a href="admin-login.html" class="text-base font-mono font-semibold text-rust border-b border-gray-100 pb-3">Admin Console</a>
+        <a href="contact.html" class="mt-2 bg-navy-900 hover:bg-navy-800 text-white text-center py-3 rounded-lg font-bold text-base shadow-md">Request a Quote</a>
+    </div>
+
+    
+
+
+    <!-- Page Banner & Session Context -->
+    <div class="bg-navy-900 py-10 text-white border-b border-navy-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
+                <div>
+                    <div class="inline-flex items-center gap-2 bg-white/10 px-3 py-1 rounded font-mono text-xs font-bold text-rust-light mb-2">
+                        <span class="w-1.5 h-1.5 rounded-full bg-rust"></span> USER PORTAL
+                    </div>
+                    <h1 class="text-2xl sm:text-3xl font-extrabold tracking-tight">My Submitted RFQs & Pipeline Status</h1>
+                    <p class="text-gray-300 text-xs sm:text-sm mt-1">Live 6-stage order tracking, CAD drawing review, and commercial quotation approval.</p>
+                </div>
+
+                <!-- Session User Info Card -->
+                <div class="bg-white/5 border border-white/10 p-3.5 rounded-xl flex items-center justify-between gap-4 shrink-0">
+                    <div>
+                        <div class="flex items-center gap-2">
+                            <span class="w-2 h-2 rounded-full bg-green-400"></span>
+                            <strong id="session-user-name" class="text-xs text-white">Authenticated Customer</strong>
+                        </div>
+                        <span id="session-user-contact" class="text-[11px] text-gray-300 font-mono block"></span>
+                        <span class="text-[10px] text-gray-400 block">Strict Ownership Access: Showing ONLY your requests</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 flex-1">
+
+        <!-- Search Bar -->
+        <div class="bg-white border border-gray-200 rounded-xl p-4 shadow-sm mb-6 flex flex-col sm:flex-row gap-3 items-center">
+            <div class="relative flex-1 w-full">
+                <i data-lucide="search" class="absolute left-3.5 top-3 w-4 h-4 text-gray-400"></i>
+                <input type="text" id="search-id" placeholder="Filter my RFQs by ID (e.g. RFQ-2026-00124) or Product..." class="w-full border border-gray-300 rounded-lg pl-10 pr-3 py-2 text-sm outline-none focus:border-rust">
+            </div>
+            <button id="search-btn" class="w-full sm:w-auto bg-navy-900 hover:bg-navy-800 text-white px-6 py-2 rounded-lg text-xs font-bold transition-colors">Search My RFQs</button>
+        </div>
+
+        <!-- Layout: User's RFQ Directory & Detail View -->
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+            
+            <!-- Left: User's Own RFQ List (4 Cols) -->
+            <div class="lg:col-span-4 flex flex-col gap-4">
+                <div class="bg-white border border-gray-200 rounded-xl p-4 shadow-sm">
+                    <div class="flex items-center justify-between mb-3 border-b border-gray-100 pb-2">
+                        <h3 class="font-mono text-xs font-bold text-navy-900 tracking-wider uppercase">My RFQ Requests (<span id="rfq-count">0</span>)</h3>
+                        <span class="text-[10px] font-mono font-bold px-2 py-0.5 rounded bg-blue-50 text-blue-700 border border-blue-200">USER PROTECTED</span>
+                    </div>
+                    <div id="rfq-list-container" class="space-y-2.5 max-h-[600px] overflow-y-auto pr-1">
+                        <!-- User's RFQs rendered here -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right: Detailed Pipeline & Quotation Inspection (8 Cols) -->
+            <div class="lg:col-span-8">
+                <div id="rfq-detail-container" class="space-y-6">
+                    <!-- Detail View rendered here -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-navy-900 text-white py-10 border-t border-navy-800 mt-auto">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-4">
+            <p class="text-xs text-gray-400">© 2026 A. R. Laminators. All rights reserved. GST: 24ADLPD9216D1ZV</p>
+            <div class="flex gap-6 text-xs text-gray-400">
+                <a href="industrial-site.html" class="hover:text-white">Home</a>
+                <a href="products.html" class="hover:text-white">Products</a>
+                <a href="contact.html" class="hover:text-white">Request Quote</a>
+                <button onclick="handleLogout()" class="hover:text-white">Logout</button>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script>
+        lucide.createIcons();
+
+        const STAGES = [
+            "Submitted",
+            "In Review",
+            "Quoted",
+            "Confirmed",
+            "In Production",
+            "Completed"
+        ];
+
+        const STAGE_LABELS = {
+            "Submitted": "1. Submitted",
+            "In Review": "2. Tech Review",
+            "Quoted": "3. Commercial Quote",
+            "Confirmed": "4. Order Confirmed",
+            "In Production": "5. CNC Production",
+            "Completed": "6. MTC & Dispatched"
+        };
+
+        const statusBadges = {
+            'Submitted': 'bg-blue-100 text-blue-800 border-blue-200',
+            'In Review': 'bg-purple-100 text-purple-800 border-purple-200',
+            'Quoted': 'bg-amber-100 text-amber-800 border-amber-200',
+            'Confirmed': 'bg-teal-100 text-teal-800 border-teal-200',
+            'In Production': 'bg-indigo-100 text-indigo-800 border-indigo-200',
+            'Completed': 'bg-green-100 text-green-800 border-green-200',
+            'Rejected': 'bg-red-100 text-red-800 border-red-200',
+        };
+
+        let activeId = null;
+        const urlParams = new URLSearchParams(window.location.search);
+        const queryId = urlParams.get('id');
+
+        function updateSessionUI() {
+            const user = getCurrentUser();
+            document.getElementById('session-user-name').innerText = user.name || "Authenticated Customer";
+            document.getElementById('session-user-contact').innerText = user.phone ? `Phone: ${user.phone}` : user.email;
+        }
+
+        function loadUserTracker(filterText = '') {
+            updateSessionUI();
+
+            // Strict Scoping: Get ONLY this user's RFQs!
+            const myEnquiries = getScopedEnquiries();
+
+            const filtered = myEnquiries.filter(e => {
+                if (!filterText) return true;
+                const q = filterText.toLowerCase();
+                return e.id.toLowerCase().includes(q) || 
+                       e.product.toLowerCase().includes(q);
+            });
+
+            document.getElementById('rfq-count').innerText = filtered.length;
+            const listContainer = document.getElementById('rfq-list-container');
+
+            if (filtered.length === 0) {
+                listContainer.innerHTML = `
+                    <div class="p-6 text-center text-xs text-gray-400">
+                        <i data-lucide="inbox" class="w-8 h-8 mx-auto mb-2 text-gray-300"></i>
+                        <p class="font-bold text-navy-900 mb-1">No requests found</p>
+                        <p class="text-[11px] text-gray-500 mb-3">You have no active RFQs under this account.</p>
+                        <a href="contact.html" class="inline-block bg-rust text-white px-3.5 py-1.5 rounded text-xs font-bold">+ Submit New RFQ</a>
+                    </div>
+                `;
+                document.getElementById('rfq-detail-container').innerHTML = `
+                    <div class="bg-white border border-gray-200 rounded-xl p-12 text-center">
+                        <i data-lucide="file-question" class="w-12 h-12 text-gray-300 mx-auto mb-3"></i>
+                        <h4 class="font-bold text-navy-900 mb-1">No RFQ Selected</h4>
+                        <p class="text-xs text-gray-500">Submit a new request or check your login details.</p>
+                    </div>
+                `;
+                lucide.createIcons();
+                return;
+            }
+
+            // Set active ID
+            if (!activeId || !filtered.some(e => e.id === activeId)) {
+                if (queryId && filtered.some(e => e.id.toLowerCase() === queryId.toLowerCase())) {
+                    activeId = filtered.find(e => e.id.toLowerCase() === queryId.toLowerCase()).id;
+                } else {
+                    activeId = filtered[0].id;
+                }
+            }
+
+            // Render User's RFQ List
+            listContainer.innerHTML = filtered.map(e => {
+                const isSelected = e.id === activeId;
+                return `
+                    <div onclick="selectRFQ('${e.id}')" class="p-3.5 rounded-lg border transition-all cursor-pointer ${isSelected ? 'bg-navy-900 text-white border-navy-900 shadow-md' : 'bg-gray-50 hover:bg-gray-100 border-gray-200 text-navy-900'}">
+                        <div class="flex items-center justify-between mb-1.5">
+                            <span class="font-mono text-xs font-bold ${isSelected ? 'text-rust-light' : 'text-navy-900'}">${e.id}</span>
+                            <span class="text-[10px] font-bold px-2 py-0.5 rounded-full border ${isSelected ? 'bg-white/20 text-white border-white/30' : statusBadges[e.status] || 'bg-gray-200'}">
+                                ${e.status}
+                            </span>
+                        </div>
+                        <h4 class="text-xs font-bold truncate mb-1">${e.product}</h4>
+                        <div class="flex items-center justify-between text-[11px] ${isSelected ? 'text-gray-300' : 'text-gray-500'}">
+                            <span class="truncate max-w-[140px]">${e.quantity}</span>
+                            <span class="font-mono">${e.date}</span>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+
+            renderDetail(activeId);
+            lucide.createIcons();
+        }
+
+        window.selectRFQ = function(id) {
+            activeId = id;
+            loadUserTracker(document.getElementById('search-id').value.trim());
+        };
+
+        function renderDetail(id) {
+            const rfq = getEnquiryById(id);
+            const container = document.getElementById('rfq-detail-container');
+            if (!rfq) return;
+
+            const currentStageIdx = STAGES.indexOf(rfq.status) !== -1 ? STAGES.indexOf(rfq.status) : 0;
+
+            container.innerHTML = `
+                <!-- Main Header Card -->
+                <div class="bg-white border border-gray-200 rounded-xl p-6 shadow-sm">
+                    <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-4 border-b border-gray-100">
+                        <div>
+                            <div class="flex items-center gap-3">
+                                <h2 class="text-xl font-extrabold text-navy-900 font-mono">${rfq.id}</h2>
+                                <span class="text-xs font-bold px-3 py-1 rounded-full border ${statusBadges[rfq.status] || 'bg-gray-200'}">
+                                    ● ${rfq.status}
+                                </span>
+                                ${rfq.whatsappSource ? `
+                                    <span class="text-[10px] font-mono font-bold bg-green-100 text-green-700 border border-green-200 px-2 py-0.5 rounded flex items-center gap-1">
+                                        📱 WhatsApp Origin
+                                    </span>
+                                ` : ''}
+                            </div>
+                            <p class="text-xs text-gray-500 mt-1">Submitted on <span class="font-mono text-gray-700 font-semibold">${rfq.date}</span> • Assigned Engineer: <span class="font-semibold text-navy-900">${rfq.assignedTo || 'Vikramaditya Mehta'}</span></p>
+                        </div>
+
+                        <button onclick="shareWhatsApp('${rfq.id}')" class="inline-flex items-center gap-1.5 text-xs font-bold bg-[#25D366] hover:bg-[#128C7E] text-white px-3.5 py-2 rounded-lg transition-colors shadow-sm self-start sm:self-auto">
+                            <i data-lucide="message-square" class="w-3.5 h-3.5"></i> WhatsApp Support
+                        </button>
+                    </div>
+
+                    <!-- 6-Stage Progress Stepper -->
+                    <div class="py-6">
+                        <h4 class="font-mono text-xs font-bold text-gray-400 uppercase tracking-wider mb-4">Pipeline Progression</h4>
+                        <div class="grid grid-cols-3 sm:grid-cols-6 gap-2">
+                            ${STAGES.map((s, idx) => {
+                                const isPassed = idx <= currentStageIdx;
+                                const isCurrent = idx === currentStageIdx;
+                                return `
+                                    <div class="flex flex-col items-center text-center">
+                                        <div class="w-8 h-8 rounded-full flex items-center justify-center font-bold text-xs mb-1.5 transition-all ${isCurrent ? 'bg-rust text-white ring-4 ring-rust/20' : isPassed ? 'bg-navy-900 text-white' : 'bg-gray-200 text-gray-400'}">
+                                            ${isPassed && !isCurrent ? '✓' : idx + 1}
+                                        </div>
+                                        <span class="text-[11px] font-semibold leading-tight ${isCurrent ? 'text-rust font-bold' : isPassed ? 'text-navy-900' : 'text-gray-400'}">
+                                            ${STAGE_LABELS[s]}
+                                        </span>
+                                    </div>
+                                `;
+                            }).join('')}
+                        </div>
+                    </div>
+
+                    <!-- Specs & Project Details Grid -->
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-4 border-t border-gray-100 text-xs">
+                        <div class="space-y-2">
+                            <p><span class="text-gray-400 font-mono">CLIENT / COMPANY:</span> <strong class="text-navy-900">${rfq.name} (${rfq.company})</strong></p>
+                            <p><span class="text-gray-400 font-mono">CONTACT EMAIL:</span> <span class="font-mono text-navy-900">${rfq.email}</span></p>
+                            <p><span class="text-gray-400 font-mono">PHONE NUMBER:</span> <span class="font-mono text-navy-900">${rfq.phone}</span></p>
+                            <p><span class="text-gray-400 font-mono">DELIVERY SITE:</span> <span class="text-navy-900">${rfq.location}</span></p>
+                        </div>
+                        <div class="space-y-2">
+                            <p><span class="text-gray-400 font-mono">PRODUCT:</span> <strong class="text-navy-900">${rfq.product}</strong></p>
+                            <p><span class="text-gray-400 font-mono">MATERIAL & GRADE:</span> <span class="font-mono text-rust font-semibold">${rfq.grade || rfq.material}</span></p>
+                            <p><span class="text-gray-400 font-mono">QUANTITY:</span> <span class="font-bold text-navy-900">${rfq.quantity}</span></p>
+                            <p><span class="text-gray-400 font-mono">TARGET DATE:</span> <span class="font-mono text-navy-900">${rfq.deliveryDate || '2026-10-30'}</span></p>
+                        </div>
+                    </div>
+
+                    <!-- Engineering Specs Box -->
+                    <div class="mt-4 p-3 bg-gray-50 rounded-lg border border-gray-200 text-xs">
+                        <span class="font-mono font-bold text-gray-500 block mb-1 uppercase text-[10px]">Technical Specifications / Tolerances</span>
+                        <p class="text-gray-700 leading-relaxed">${rfq.specifications || 'Standard manufacturing tolerance. Full MTC 3.1 certification required.'}</p>
+                    </div>
+
+                    <!-- Attached CAD / Drawings -->
+                    <div class="mt-4 pt-4 border-t border-gray-100">
+                        <h4 class="font-mono text-xs font-bold text-gray-400 uppercase tracking-wider mb-2">Attached Engineering Drawings & BOM</h4>
+                        <div class="flex flex-wrap gap-2">
+                            ${(rfq.attachments || ['Technical_Drawing_Rev1.pdf']).map(a => `
+                                <div class="bg-gray-100 border border-gray-200 text-xs px-3 py-1.5 rounded-lg flex items-center gap-2 text-navy-900">
+                                    <i data-lucide="file-code" class="w-4 h-4 text-rust"></i>
+                                    <span class="font-mono font-semibold">${a}</span>
+                                    <span class="text-[10px] text-green-600 font-bold bg-green-50 px-1.5 py-0.5 rounded border border-green-200">Verified</span>
+                                </div>
+                            `).join('')}
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Quotation Section (If Available) -->
+                ${rfq.quotation ? `
+                    <div class="bg-white border-2 border-rust/30 rounded-xl p-6 shadow-md relative overflow-hidden">
+                        <div class="absolute top-0 right-0 bg-rust text-white text-[10px] font-mono font-bold px-4 py-1 rounded-bl-lg">
+                            COMMERCIAL PROPOSAL READY
+                        </div>
+
+                        <div class="flex items-center justify-between mb-4 border-b border-gray-100 pb-3">
+                            <div>
+                                <h3 class="text-lg font-extrabold text-navy-900">Official Quotation: <span class="font-mono text-rust">${rfq.quotation.quotationNumber}</span></h3>
+                                <p class="text-xs text-gray-500 font-mono">Valid until: ${rfq.quotation.validUntil} • GSTIN: 27AAACS1234F1Z8</p>
+                            </div>
+                        </div>
+
+                        <!-- Itemized Table -->
+                        <div class="overflow-x-auto mb-6">
+                            <table class="w-full text-xs text-left">
+                                <thead class="bg-gray-50 border-y border-gray-200 text-gray-500 font-mono uppercase">
+                                    <tr>
+                                        <th class="py-2.5 px-3">Item Description</th>
+                                        <th class="py-2.5 px-3 text-right">Qty</th>
+                                        <th class="py-2.5 px-3 text-right">Rate (₹)</th>
+                                        <th class="py-2.5 px-3 text-right">Total (₹)</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="divide-y divide-gray-100">
+                                    ${(rfq.quotation.items || []).map(item => `
+                                        <tr>
+                                            <td class="py-2.5 px-3 font-semibold text-navy-900">${item.description}</td>
+                                            <td class="py-2.5 px-3 text-right font-mono">${item.quantity} ${item.unit || ''}</td>
+                                            <td class="py-2.5 px-3 text-right font-mono">₹${Number(item.unitPrice).toLocaleString('en-IN')}</td>
+                                            <td class="py-2.5 px-3 text-right font-mono font-bold text-navy-900">₹${Number(item.total).toLocaleString('en-IN')}</td>
+                                        </tr>
+                                    `).join('')}
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <!-- Commercial Summary & Calculations -->
+                        <div class="bg-gray-50 rounded-lg p-4 border border-gray-200 text-xs mb-6">
+                            <div class="max-w-xs ml-auto space-y-1.5 font-mono">
+                                <div class="flex justify-between text-gray-600">
+                                    <span>Subtotal:</span>
+                                    <span>₹${Number(rfq.quotation.subtotal).toLocaleString('en-IN')}</span>
+                                </div>
+                                <div class="flex justify-between text-gray-600">
+                                    <span>GST (18%):</span>
+                                    <span>₹${Number(rfq.quotation.tax).toLocaleString('en-IN')}</span>
+                                </div>
+                                <div class="flex justify-between text-gray-600">
+                                    <span>Freight / Dispatch:</span>
+                                    <span>₹${Number(rfq.quotation.shipping || 0).toLocaleString('en-IN')}</span>
+                                </div>
+                                ${rfq.quotation.discount ? `
+                                    <div class="flex justify-between text-green-600 font-bold">
+                                        <span>Special Discount:</span>
+                                        <span>- ₹${Number(rfq.quotation.discount).toLocaleString('en-IN')}</span>
+                                    </div>
+                                ` : ''}
+                                <div class="flex justify-between text-navy-900 font-bold text-sm pt-2 border-t border-gray-300">
+                                    <span>Grand Total:</span>
+                                    <span class="text-rust">₹${Number(rfq.quotation.total).toLocaleString('en-IN')}</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Terms & Action Button -->
+                        <div class="flex flex-col sm:flex-row items-center justify-between gap-4 pt-4 border-t border-gray-100">
+                            <div class="text-[11px] text-gray-500 space-y-1">
+                                <p><strong>Payment Terms:</strong> ${rfq.quotation.paymentTerms}</p>
+                                <p><strong>Delivery Terms:</strong> ${rfq.quotation.deliveryTerms}</p>
+                            </div>
+
+                            ${rfq.status === 'Quoted' ? `
+                                <button onclick="acceptQuotation('${rfq.id}')" class="w-full sm:w-auto bg-green-600 hover:bg-green-700 text-white font-bold text-sm px-6 py-3 rounded-lg shadow-md flex items-center justify-center gap-2 transition-colors">
+                                    <i data-lucide="check-circle" class="w-4 h-4"></i> Accept Quotation & Issue PO
+                                </button>
+                            ` : `
+                                <span class="text-xs font-mono font-bold text-green-700 bg-green-50 border border-green-200 px-4 py-2 rounded-lg flex items-center gap-1.5">
+                                    <i data-lucide="check-check" class="w-4 h-4"></i> Quotation Accepted & Confirmed
+                                </span>
+                            `}
+                        </div>
+                    </div>
+                ` : ''}
+
+                <!-- Audit Trail / History Log -->
+                <div class="bg-white border border-gray-200 rounded-xl p-6 shadow-sm">
+                    <h3 class="font-mono text-xs font-bold text-navy-900 tracking-wider uppercase mb-4 pb-2 border-b border-gray-100">
+                        Audit Trail & Pipeline History
+                    </h3>
+                    <div class="space-y-4">
+                        ${(rfq.history || []).map(h => `
+                            <div class="flex items-start gap-3 text-xs">
+                                <div class="w-2 h-2 rounded-full bg-rust mt-1.5 shrink-0"></div>
+                                <div class="flex-1">
+                                    <div class="flex items-center justify-between">
+                                        <strong class="text-navy-900">${h.stage}</strong>
+                                        <span class="font-mono text-gray-400 text-[11px]">${h.time}</span>
+                                    </div>
+                                    <p class="text-gray-600 mt-0.5">${h.note}</p>
+                                    <span class="text-[10px] text-gray-400 font-mono">By: ${h.user}</span>
+                                </div>
+                            </div>
+                        `).join('')}
+                    </div>
+                </div>
+            `;
+
+            lucide.createIcons();
+        }
+
+        window.acceptQuotation = function(id) {
+            if (!confirm(`Confirm acceptance of Quotation for ${id}? This will issue a formal digital PO acknowledgement.`)) {
+                return;
+            }
+
+            const rfq = getEnquiryById(id);
+            if (!rfq) return;
+
+            const now = new Date();
+            const timeStr = now.toLocaleDateString('en-GB', { day: '2-digit', month: 'short', year: 'numeric' }) + ', ' + now.toLocaleTimeString('en-IN', { hour: '2-digit', minute: '2-digit' });
+
+            const history = rfq.history || [];
+            history.push({
+                stage: "Confirmed",
+                time: timeStr,
+                user: `${rfq.name} (Customer)`,
+                note: "Customer accepted commercial quotation and confirmed purchase order."
+            });
+
+            updateEnquiry(id, {
+                status: "Confirmed",
+                history: history
+            });
+
+            alert(`✅ Quotation for ${id} has been Accepted!\nStatus updated to "Order Confirmed". Engineering and production scheduling has commenced.`);
+            loadUserTracker(document.getElementById('search-id').value.trim());
+        };
+
+        window.shareWhatsApp = function(id) {
+            const rfq = getEnquiryById(id);
+            if (!rfq) return;
+            const text = `Hi AR Group Support, I am inquiring about my RFQ ${rfq.id} (${rfq.product}, ${rfq.quantity}). Status is currently: ${rfq.status}.`;
+            window.open(`https://wa.me/919823012345?text=${encodeURIComponent(text)}`, '_blank');
+        };
+
+        function handleLogout() {
+            localStorage.removeItem('ar_role');
+            localStorage.removeItem('ar_user_phone');
+            localStorage.removeItem('ar_user_email');
+            localStorage.removeItem('ar_user_name');
+            window.location.href = 'login.html';
+        }
+
+        document.getElementById('logout-portal-btn').addEventListener('click', handleLogout);
+
+        document.getElementById('search-btn').addEventListener('click', () => {
+            loadUserTracker(document.getElementById('search-id').value.trim());
+        });
+
+        document.getElementById('search-id').addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') {
+                loadUserTracker(e.target.value.trim());
+            }
+        });
+
+        loadUserTracker(queryId || '');
+    </script>
+    <script src="chatbot.js"></script>
+</body>
+</html>

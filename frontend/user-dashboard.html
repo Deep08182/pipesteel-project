@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Customer Dashboard | AR Group & Steelcore</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script src="js/api.js"></script>
+    <script>
+        if (!localStorage.getItem('token') || localStorage.getItem('ar_role') !== 'user') {
+            window.location.href = 'login.html';
+        }
+
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        background: '#F5F6F8',
+                        navy: { DEFAULT: '#0B1220', 900: '#0B1220', 800: '#111C30', 700: '#1A2A44' },
+                        rust: { DEFAULT: '#C05621', hover: '#B5541F', light: '#E26E33' },
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        mono: ['JetBrains Mono', 'monospace'],
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-[#F5F6F8] text-slate-700 antialiased min-h-screen flex flex-col">
+    <!-- Header -->
+    <header class="bg-navy-900 border-b border-navy-800 text-white shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+            <a href="industrial-site.html" class="flex items-center gap-3">
+                <img src="logo.jpg" alt="AR Group" class="h-10 w-auto object-contain bg-white rounded p-1 hover:opacity-90 transition-opacity">
+                <div class="hidden sm:block">
+                    <span class="font-extrabold tracking-tight block leading-none">AR GROUP</span>
+                    <span class="font-mono text-[10px] text-gray-400 tracking-widest uppercase">CUSTOMER PORTAL</span>
+                </div>
+            </a>
+            <div class="flex items-center gap-4">
+                <span class="text-sm font-semibold text-gray-300" id="user-greeting">Welcome</span>
+                <button onclick="api.logout()" class="text-xs font-bold text-rust hover:text-rust-hover flex items-center gap-1 bg-white/10 px-3 py-1.5 rounded">
+                    <i data-lucide="log-out" class="w-3.5 h-3.5"></i> Logout
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 flex-1 w-full">
+        <div class="flex items-center justify-between mb-8">
+            <div>
+                <h1 class="text-2xl font-extrabold text-navy-900 tracking-tight">My Enquiries</h1>
+                <p class="text-sm text-gray-500 mt-1">Track your requests and quotations</p>
+            </div>
+            <a href="contact.html" class="bg-rust hover:bg-rust-hover text-white text-sm font-bold py-2.5 px-4 rounded-lg transition-colors flex items-center gap-2 shadow-sm">
+                <i data-lucide="plus" class="w-4 h-4"></i> New Enquiry
+            </a>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-4 mb-8" id="stats-container">
+            <!-- Stats populated via JS -->
+            <div class="bg-white p-5 rounded-xl border border-gray-200 shadow-sm flex items-center gap-4">
+                <div class="w-12 h-12 rounded-lg bg-navy-900/5 text-navy-900 flex items-center justify-center shrink-0">
+                    <i data-lucide="file-text" class="w-6 h-6"></i>
+                </div>
+                <div>
+                    <h3 class="text-xs font-bold text-gray-500 uppercase tracking-wider mb-1">Total Enquiries</h3>
+                    <p class="text-2xl font-extrabold text-navy-900" id="stat-total">0</p>
+                </div>
+            </div>
+            <div class="bg-white p-5 rounded-xl border border-gray-200 shadow-sm flex items-center gap-4">
+                <div class="w-12 h-12 rounded-lg bg-blue-50 text-blue-600 flex items-center justify-center shrink-0">
+                    <i data-lucide="inbox" class="w-6 h-6"></i>
+                </div>
+                <div>
+                    <h3 class="text-xs font-bold text-gray-500 uppercase tracking-wider mb-1">New</h3>
+                    <p class="text-2xl font-extrabold text-navy-900" id="stat-new">0</p>
+                </div>
+            </div>
+            <div class="bg-white p-5 rounded-xl border border-gray-200 shadow-sm flex items-center gap-4">
+                <div class="w-12 h-12 rounded-lg bg-amber-50 text-amber-600 flex items-center justify-center shrink-0">
+                    <i data-lucide="clock" class="w-6 h-6"></i>
+                </div>
+                <div>
+                    <h3 class="text-xs font-bold text-gray-500 uppercase tracking-wider mb-1">In Review</h3>
+                    <p class="text-2xl font-extrabold text-navy-900" id="stat-review">0</p>
+                </div>
+            </div>
+            <div class="bg-white p-5 rounded-xl border border-gray-200 shadow-sm flex items-center gap-4">
+                <div class="w-12 h-12 rounded-lg bg-green-50 text-green-600 flex items-center justify-center shrink-0">
+                    <i data-lucide="check-circle" class="w-6 h-6"></i>
+                </div>
+                <div>
+                    <h3 class="text-xs font-bold text-gray-500 uppercase tracking-wider mb-1">Completed</h3>
+                    <p class="text-2xl font-extrabold text-navy-900" id="stat-completed">0</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="bg-white border border-gray-200 rounded-xl shadow-sm overflow-hidden">
+            <div class="overflow-x-auto">
+                <table class="w-full text-left text-sm whitespace-nowrap">
+                    <thead class="bg-gray-50 border-b border-gray-200 font-mono text-[10px] uppercase text-gray-500 tracking-wider">
+                        <tr>
+                            <th class="px-6 py-4 font-semibold">Enquiry ID</th>
+                            <th class="px-6 py-4 font-semibold">Date</th>
+                            <th class="px-6 py-4 font-semibold">Product</th>
+                            <th class="px-6 py-4 font-semibold">Quantity</th>
+                            <th class="px-6 py-4 font-semibold">Status</th>
+                            <th class="px-6 py-4 font-semibold text-right">Action</th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-gray-100" id="enquiries-tbody">
+                        <tr><td colspan="6" class="px-6 py-8 text-center text-gray-500">Loading your enquiries...</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <!-- Enquiry Detail Modal -->
+    <div id="enquiry-modal" class="fixed inset-0 z-50 bg-navy-900/60 backdrop-blur-sm hidden items-center justify-center p-4">
+        <div class="bg-white rounded-2xl w-full max-w-2xl max-h-[90vh] flex flex-col shadow-2xl border border-gray-200">
+            <div class="p-5 border-b border-gray-200 flex items-center justify-between bg-gray-50 rounded-t-2xl">
+                <div>
+                    <h3 class="font-bold text-lg text-navy-900" id="modal-title">Enquiry Details</h3>
+                    <p class="text-xs text-gray-500 font-mono" id="modal-date">Date</p>
+                </div>
+                <button onclick="closeModal()" class="text-gray-400 hover:text-navy-900 p-1.5 hover:bg-gray-200 rounded-lg transition-colors">
+                    <i data-lucide="x" class="w-5 h-5"></i>
+                </button>
+            </div>
+            <div class="p-6 overflow-y-auto" id="modal-content">
+                <!-- Populated by JS -->
+            </div>
+        </div>
+    </div>
+
+    <script>
+        lucide.createIcons();
+        document.getElementById('user-greeting').innerText = `Welcome, ${localStorage.getItem('ar_user_name')}`;
+
+        const getStatusColor = (status) => {
+            const map = {
+                'New': 'bg-blue-100 text-blue-700 border-blue-200',
+                'In Review': 'bg-amber-100 text-amber-700 border-amber-200',
+                'Contacted': 'bg-purple-100 text-purple-700 border-purple-200',
+                'Quotation Sent': 'bg-indigo-100 text-indigo-700 border-indigo-200',
+                'Completed': 'bg-green-100 text-green-700 border-green-200',
+                'Closed': 'bg-gray-100 text-gray-700 border-gray-200'
+            };
+            return map[status] || 'bg-gray-100 text-gray-700 border-gray-200';
+        };
+
+        const formatDate = (isoString) => {
+            return new Date(isoString).toLocaleDateString('en-GB', { day: '2-digit', month: 'short', year: 'numeric' });
+        };
+
+        async function loadEnquiries() {
+            try {
+                const enquiries = await api.get('/enquiries/my');
+                
+                let newCount = 0, reviewCount = 0, compCount = 0;
+                
+                const tbody = document.getElementById('enquiries-tbody');
+                if (enquiries.length === 0) {
+                    tbody.innerHTML = `<tr><td colspan="6" class="px-6 py-8 text-center text-gray-500 flex flex-col items-center gap-2">
+                        <i data-lucide="inbox" class="w-8 h-8 text-gray-300"></i>
+                        You haven't submitted any enquiries yet.
+                    </td></tr>`;
+                    lucide.createIcons();
+                    return;
+                }
+
+                tbody.innerHTML = '';
+                enquiries.forEach(enq => {
+                    if (enq.status === 'New') newCount++;
+                    if (enq.status === 'In Review') reviewCount++;
+                    if (enq.status === 'Completed') compCount++;
+
+                    const tr = document.createElement('tr');
+                    tr.className = "hover:bg-gray-50/50 transition-colors group";
+                    tr.innerHTML = `
+                        <td class="px-6 py-4">
+                            <span class="font-mono font-bold text-navy-900 group-hover:text-rust transition-colors">${enq.id}</span>
+                        </td>
+                        <td class="px-6 py-4 text-gray-500">${formatDate(enq.created_at)}</td>
+                        <td class="px-6 py-4">
+                            <div class="font-medium text-navy-900 truncate max-w-xs">${enq.product_name}</div>
+                            <div class="text-[10px] text-gray-400 font-mono mt-0.5">${enq.product_type || '-'}</div>
+                        </td>
+                        <td class="px-6 py-4 font-mono text-gray-600">${enq.quantity}</td>
+                        <td class="px-6 py-4">
+                            <span class="px-2.5 py-1 rounded border text-[10px] font-bold uppercase tracking-wider ${getStatusColor(enq.status)}">${enq.status}</span>
+                        </td>
+                        <td class="px-6 py-4 text-right">
+                            <button onclick='openModal(${JSON.stringify(enq).replace(/'/g, "&#39;")})' class="text-sm font-semibold text-rust hover:text-rust-hover transition-colors">
+                                View &rarr;
+                            </button>
+                        </td>
+                    `;
+                    tbody.appendChild(tr);
+                });
+                
+                document.getElementById('stat-total').innerText = enquiries.length;
+                document.getElementById('stat-new').innerText = newCount;
+                document.getElementById('stat-review').innerText = reviewCount;
+                document.getElementById('stat-completed').innerText = compCount;
+
+                lucide.createIcons();
+            } catch (err) {
+                console.error(err);
+                document.getElementById('enquiries-tbody').innerHTML = `<tr><td colspan="6" class="px-6 py-8 text-center text-red-500">Failed to load enquiries.</td></tr>`;
+            }
+        }
+
+        window.openModal = (enq) => {
+            document.getElementById('modal-title').innerText = `Enquiry: ${enq.id}`;
+            document.getElementById('modal-date').innerText = `Submitted on ${formatDate(enq.created_at)}`;
+            
+            let content = `
+                <div class="mb-6 pb-6 border-b border-gray-100">
+                    <div class="flex items-center gap-3 mb-4">
+                        <span class="px-3 py-1 rounded-full border text-xs font-bold uppercase tracking-wider ${getStatusColor(enq.status)}">${enq.status}</span>
+                    </div>
+                    
+                    <div class="grid grid-cols-2 gap-y-4 gap-x-8">
+                        <div>
+                            <p class="text-[10px] font-mono font-bold text-gray-400 uppercase tracking-wider mb-1">Product</p>
+                            <p class="font-semibold text-navy-900">${enq.product_name}</p>
+                        </div>
+                        <div>
+                            <p class="text-[10px] font-mono font-bold text-gray-400 uppercase tracking-wider mb-1">Type / Grade</p>
+                            <p class="text-gray-700">${enq.product_type || 'N/A'}</p>
+                        </div>
+                        <div>
+                            <p class="text-[10px] font-mono font-bold text-gray-400 uppercase tracking-wider mb-1">Quantity</p>
+                            <p class="text-gray-700 font-mono">${enq.quantity}</p>
+                        </div>
+                        <div>
+                            <p class="text-[10px] font-mono font-bold text-gray-400 uppercase tracking-wider mb-1">Last Updated</p>
+                            <p class="text-gray-700">${formatDate(enq.updated_at)}</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mb-6">
+                    <p class="text-[10px] font-mono font-bold text-gray-400 uppercase tracking-wider mb-2">Message / Specs</p>
+                    <div class="bg-gray-50 p-4 rounded-lg text-sm text-gray-700 whitespace-pre-wrap">${enq.message || 'No additional message provided.'}</div>
+                </div>
+            `;
+
+            if (enq.admin_reply) {
+                content += `
+                <div>
+                    <p class="text-[10px] font-mono font-bold text-rust uppercase tracking-wider mb-2 flex items-center gap-1.5">
+                        <i data-lucide="message-square" class="w-3.5 h-3.5"></i> Admin Reply
+                    </p>
+                    <div class="bg-rust/5 border border-rust/20 p-4 rounded-lg text-sm text-navy-900 whitespace-pre-wrap">${enq.admin_reply}</div>
+                </div>
+                `;
+            }
+
+            document.getElementById('modal-content').innerHTML = content;
+            document.getElementById('enquiry-modal').classList.remove('hidden');
+            document.getElementById('enquiry-modal').classList.add('flex');
+            lucide.createIcons();
+        };
+
+        window.closeModal = () => {
+            document.getElementById('enquiry-modal').classList.add('hidden');
+            document.getElementById('enquiry-modal').classList.remove('flex');
+        };
+
+        loadEnquiries();
+    </script>
+</body>
+</html>
