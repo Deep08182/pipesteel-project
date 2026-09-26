@@ -17,6 +17,7 @@ app.use(express.static(path.join(__dirname, '../frontend')));
 app.use('/api/auth', require('./routes/auth'));
 app.use('/api/enquiries', require('./routes/enquiries'));
 app.use('/api/admin', require('./routes/admin'));
+app.use('/api/products', require('./routes/products'));
 
 // Fallback for frontend routing (if any)
 app.get('*', (req, res) => {

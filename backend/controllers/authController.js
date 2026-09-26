@@ -3,7 +3,7 @@ const jwt = require('jsonwebtoken');
 const db = require('../database/db');
 
 exports.register = async (req, res) => {
-  const { name, email, phone, password, role } = req.body;
+  const { name, email, password, role } = req.body;
 
   try {
     // Prevent normal users from selecting admin role
@@ -18,8 +18,8 @@ exports.register = async (req, res) => {
     const passwordHash = await bcrypt.hash(password, salt);
 
     const newUser = await db.query(
-      'INSERT INTO users (name, email, phone, password_hash, role) VALUES ($1, $2, $3, $4, $5) RETURNING id, name, email, role',
-      [name, email, phone, passwordHash, assignedRole]
+      'INSERT INTO users (name, email, password_hash, role) VALUES ($1, $2, $3, $4) RETURNING id, name, email, role',
+      [name, email, passwordHash, assignedRole]
     );
 
     const payload = {
@@ -34,13 +34,16 @@ exports.register = async (req, res) => {
       process.env.JWT_SECRET,
       { expiresIn: '5d' },
       (err, token) => {
-        if (err) throw err;
+        if (err) {
+          console.error('JWT Sign Error:', err);
+          return res.status(500).json({ msg: 'Error generating token' });
+        }
         res.json({ token, user: newUser.rows[0] });
       }
     );
   } catch (err) {
-    console.error(err.message);
-    res.status(500).send('Server Error');
+    console.error('Register Error:', err.message);
+    res.status(500).json({ msg: 'Server Error', error: err.message });
   }
 };
 
@@ -78,7 +81,10 @@ exports.login = async (req, res) => {
       process.env.JWT_SECRET,
       { expiresIn: '5d' },
       (err, token) => {
-        if (err) throw err;
+        if (err) {
+          console.error('JWT Sign Error:', err);
+          return res.status(500).json({ msg: 'Error generating token' });
+        }
         res.json({ 
             token, 
             user: {
@@ -91,20 +97,20 @@ exports.login = async (req, res) => {
       }
     );
   } catch (err) {
-    console.error(err.message);
-    res.status(500).send('Server Error');
+    console.error('Login Error:', err.message);
+    res.status(500).json({ msg: 'Server Error', error: err.message });
   }
 };
 
 exports.getMe = async (req, res) => {
     try {
-        const userResult = await db.query('SELECT id, name, email, phone, role, created_at FROM users WHERE id = $1', [req.user.id]);
+        const userResult = await db.query('SELECT id, name, email, role, created_at FROM users WHERE id = $1', [req.user.id]);
         if(userResult.rows.length === 0) {
              return res.status(404).json({ msg: 'User not found' });
         }
         res.json(userResult.rows[0]);
     } catch (error) {
-        console.error(error.message);
-        res.status(500).send('Server Error');
+        console.error('GetMe Error:', error.message);
+        res.status(500).json({ msg: 'Server Error', error: error.message });
     }
 };

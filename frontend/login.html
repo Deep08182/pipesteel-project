@@ -69,70 +69,42 @@
                 <div class="w-12 h-12 bg-rust/20 text-rust rounded-full flex items-center justify-center mx-auto mb-2">
                     <i data-lucide="user-check" class="w-6 h-6"></i>
                 </div>
-                <h2 class="text-xl font-extrabold tracking-tight">Customer Tracking Portal</h2>
-                <p class="text-xs text-gray-300 mt-1">Sign in with your phone or email to track your WhatsApp & web RFQs.</p>
+                <h2 class="text-xl font-extrabold tracking-tight">Customer Login Portal</h2>
+                <p class="text-xs text-gray-300 mt-1">Sign in with your email to track your RFQs.</p>
             </div>
 
-            <!-- Login Modes: Phone/OTP vs Email/Password -->
+            <!-- Login Form -->
             <div class="p-6">
-                <div class="flex border-b border-gray-200 mb-6">
-                    <button id="mode-phone" class="flex-1 pb-3 text-xs font-mono font-bold uppercase border-b-2 border-rust text-navy-900">
-                        📱 Phone / WhatsApp OTP
-                    </button>
-                    <button id="mode-email" class="flex-1 pb-3 text-xs font-mono font-bold uppercase text-gray-400 border-b-2 border-transparent">
-                        ✉️ Email & Password
-                    </button>
-                </div>
-
                 <!-- 1-Click Fast Customer Demo Accounts -->
                 <div class="mb-6 p-3 bg-navy-900/5 rounded-xl border border-navy-900/10">
-                    <span class="text-[10px] font-mono font-bold text-gray-400 uppercase block mb-1.5">⚡ 1-Click Instant Customer Login</span>
+                    <span class="text-[10px] font-mono font-bold text-gray-400 uppercase block mb-1.5">⚡ 1-Click Demo Login</span>
                     <div class="space-y-1.5">
-                        <button type="button" onclick="loginAsCustomer('+91 98112 34567', 'rahul@abc.com', 'Rahul Sharma')" class="w-full bg-white hover:bg-gray-50 border border-gray-300 text-navy-900 text-xs font-bold py-1.5 px-3 rounded-lg transition-colors flex items-center justify-between shadow-sm">
+                        <button type="button" onclick="fillDemoCredentials('rahul@abc.com', 'password123')" class="w-full bg-white hover:bg-gray-50 border border-gray-300 text-navy-900 text-xs font-bold py-1.5 px-3 rounded-lg transition-colors flex items-center justify-between shadow-sm">
                             <span>Rahul Sharma (ABC Infra)</span>
-                            <span class="text-[10px] font-mono text-rust">WhatsApp Linked</span>
+                            <span class="text-[10px] font-mono text-rust">Customer</span>
                         </button>
-                        <button type="button" onclick="loginAsCustomer('+91 98220 87654', 'amit.patel@lnt-heavy.com', 'Amit Patel')" class="w-full bg-white hover:bg-gray-50 border border-gray-300 text-navy-900 text-xs font-bold py-1.5 px-3 rounded-lg transition-colors flex items-center justify-between shadow-sm">
+                        <button type="button" onclick="fillDemoCredentials('amit.patel@lnt-heavy.com', 'password123')" class="w-full bg-white hover:bg-gray-50 border border-gray-300 text-navy-900 text-xs font-bold py-1.5 px-3 rounded-lg transition-colors flex items-center justify-between shadow-sm">
                             <span>Amit Patel (L&T Heavy)</span>
-                            <span class="text-[10px] font-mono text-purple-600">WhatsApp Linked</span>
+                            <span class="text-[10px] font-mono text-purple-600">Customer</span>
                         </button>
                     </div>
                 </div>
 
                 <form id="customer-login-form">
-                    <!-- Phone Input Block -->
-                    <div id="phone-block" class="space-y-4">
-                        <div>
-                            <label class="block text-[11px] font-mono font-bold tracking-wide text-gray-700 mb-1.5 uppercase">WHATSAPP / PHONE NUMBER</label>
-                            <div class="relative">
-                                <i data-lucide="phone" class="absolute left-3 top-2.5 w-4 h-4 text-gray-400"></i>
-                                <input type="text" id="req-phone-input" class="w-full border border-gray-300 rounded-lg pl-9 pr-3 py-2 text-sm outline-none focus:border-rust font-mono" value="+91 98112 34567">
-                            </div>
-                        </div>
-                        <div>
-                            <label class="block text-[11px] font-mono font-bold tracking-wide text-gray-700 mb-1.5 uppercase">VERIFICATION OTP</label>
-                            <div class="relative">
-                                <i data-lucide="message-square" class="absolute left-3 top-2.5 w-4 h-4 text-gray-400"></i>
-                                <input type="text" id="req-otp-input" class="w-full border border-gray-300 rounded-lg pl-9 pr-3 py-2 text-sm outline-none focus:border-rust font-mono" value="882190">
-                            </div>
-                            <span class="text-[10px] text-gray-400 mt-1 block">Auto-verified for registered WhatsApp customers</span>
-                        </div>
-                    </div>
-
                     <!-- Email Input Block -->
-                    <div id="email-block" class="space-y-4 hidden">
+                    <div class="space-y-4">
                         <div>
-                            <label class="block text-[11px] font-mono font-bold tracking-wide text-gray-700 mb-1.5 uppercase">OFFICIAL EMAIL</label>
+                            <label class="block text-[11px] font-mono font-bold tracking-wide text-gray-700 mb-1.5 uppercase">EMAIL ADDRESS</label>
                             <div class="relative">
                                 <i data-lucide="mail" class="absolute left-3 top-2.5 w-4 h-4 text-gray-400"></i>
-                                <input type="email" id="req-email-input" class="w-full border border-gray-300 rounded-lg pl-9 pr-3 py-2 text-sm outline-none focus:border-rust" value="rahul@abc.com">
+                                <input type="email" id="req-email-input" required class="w-full border border-gray-300 rounded-lg pl-9 pr-3 py-2 text-sm outline-none focus:border-rust" placeholder="your.email@company.com">
                             </div>
                         </div>
                         <div>
                             <label class="block text-[11px] font-mono font-bold tracking-wide text-gray-700 mb-1.5 uppercase">PASSWORD</label>
                             <div class="relative">
                                 <i data-lucide="lock" class="absolute left-3 top-2.5 w-4 h-4 text-gray-400"></i>
-                                <input type="password" id="req-pass-input" class="w-full border border-gray-300 rounded-lg pl-9 pr-3 py-2 text-sm outline-none focus:border-rust" value="password123">
+                                <input type="password" id="req-pass-input" required class="w-full border border-gray-300 rounded-lg pl-9 pr-3 py-2 text-sm outline-none focus:border-rust" placeholder="Enter your password">
                             </div>
                         </div>
                     </div>
@@ -163,40 +135,11 @@
     <script>
         lucide.createIcons();
 
-        const btnPhone = document.getElementById('mode-phone');
-        const btnEmail = document.getElementById('mode-email');
-        const blockPhone = document.getElementById('phone-block');
-        const blockEmail = document.getElementById('email-block');
         const form = document.getElementById('customer-login-form');
 
-        let activeAuthMode = 'phone';
-
-        btnPhone.addEventListener('click', () => {
-            activeAuthMode = 'phone';
-            btnPhone.classList.add('border-rust', 'text-navy-900');
-            btnPhone.classList.remove('border-transparent', 'text-gray-400');
-            btnEmail.classList.remove('border-rust', 'text-navy-900');
-            btnEmail.classList.add('border-transparent', 'text-gray-400');
-            blockPhone.classList.remove('hidden');
-            blockEmail.classList.add('hidden');
-        });
-
-        btnEmail.addEventListener('click', () => {
-            activeAuthMode = 'email';
-            btnEmail.classList.add('border-rust', 'text-navy-900');
-            btnEmail.classList.remove('border-transparent', 'text-gray-400');
-            btnPhone.classList.remove('border-rust', 'text-navy-900');
-            btnPhone.classList.add('border-transparent', 'text-gray-400');
-            blockEmail.classList.remove('hidden');
-            blockPhone.classList.add('hidden');
-        });
-
-        window.loginAsCustomer = function(phone, email, name) {
-            localStorage.setItem('ar_role', 'user');
-            localStorage.setItem('ar_user_phone', phone);
-            localStorage.setItem('ar_user_email', email);
-            localStorage.setItem('ar_user_name', name);
-            window.location.href = 'industrial-site.html';
+        window.fillDemoCredentials = function(email, password) {
+            document.getElementById('req-email-input').value = email;
+            document.getElementById('req-pass-input').value = password;
         };
 
         form.addEventListener('submit', async (e) => {
@@ -206,14 +149,6 @@
             submitBtn.innerHTML = '<i data-lucide="loader" class="w-4 h-4 animate-spin"></i> Authenticating...';
             
             try {
-                if (activeAuthMode === 'phone') {
-                    // For now, phone login is not supported in the backend implementation, 
-                    // redirect to email or show error.
-                    alert('Phone login is currently disabled. Please use Email/Password.');
-                    submitBtn.innerHTML = 'Sign In to Portal &rarr;';
-                    return;
-                }
-
                 const email = document.getElementById('req-email-input').value.trim();
                 const password = document.getElementById('req-pass-input').value.trim();
 
@@ -232,7 +167,8 @@
             } catch (err) {
                 alert(err.message || 'Login failed. Please check your credentials.');
             } finally {
-                submitBtn.innerHTML = 'Sign In to Portal &rarr;';
+                submitBtn.innerHTML = '<i data-lucide="log-in" class="w-4 h-4"></i> Sign In to Portal &rarr;';
+                lucide.createIcons();
             }
         });
     </script>

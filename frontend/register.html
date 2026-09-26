@@ -70,13 +70,6 @@
                         </div>
                     </div>
                     <div>
-                        <label class="block text-[11px] font-mono font-bold tracking-wide text-gray-700 mb-1.5 uppercase">PHONE NUMBER</label>
-                        <div class="relative">
-                            <i data-lucide="phone" class="absolute left-3 top-2.5 w-4 h-4 text-gray-400"></i>
-                            <input type="tel" id="reg-phone" required class="w-full border border-gray-300 rounded-lg pl-9 pr-3 py-2 text-sm outline-none focus:border-rust" placeholder="e.g. +91 98112 34567">
-                        </div>
-                    </div>
-                    <div>
                         <label class="block text-[11px] font-mono font-bold tracking-wide text-gray-700 mb-1.5 uppercase">PASSWORD</label>
                         <div class="relative">
                             <i data-lucide="lock" class="absolute left-3 top-2.5 w-4 h-4 text-gray-400"></i>
@@ -118,7 +111,6 @@
             
             const name = document.getElementById('reg-name').value.trim();
             const email = document.getElementById('reg-email').value.trim();
-            const phone = document.getElementById('reg-phone').value.trim();
             const password = document.getElementById('reg-pass').value;
             const confirmPassword = document.getElementById('reg-pass-confirm').value;
 
@@ -131,7 +123,7 @@
             submitBtn.innerHTML = '<i data-lucide="loader" class="w-4 h-4 animate-spin"></i> Creating Account...';
             
             try {
-                const response = await api.post('/auth/register', { name, email, phone, password });
+                const response = await api.post('/auth/register', { name, email, password });
                 
                 api.setToken(response.token);
                 localStorage.setItem('ar_user_name', response.user.name);

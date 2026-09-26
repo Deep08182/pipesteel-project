@@ -44,6 +44,27 @@ const api = {
         return result;
     },
 
+    put: async (endpoint, data) => {
+        const res = await fetch(`${API_URL}${endpoint}`, {
+            method: 'PUT',
+            headers: api.getHeaders(),
+            body: JSON.stringify(data)
+        });
+        const result = await res.json();
+        if (!res.ok) throw new Error(result.msg || 'API Error');
+        return result;
+    },
+
+    delete: async (endpoint) => {
+        const res = await fetch(`${API_URL}${endpoint}`, {
+            method: 'DELETE',
+            headers: api.getHeaders()
+        });
+        const result = await res.json();
+        if (!res.ok) throw new Error(result.msg || 'API Error');
+        return result;
+    },
+
     logout: () => {
         api.removeToken();
         localStorage.removeItem('ar_user'); // remove any remaining legacy data

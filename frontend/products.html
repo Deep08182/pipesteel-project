@@ -148,7 +148,7 @@
                     <i data-lucide="help-circle" class="w-4 h-4 text-rust"></i> Bulk Requirement?
                 </div>
                 <p class="text-xs text-gray-600 mb-3">Need specialized membrane thickness or bulk truckload quotation?</p>
-                <a href="https://wa.me/919823012345?text=Hello%20AR%20Group,%20I%20need%20a%20bulk%20quotation%20for%20waterproofing%20membranes." target="_blank" class="block text-center text-xs font-bold bg-[#25D366] hover:bg-[#128C7E] text-white py-2 rounded shadow-sm">Instant WhatsApp Inquiry</a>
+                <a href="https://wa.me/917203866209?text=Hello%20AR%20Group,%20I%20need%20a%20bulk%20quotation%20for%20waterproofing%20membranes." target="_blank" class="block text-center text-xs font-bold bg-[#25D366] hover:bg-[#128C7E] text-white py-2 rounded shadow-sm">Instant WhatsApp Inquiry</a>
             </div>
         </aside>
 
@@ -239,7 +239,6 @@
     </footer>
 
     <!-- Scripts -->
-    <script src="company-config.js"></script>
     <script>
         lucide.createIcons();
 
@@ -247,8 +246,50 @@
         const searchInput = document.getElementById('search-input');
         const resultsCount = document.getElementById('results-count');
         const modal = document.getElementById('product-modal');
-        const closeModal = document.getElementById('close-modal');
+        const closeModalBtn = document.getElementById('close-modal');
         const modalCancelBtn = document.getElementById('modal-cancel-btn');
+
+        let PRODUCT_CATALOG = []; // Will be loaded from API
+        let activeCategory = 'all';
+        let activeMaterial = 'all';
+        let activeSearch = '';
+
+        // Fetch products from API
+        async function loadProducts() {
+            try {
+                const response = await fetch('/api/products');
+                const products = await response.json();
+                
+                // Transform API data to match frontend format
+                PRODUCT_CATALOG = products.map(p => ({
+                    id: p.id,
+                    name: p.name,
+                    category: p.category,
+                    tag: p.tag,
+                    material: p.material,
+                    grades: p.grades,
+                    shortDesc: p.short_desc,
+                    image: p.image_url,
+                    detailUrl: p.detail_url,
+                    specSummary: p.spec_summary,
+                    highlights: p.highlights
+                }));
+                
+                renderProducts();
+            } catch (error) {
+                console.error('Error loading products:', error);
+                grid.innerHTML = `
+                    <div class="col-span-full py-16 text-center bg-white border border-gray-200 rounded-xl p-8">
+                        <div class="w-12 h-12 rounded-full bg-red-100 flex items-center justify-center mx-auto mb-3 text-red-500">
+                            <i data-lucide="alert-circle" class="w-6 h-6"></i>
+                        </div>
+                        <h4 class="font-bold text-navy-900 mb-1">Failed to load products</h4>
+                        <p class="text-xs text-gray-500">Please refresh the page or contact support.</p>
+                    </div>
+                `;
+                lucide.createIcons();
+            }
+        }
 
         let activeCategory = 'all';
         let activeMaterial = 'all';
@@ -298,12 +339,15 @@
                         
                         <!-- Mini Specs Grid -->
                         <div class="bg-gray-50 border border-gray-200 rounded p-2.5 text-xs mb-4 mt-auto">
-                            ${Object.entries(p.specSummary).slice(0, 2).map(([k, v]) => `
-                                <div class="flex justify-between py-0.5 border-b border-gray-200 last:border-0">
-                                    <span class="text-gray-500 font-mono text-[11px]">${k}:</span>
-                                    <span class="font-semibold text-navy-900 text-[11px] truncate max-w-[160px]">${v}</span>
-                                </div>
-                            `).join('')}
+                            ${Object.entries(p.specSummary || {}).length > 0 
+                                ? Object.entries(p.specSummary).slice(0, 2).map(([k, v]) => `
+                                    <div class="flex justify-between py-0.5 border-b border-gray-200 last:border-0">
+                                        <span class="text-gray-500 font-mono text-[11px]">${k}:</span>
+                                        <span class="font-semibold text-navy-900 text-[11px] truncate max-w-[160px]">${v}</span>
+                                    </div>
+                                `).join('')
+                                : '<div class="text-center text-gray-400 text-[11px] py-2">No specifications available</div>'
+                            }
                         </div>
 
                         <div class="flex gap-2" onclick="event.stopPropagation()">
@@ -316,7 +360,7 @@
                                     View Specs
                                 </button>
                             `}
-                            <a href="https://wa.me/919823012345?text=${encodeURIComponent('Hi, I want to enquire about ' + p.name)}" target="_blank" class="flex-1 py-2 bg-[#25D366] hover:bg-[#128C7E] text-white rounded text-xs font-bold text-center transition-colors shadow-sm flex items-center justify-center gap-1.5">
+                            <a href="https://wa.me/917203866209?text=${encodeURIComponent('Hi, I want to enquire about ' + p.name)}" target="_blank" class="flex-1 py-2 bg-[#25D366] hover:bg-[#128C7E] text-white rounded text-xs font-bold text-center transition-colors shadow-sm flex items-center justify-center gap-1.5">
                                 <i data-lucide="message-square" class="w-3.5 h-3.5"></i> WhatsApp
                             </a>
                         </div>
@@ -357,7 +401,7 @@
                 </li>
             `).join('');
 
-            document.getElementById('modal-whatsapp-link').href = `https://wa.me/919823012345?text=${encodeURIComponent('Hi, I want to enquire about ' + p.name)}`;
+            document.getElementById('modal-whatsapp-link').href = `https://wa.me/917203866209?text=${encodeURIComponent('Hi, I want to enquire about ' + p.name)}`;
             document.getElementById('modal-rfq-link').href = `contact.html?product=${encodeURIComponent(p.name)}`;
 
             modal.classList.remove('hidden');
@@ -405,7 +449,7 @@
             renderProducts();
         });
 
-        renderProducts();
+        loadProducts();
     </script>
     <script src="chatbot.js"></script>
 </body>

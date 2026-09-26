@@ -11,7 +11,7 @@ exports.getAllEnquiries = async (req, res) => {
         res.json(result.rows);
     } catch (error) {
         console.error("Error fetching all enquiries:", error);
-        res.status(500).send('Server Error');
+        res.status(500).json({ msg: 'Server Error', error: error.message });
     }
 };
 
@@ -32,7 +32,7 @@ exports.getEnquiry = async (req, res) => {
         res.json(result.rows[0]);
     } catch (error) {
         console.error("Error fetching enquiry:", error);
-        res.status(500).send('Server Error');
+        res.status(500).json({ msg: 'Server Error', error: error.message });
     }
 };
 
@@ -57,21 +57,21 @@ exports.updateEnquiry = async (req, res) => {
         res.json(result.rows[0]);
     } catch (error) {
         console.error("Error updating enquiry:", error);
-        res.status(500).send('Server Error');
+        res.status(500).json({ msg: 'Server Error', error: error.message });
     }
 };
 
 exports.getAllUsers = async (req, res) => {
     try {
         const result = await db.query(`
-            SELECT id, name, email, phone, role, created_at
+            SELECT id, name, email, role, created_at
             FROM users
             ORDER BY created_at DESC
         `);
         res.json(result.rows);
     } catch (error) {
         console.error("Error fetching users:", error);
-        res.status(500).send('Server Error');
+        res.status(500).json({ msg: 'Server Error', error: error.message });
     }
 };
 
@@ -92,6 +92,6 @@ exports.getDashboardStats = async (req, res) => {
         });
     } catch (error) {
         console.error("Error fetching stats:", error);
-        res.status(500).send('Server Error');
+        res.status(500).json({ msg: 'Server Error', error: error.message });
     }
 };

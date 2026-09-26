@@ -46,7 +46,7 @@ exports.createEnquiry = async (req, res) => {
 
     } catch (error) {
         console.error("Error creating enquiry:", error);
-        res.status(500).send('Server Error');
+        res.status(500).json({ msg: 'Server Error', error: error.message });
     }
 };
 
@@ -57,7 +57,7 @@ exports.getMyEnquiries = async (req, res) => {
         res.json(result.rows);
     } catch (error) {
         console.error("Error fetching enquiries:", error);
-        res.status(500).send('Server Error');
+        res.status(500).json({ msg: 'Server Error', error: error.message });
     }
 };
 
@@ -75,6 +75,6 @@ exports.getEnquiry = async (req, res) => {
         res.json(result.rows[0]);
     } catch (error) {
         console.error("Error fetching enquiry:", error);
-        res.status(500).send('Server Error');
+        res.status(500).json({ msg: 'Server Error', error: error.message });
     }
 };
