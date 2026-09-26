@@ -20,8 +20,8 @@ app.use('/api/admin', require('./routes/admin'));
 app.use('/api/products', require('./routes/products'));
 
 // Fallback for frontend routing (if any)
-app.get('*', (req, res) => {
-    res.sendFile(path.join(__dirname, '../frontend/industrial-site.html'));
+app.listen(PORT, () => {
+    console.log(`Server running on port ${PORT}`);
 });
 
 const PORT = process.env.PORT || 3000;
